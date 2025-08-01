@@ -1,12 +1,9 @@
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-    CallToolResult,
-    GetPromptResult,
-    ReadResourceResult,
-} from "@modelcontextprotocol/sdk/types.js";
-import { WeatherData } from "../types";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
+import { WeatherData } from "./types";
 import WeatherCard from "../mcp-ui/WeatherCard";
+import { getWeather } from "./tools/getWeather";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -36,25 +33,9 @@ export const setupMCPServer = (): McpServer => {
         async ({ location, units }): Promise<CallToolResult> => {
             try {
                 // Simulate weather data (in a real implementation, you'd call a weather API)
-                const weatherData: WeatherData = {
-                    location: location,
-                    temperature: units === "metric" ? 22 : 72,
-                    unit: units === "metric" ? "°C" : "°F",
-                    condition: "Partly Cloudy",
-                    humidity: 65,
-                    windSpeed: units === "metric" ? 15 : 9,
-                    windUnit: units === "metric" ? "km/h" : "mph",
-                    description: `Current weather in ${location}`,
-                };
-
+                const weatherData: WeatherData = getWeather(location, units);
                 return {
-                    content: [
-                        {
-                            type: "text",
-                            text: `${weatherData.description}: ${weatherData.temperature}${weatherData.unit}, ${weatherData.condition}. Humidity: ${weatherData.humidity}%. Wind: ${weatherData.windSpeed} ${weatherData.windUnit}.`,
-                        },
-                        WeatherCard(weatherData),
-                    ],
+                    content: [WeatherCard(weatherData)],
                 };
             } catch (error) {
                 console.error("Error getting weather:", error);
