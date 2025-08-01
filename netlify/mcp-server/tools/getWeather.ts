@@ -13,73 +13,101 @@ interface OpenMeteoResponse {
     };
 }
 
-// Weather code mapping for OpenMeteo API
+// Weather code mapping for OpenMeteo API - Complete WMO codes
 const weatherCodeMap: {
     [key: number]:
-        | "Clear"
+        | "Clear Sky"
+        | "Mainly Clear"
         | "Partly Cloudy"
-        | "Cloudy"
-        | "Foggy"
-        | "Light Rain"
-        | "Heavy Rain"
-        | "Snow"
-        | "Thunderstorm"
-        | "Sunny"
-        | "Windy"
         | "Overcast"
-        | "Drizzle"
-        | "Hail"
-        | "Sleet";
+        | "Fog"
+        | "Depositing Rime Fog"
+        | "Light Drizzle"
+        | "Moderate Drizzle"
+        | "Dense Drizzle"
+        | "Light Freezing Drizzle"
+        | "Dense Freezing Drizzle"
+        | "Slight Rain"
+        | "Moderate Rain"
+        | "Heavy Rain"
+        | "Light Freezing Rain"
+        | "Heavy Freezing Rain"
+        | "Slight Snow"
+        | "Moderate Snow"
+        | "Heavy Snow"
+        | "Snow Grains"
+        | "Slight Rain Showers"
+        | "Moderate Rain Showers"
+        | "Violent Rain Showers"
+        | "Slight Snow Showers"
+        | "Heavy Snow Showers"
+        | "Slight Thunderstorm"
+        | "Thunderstorm with Slight Hail"
+        | "Thunderstorm with Heavy Hail";
 } = {
-    0: "Clear",
-    1: "Partly Cloudy",
+    0: "Clear Sky",
+    1: "Mainly Clear",
     2: "Partly Cloudy",
-    3: "Cloudy",
-    45: "Foggy",
-    48: "Foggy",
-    51: "Drizzle",
-    53: "Drizzle",
-    55: "Drizzle",
-    56: "Drizzle",
-    57: "Drizzle",
-    61: "Light Rain",
-    63: "Heavy Rain",
+    3: "Overcast",
+    45: "Fog",
+    48: "Depositing Rime Fog",
+    51: "Light Drizzle",
+    53: "Moderate Drizzle",
+    55: "Dense Drizzle",
+    56: "Light Freezing Drizzle",
+    57: "Dense Freezing Drizzle",
+    61: "Slight Rain",
+    63: "Moderate Rain",
     65: "Heavy Rain",
-    66: "Light Rain",
-    67: "Heavy Rain",
-    71: "Snow",
-    73: "Snow",
-    75: "Snow",
-    77: "Snow",
-    80: "Light Rain",
-    81: "Light Rain",
-    82: "Heavy Rain",
-    85: "Snow",
-    86: "Snow",
-    95: "Thunderstorm",
-    96: "Thunderstorm",
-    99: "Thunderstorm",
+    66: "Light Freezing Rain",
+    67: "Heavy Freezing Rain",
+    71: "Slight Snow",
+    73: "Moderate Snow",
+    75: "Heavy Snow",
+    77: "Snow Grains",
+    80: "Slight Rain Showers",
+    81: "Moderate Rain Showers",
+    82: "Violent Rain Showers",
+    85: "Slight Snow Showers",
+    86: "Heavy Snow Showers",
+    95: "Slight Thunderstorm",
+    96: "Thunderstorm with Slight Hail",
+    99: "Thunderstorm with Heavy Hail",
 };
 
 // Helper function to get weather condition from weather code
 const getWeatherCondition = (
     weatherCode: number
 ):
-    | "Clear"
+    | "Clear Sky"
+    | "Mainly Clear"
     | "Partly Cloudy"
-    | "Cloudy"
-    | "Foggy"
-    | "Light Rain"
-    | "Heavy Rain"
-    | "Snow"
-    | "Thunderstorm"
-    | "Sunny"
-    | "Windy"
     | "Overcast"
-    | "Drizzle"
-    | "Hail"
-    | "Sleet" => {
-    return weatherCodeMap[weatherCode] || "Clear";
+    | "Fog"
+    | "Depositing Rime Fog"
+    | "Light Drizzle"
+    | "Moderate Drizzle"
+    | "Dense Drizzle"
+    | "Light Freezing Drizzle"
+    | "Dense Freezing Drizzle"
+    | "Slight Rain"
+    | "Moderate Rain"
+    | "Heavy Rain"
+    | "Light Freezing Rain"
+    | "Heavy Freezing Rain"
+    | "Slight Snow"
+    | "Moderate Snow"
+    | "Heavy Snow"
+    | "Snow Grains"
+    | "Slight Rain Showers"
+    | "Moderate Rain Showers"
+    | "Violent Rain Showers"
+    | "Slight Snow Showers"
+    | "Heavy Snow Showers"
+    | "Slight Thunderstorm"
+    | "Thunderstorm with Slight Hail"
+    | "Thunderstorm with Heavy Hail" => {
+    return weatherCodeMap[weatherCode] || "Clear Sky";
 };
 
 // Helper function to convert temperature units
@@ -173,7 +201,7 @@ export const getWeather = async (
             location: location,
             temperature: temperature,
             unit: units === "metric" ? "°C" : "°F",
-            condition: "Clear",
+            condition: "Clear Sky",
             humidity: Math.floor(Math.random() * 40) + 40,
             windSpeed: Math.floor(Math.random() * 20) + 5,
             windUnit: units === "metric" ? "km/h" : "mph",

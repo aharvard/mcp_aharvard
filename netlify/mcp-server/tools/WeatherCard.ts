@@ -98,19 +98,62 @@ export default function WeatherCard(data: WeatherData | null) {
     opacity: 0.75;  
   }
   
-  .weather-condition-sunny {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffb347 100%);
+  /* Clear and Sunny Conditions */
+  .weather-condition-clear-sky {
+    background: linear-gradient(135deg, #1e90ff 0%, #00bfff 50%, #87ceeb 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-mainly-clear {
+    background: linear-gradient(135deg, #87ceeb 0%, #b0e0e6 50%, #f0f8ff 100%);
     --card-text-color: #000000;
   }
   .weather-condition-partly-cloudy {
     background: linear-gradient(135deg, #87ceeb 0%, #b0e0e6 50%, #f0f8ff 100%);
     --card-text-color: #000000;
   }
-  .weather-condition-cloudy { 
-    background: linear-gradient(135deg, #696969 0%, #a9a9a9 50%, #d3d3d3 100%);
+  .weather-condition-overcast {
+    background: linear-gradient(135deg, #708090 0%, #778899 50%, #b0c4de 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-light-rain {
+
+  /* Fog Conditions */
+  .weather-condition-fog {
+    background: linear-gradient(135deg, #d3d3d3 0%, #e6e6e6 50%, #f5f5f5 100%);
+    --card-text-color: #000000;
+  }
+  .weather-condition-depositing-rime-fog {
+    background: linear-gradient(135deg, #d3d3d3 0%, #e6e6e6 50%, #f5f5f5 100%);
+    --card-text-color: #000000;
+  }
+
+  /* Drizzle Conditions */
+  .weather-condition-light-drizzle {
+    background: linear-gradient(135deg, #5f9ea0 0%, #7fb3d3 50%, #b0e0e6 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-moderate-drizzle {
+    background: linear-gradient(135deg, #5f9ea0 0%, #7fb3d3 50%, #b0e0e6 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-dense-drizzle {
+    background: linear-gradient(135deg, #5f9ea0 0%, #7fb3d3 50%, #b0e0e6 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-light-freezing-drizzle {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #b0c4de 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-dense-freezing-drizzle {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #b0c4de 100%);
+    --card-text-color: #ffffff;
+  }
+
+  /* Rain Conditions */
+  .weather-condition-slight-rain {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #87ceeb 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-moderate-rain {
     background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #87ceeb 100%);
     --card-text-color: #ffffff;
   }
@@ -118,40 +161,68 @@ export default function WeatherCard(data: WeatherData | null) {
     background: linear-gradient(135deg, #191970 0%, #4169e1 50%, #1e90ff 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-thunderstorm {
-    background: linear-gradient(135deg, #2f2f2f 0%, #4b0082 50%, #8a2be2 100%);
+  .weather-condition-light-freezing-rain {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #b0c4de 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-snow {
+  .weather-condition-heavy-freezing-rain {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #b0c4de 100%);
+    --card-text-color: #ffffff;
+  }
+
+  /* Snow Conditions */
+  .weather-condition-slight-snow {
     background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
     --card-text-color: #000000;
   }
-  .weather-condition-foggy {
-    background: linear-gradient(135deg, #d3d3d3 0%, #e6e6e6 50%, #f5f5f5 100%);
+  .weather-condition-moderate-snow {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
     --card-text-color: #000000;
   }
-  .weather-condition-windy {
-    background: linear-gradient(135deg, #87ceeb 0%, #b0c4de 50%, #e0f6ff 100%);
+  .weather-condition-heavy-snow {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
     --card-text-color: #000000;
   }
-  .weather-condition-clear {  
-    background: linear-gradient(135deg, #1e90ff 0%, #00bfff 50%, #87ceeb 100%);
+  .weather-condition-snow-grains {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
+    --card-text-color: #000000;
+  }
+
+  /* Rain Showers */
+  .weather-condition-slight-rain-showers {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #87ceeb 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-overcast {
-    background: linear-gradient(135deg, #708090 0%, #778899 50%, #b0c4de 100%);
+  .weather-condition-moderate-rain-showers {
+    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #87ceeb 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-drizzle {
-    background: linear-gradient(135deg, #5f9ea0 0%, #7fb3d3 50%, #b0e0e6 100%);
+  .weather-condition-violent-rain-showers {
+    background: linear-gradient(135deg, #191970 0%, #4169e1 50%, #1e90ff 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-hail {
+
+  /* Snow Showers */
+  .weather-condition-slight-snow-showers {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
+    --card-text-color: #000000;
+  }
+  .weather-condition-heavy-snow-showers {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6e6fa 50%, #ffffff 100%);
+    --card-text-color: #000000;
+  }
+
+  /* Thunderstorm Conditions */
+  .weather-condition-slight-thunderstorm {
+    background: linear-gradient(135deg, #2f2f2f 0%, #4b0082 50%, #8a2be2 100%);
+    --card-text-color: #ffffff;
+  }
+  .weather-condition-thunderstorm-with-slight-hail {
     background: linear-gradient(135deg, #483d8b 0%, #6a5acd 50%, #9370db 100%);
     --card-text-color: #ffffff;
   }
-  .weather-condition-sleet {
-    background: linear-gradient(135deg, #4682b4 0%, #5f9ea0 50%, #b0c4de 100%);
+  .weather-condition-thunderstorm-with-heavy-hail {
+    background: linear-gradient(135deg, #483d8b 0%, #6a5acd 50%, #9370db 100%);
     --card-text-color: #ffffff;
   } 
 </style>
