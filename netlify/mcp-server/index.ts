@@ -37,10 +37,11 @@ export const setupMCPServer = (): McpServer => {
                 return {
                     content: [
                         {
-                            type: "text",
-                            text: JSON.stringify(weatherData),
-                            annotations: {
-                                audience: ["user"],
+                            type: "resource",
+                            resource: {
+                                uri: "http://mcp-aharvard/weather-data",
+                                text: JSON.stringify(weatherData),
+                                mimeType: "application/json",
                             },
                         },
                         WeatherCard(weatherData),
