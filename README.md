@@ -56,6 +56,7 @@ This project includes MCP (Model Context Protocol) integration through Express s
 1. Add this endpoint: https://mcp-aharvard.netlify.app/mcp
 1. A timeout of `300` is fine
 1. Save changes
+1. Ask goose what's the weather in your city (not all cities are supported)
 
 ### Using the MCP Inspector
 
