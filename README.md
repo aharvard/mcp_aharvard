@@ -58,6 +58,42 @@ This project includes MCP (Model Context Protocol) integration through Express s
 1. Save changes
 1. Ask goose what's the weather in your city (not all cities are supported)
 
+### Weather API Information
+
+This project uses the **Open-Meteo API** for weather data, which provides free weather forecasts based on multiple national weather providers. The API uses WMO (World Meteorological Organization) weather interpretation codes to describe weather conditions.
+
+#### Supported Weather Conditions
+
+The weather tool supports all WMO weather codes (0-99), including:
+
+-   **Clear Conditions**: Clear sky, mainly clear, partly cloudy, overcast
+-   **Fog Conditions**: Fog, depositing rime fog
+-   **Drizzle**: Light, moderate, and dense drizzle (including freezing)
+-   **Rain**: Slight, moderate, and heavy rain (including freezing)
+-   **Snow**: Slight, moderate, and heavy snow, snow grains
+-   **Showers**: Rain and snow showers of various intensities
+-   **Thunderstorms**: Slight thunderstorms with and without hail
+
+#### API Features
+
+-   **Free to use** with no API key required
+-   **High accuracy** using multiple weather models
+-   **Global coverage** with automatic model selection
+-   **Real-time data** with hourly updates
+-   **Multiple units** support (metric/imperial)
+
+#### Data Sources
+
+The API combines weather models from multiple national weather providers:
+
+-   **ICON** (Germany) - 2-11 km resolution
+-   **GFS & HRRR** (NOAA, US) - 3-25 km resolution
+-   **ARPEGE & AROME** (Météo-France) - 1-25 km resolution
+-   **IFS & AIFS** (ECMWF, EU) - 25 km resolution
+-   And many more regional models
+
+For more information, visit: [Open-Meteo API Documentation](https://open-meteo.com/en/docs)
+
 ### Using the MCP Inspector
 
 Test the MCP server locally or remotely:
