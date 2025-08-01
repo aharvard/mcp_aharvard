@@ -29,9 +29,9 @@ export default function WeatherCard(data: WeatherData) {
     margin: 10px;
     background-color: var(--card-background-color);
     width: 100%;
-    max-width: 500px;
+    max-width: 700px;
     color: var(--card-text-color);
-    padding: 30px;
+    padding: 30px 30px 40px 30px;
     border-radius: 4px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, .15);
     display: grid;
@@ -46,7 +46,7 @@ export default function WeatherCard(data: WeatherData) {
     line-height: 1;
   }
   .location {
-    font-size: 24px;
+    font-size: 48px;
     font-weight: 700;
     grid-area: location;
   }
@@ -58,7 +58,7 @@ export default function WeatherCard(data: WeatherData) {
   }
   .temperature-value {
     font-weight: 900;
-    font-size: 90px;
+    font-size: 160px;
     line-height: 0.8;
     transform: translateY(10px);
     filter: drop-shadow(0 2px 1px rgba(120, 120, 120, 0.25));
@@ -79,15 +79,16 @@ export default function WeatherCard(data: WeatherData) {
     grid-area: condition-container;
   }
   .condition {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 800;
     margin-bottom: 4px;
   }
   .wind-speed,
   .humidity {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 2500;
     letter-spacing: 0.05em;
+    opacity: 0.75;  
   }
   
   .weather-condition-sunny {
