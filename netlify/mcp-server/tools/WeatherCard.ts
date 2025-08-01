@@ -21,7 +21,6 @@ export default function WeatherCard(data: WeatherData) {
     padding: 0;
     background-color: transparent;
     display: grid;
-    place-items: center;
     --card-background-color: #000000;
     --card-text-color: #ffffff;
   }
