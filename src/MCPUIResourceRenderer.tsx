@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { UIActionResult, UIResourceRenderer } from "@mcp-ui/client";
 import { createUIResource } from "@mcp-ui/server";
 import WeatherCard from "../netlify/mcp-server/tools/WeatherCard";
@@ -22,13 +22,57 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
     city,
 }) => {
     const [iframeHeight, setIframeHeight] = useState("100px");
+    const [weatherData, setWeatherData] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const UIResources = (cityName: string) => {
+        useEffect(() => {
+            setError(null); // Clear any previous errors
+            getWeather(city, "imperial")
+                .then(setWeatherData)
+                .catch((err) => {
+                    console.error("Error fetching weather data:", err);
+                    setError(err.message || "Failed to fetch weather data");
+                });
+        }, [city]);
+
+        // Show error if there was an error fetching data
+        if (error) {
+            return createUIResource({
+                uri: `ui://mcp-aharvard/weather-card`,
+                content: {
+                    type: "rawHtml",
+                    htmlString: `
+                        <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif; color: #e74c3c;">
+                            <p>Error: ${error}</p>
+                        </div>
+                    `,
+                },
+                encoding: "text",
+            });
+        }
+
+        // Don't render WeatherCard if weatherData is null
+        if (!weatherData) {
+            return createUIResource({
+                uri: `ui://mcp-aharvard/weather-card`,
+                content: {
+                    type: "rawHtml",
+                    htmlString: `
+                        <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+                            <p>Loading weather data for ${city}...</p>
+                        </div>
+                    `,
+                },
+                encoding: "text",
+            });
+        }
+
         return createUIResource({
             uri: `ui://mcp-aharvard/weather-card`,
             content: {
                 type: "rawHtml",
-                htmlString: WeatherCard(getWeather(cityName, "imperial")),
+                htmlString: WeatherCard(weatherData),
             },
             encoding: "text",
         });

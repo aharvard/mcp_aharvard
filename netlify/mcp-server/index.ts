@@ -33,8 +33,8 @@ export const setupMCPServer = (): McpServer => {
         },
         async ({ location, units }): Promise<CallToolResult> => {
             try {
-                // Simulate weather data (in a real implementation, you'd call a weather API)
-                const weatherData: WeatherData = getWeather(location, units);
+                // Get real weather data from OpenMeteo API
+                const weatherData: WeatherData = await getWeather(location, units);
                 return {
                     content: [
                         {

@@ -1,6 +1,14 @@
 import { WeatherData } from "../types";
 
-export default function WeatherCard(data: WeatherData) {
+export default function WeatherCard(data: WeatherData | null) {
+    // Handle null or undefined data
+    if (!data) {
+        return `
+            <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+                <p>No weather data available</p>
+            </div>
+        `;
+    }
     const style = `
 <style>
   * {

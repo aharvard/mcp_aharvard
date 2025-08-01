@@ -1,144 +1,181 @@
 import { WeatherData } from "../types";
 
-// Weather conditions categorized by temperature ranges
-const weatherConditionsByTemp = {
-    // Cold weather conditions (below freezing)
-    cold: ["Snow", "Sleet", "Hail", "Foggy"],
-    // Cool weather conditions (near freezing to cool)
-    cool: ["Cloudy", "Overcast", "Drizzle", "Light Rain", "Foggy"],
-    // Moderate weather conditions (comfortable temperatures)
-    moderate: ["Partly Cloudy", "Cloudy", "Light Rain", "Clear", "Windy"],
-    // Warm weather conditions (pleasant temperatures)
-    warm: ["Sunny", "Partly Cloudy", "Clear", "Windy"],
-    // Hot weather conditions (high temperatures)
-    hot: ["Sunny", "Clear", "Thunderstorm"],
-    // Rainy conditions (can occur in various temperatures)
-    rainy: ["Light Rain", "Heavy Rain", "Thunderstorm", "Drizzle"],
-};
-
-// Helper function to get random number between min and max
-const getRandomNumber = (min: number, max: number): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-// Helper function to get random element from array
-const getRandomElement = <T>(array: T[]): T => {
-    return array[Math.floor(Math.random() * array.length)];
-};
-
-// Helper function to get appropriate weather conditions based on temperature
-const getWeatherConditionsForTemp = (temp: number, units: string): string[] => {
-    const isMetric = units === "metric";
-    const freezingPoint = isMetric ? 0 : 32;
-    const coolTemp = isMetric ? 10 : 50;
-    const moderateTemp = isMetric ? 20 : 68;
-    const warmTemp = isMetric ? 25 : 77;
-
-    let conditions: string[] = [];
-
-    if (temp <= freezingPoint) {
-        // Cold weather - snow, sleet, hail more likely
-        conditions = [
-            ...weatherConditionsByTemp.cold,
-            ...weatherConditionsByTemp.cool,
-        ];
-    } else if (temp <= coolTemp) {
-        // Cool weather - cloudy, drizzle more likely
-        conditions = [
-            ...weatherConditionsByTemp.cool,
-            ...weatherConditionsByTemp.moderate,
-        ];
-    } else if (temp <= moderateTemp) {
-        // Moderate weather - mix of conditions
-        conditions = [
-            ...weatherConditionsByTemp.moderate,
-            ...weatherConditionsByTemp.warm,
-        ];
-    } else if (temp <= warmTemp) {
-        // Warm weather - sunny, clear more likely
-        conditions = [
-            ...weatherConditionsByTemp.warm,
-            ...weatherConditionsByTemp.moderate,
-        ];
-    } else {
-        // Hot weather - sunny, thunderstorms more likely
-        conditions = [
-            ...weatherConditionsByTemp.hot,
-            ...weatherConditionsByTemp.rainy,
-        ];
-    }
-
-    // Add some randomness - occasionally allow "unusual" conditions
-    if (Math.random() < 0.1) {
-        // 10% chance for unusual weather
-        const allConditions = Object.values(weatherConditionsByTemp).flat();
-        conditions = [...conditions, ...allConditions];
-    }
-
-    return conditions;
-};
-
-export const getWeather = (location: string, units: string): WeatherData => {
-    // Generate random temperature based on units
-    const baseTemp = units === "metric" ? 20 : 68; // Base temperature
-    const tempVariation = units === "metric" ? 15 : 27; // ±15°C or ±27°F
-    const temperature = getRandomNumber(
-        baseTemp - tempVariation,
-        baseTemp + tempVariation
-    );
-
-    // Get weather conditions appropriate for this temperature
-    const availableConditions = getWeatherConditionsForTemp(temperature, units);
-    const condition = getRandomElement(
-        availableConditions
-    ) as WeatherData["condition"];
-
-    // Adjust humidity based on weather condition
-    let humidity: number;
-    if (
-        ["Heavy Rain", "Thunderstorm", "Drizzle", "Light Rain"].includes(
-            condition
-        )
-    ) {
-        humidity = getRandomNumber(70, 95); // High humidity for rain
-    } else if (["Snow", "Sleet", "Hail"].includes(condition)) {
-        humidity = getRandomNumber(60, 85); // Moderate-high humidity for frozen precip
-    } else if (["Foggy", "Cloudy", "Overcast"].includes(condition)) {
-        humidity = getRandomNumber(50, 80); // Moderate humidity for cloudy conditions
-    } else {
-        humidity = getRandomNumber(30, 70); // Lower humidity for clear/sunny conditions
-    }
-
-    // Adjust wind speed based on weather condition
-    let windSpeed: number;
-    const baseWindSpeed = units === "metric" ? 10 : 6;
-    const windVariation = units === "metric" ? 20 : 12;
-
-    if (["Windy", "Thunderstorm"].includes(condition)) {
-        windSpeed = getRandomNumber(
-            baseWindSpeed + 10,
-            baseWindSpeed + windVariation + 15
-        ); // Higher winds
-    } else if (["Heavy Rain", "Snow"].includes(condition)) {
-        windSpeed = getRandomNumber(
-            baseWindSpeed + 5,
-            baseWindSpeed + windVariation + 10
-        ); // Moderate-high winds
-    } else {
-        windSpeed = getRandomNumber(
-            baseWindSpeed,
-            baseWindSpeed + windVariation
-        ); // Normal winds
-    }
-
-    return {
-        location: location,
-        temperature: temperature,
-        unit: units === "metric" ? "°C" : "°F",
-        condition: condition,
-        humidity: humidity,
-        windSpeed: windSpeed,
-        windUnit: units === "metric" ? "km/h" : "mph",
-        description: `Current weather in ${location}`,
+interface OpenMeteoResponse {
+    current: {
+        temperature_2m: number;
+        relative_humidity_2m: number;
+        wind_speed_10m: number;
+        weather_code: number;
     };
+    current_units: {
+        temperature_2m: string;
+        wind_speed_10m: string;
+    };
+}
+
+// Weather code mapping for OpenMeteo API
+const weatherCodeMap: {
+    [key: number]:
+        | "Clear"
+        | "Partly Cloudy"
+        | "Cloudy"
+        | "Foggy"
+        | "Light Rain"
+        | "Heavy Rain"
+        | "Snow"
+        | "Thunderstorm"
+        | "Sunny"
+        | "Windy"
+        | "Overcast"
+        | "Drizzle"
+        | "Hail"
+        | "Sleet";
+} = {
+    0: "Clear",
+    1: "Partly Cloudy",
+    2: "Partly Cloudy",
+    3: "Cloudy",
+    45: "Foggy",
+    48: "Foggy",
+    51: "Drizzle",
+    53: "Drizzle",
+    55: "Drizzle",
+    56: "Drizzle",
+    57: "Drizzle",
+    61: "Light Rain",
+    63: "Heavy Rain",
+    65: "Heavy Rain",
+    66: "Light Rain",
+    67: "Heavy Rain",
+    71: "Snow",
+    73: "Snow",
+    75: "Snow",
+    77: "Snow",
+    80: "Light Rain",
+    81: "Light Rain",
+    82: "Heavy Rain",
+    85: "Snow",
+    86: "Snow",
+    95: "Thunderstorm",
+    96: "Thunderstorm",
+    99: "Thunderstorm",
+};
+
+// Helper function to get weather condition from weather code
+const getWeatherCondition = (
+    weatherCode: number
+):
+    | "Clear"
+    | "Partly Cloudy"
+    | "Cloudy"
+    | "Foggy"
+    | "Light Rain"
+    | "Heavy Rain"
+    | "Snow"
+    | "Thunderstorm"
+    | "Sunny"
+    | "Windy"
+    | "Overcast"
+    | "Drizzle"
+    | "Hail"
+    | "Sleet" => {
+    return weatherCodeMap[weatherCode] || "Clear";
+};
+
+// Helper function to convert temperature units
+const convertTemperature = (temp: number, targetUnit: string): number => {
+    if (targetUnit === "°F") {
+        return Math.round((temp * 9) / 5 + 32);
+    }
+    return Math.round(temp);
+};
+
+// Helper function to convert wind speed units
+const convertWindSpeed = (speed: number, targetUnit: string): number => {
+    if (targetUnit === "mph") {
+        return Math.round(speed * 0.621371); // km/h to mph
+    }
+    return Math.round(speed);
+};
+
+export const getWeather = async (
+    location: string,
+    units: string
+): Promise<WeatherData> => {
+    try {
+        // First, we need to geocode the location to get coordinates
+        // Using a free geocoding service
+        const geocodeUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+            location
+        )}&count=1&language=en&format=json`;
+
+        const geocodeResponse = await fetch(geocodeUrl);
+        if (!geocodeResponse.ok) {
+            throw new Error(`Geocoding failed: ${geocodeResponse.statusText}`);
+        }
+
+        const geocodeData = await geocodeResponse.json();
+
+        if (!geocodeData.results || geocodeData.results.length === 0) {
+            throw new Error(`Location not found: ${location}`);
+        }
+
+        const { latitude, longitude } = geocodeData.results[0];
+
+        // Now get weather data using coordinates
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto`;
+
+        const weatherResponse = await fetch(weatherUrl);
+        if (!weatherResponse.ok) {
+            throw new Error(
+                `Weather API failed: ${weatherResponse.statusText}`
+            );
+        }
+
+        const weatherData: OpenMeteoResponse = await weatherResponse.json();
+
+        // Extract and convert data
+        const temperature = convertTemperature(
+            weatherData.current.temperature_2m,
+            units === "metric" ? "°C" : "°F"
+        );
+
+        const windSpeed = convertWindSpeed(
+            weatherData.current.wind_speed_10m,
+            units === "metric" ? "km/h" : "mph"
+        );
+
+        const condition = getWeatherCondition(weatherData.current.weather_code);
+
+        return {
+            location: location,
+            temperature: temperature,
+            unit: units === "metric" ? "°C" : "°F",
+            condition: condition,
+            humidity: weatherData.current.relative_humidity_2m,
+            windSpeed: windSpeed,
+            windUnit: units === "metric" ? "km/h" : "mph",
+            description: `Current weather in ${location}`,
+        };
+    } catch (error) {
+        console.error("Error fetching weather data:", error);
+
+        // Fallback to mock data if API fails
+        const baseTemp = units === "metric" ? 20 : 68;
+        const tempVariation = units === "metric" ? 15 : 27;
+        const temperature =
+            Math.floor(Math.random() * (tempVariation * 2 + 1)) +
+            (baseTemp - tempVariation);
+
+        return {
+            location: location,
+            temperature: temperature,
+            unit: units === "metric" ? "°C" : "°F",
+            condition: "Clear",
+            humidity: Math.floor(Math.random() * 40) + 40,
+            windSpeed: Math.floor(Math.random() * 20) + 5,
+            windUnit: units === "metric" ? "km/h" : "mph",
+            description: `Current weather in ${location} (fallback data)`,
+        };
+    }
 };
