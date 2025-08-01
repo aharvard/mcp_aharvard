@@ -49,12 +49,13 @@ This project includes MCP (Model Context Protocol) integration through Express s
 
 ### Using as a Goose Extension
 
-1. Add a name
-2. Select type: `HTTP`
-3. Add a description
-4. Add this endpoint: https://mcp-aharvard.netlify.app/mcp
-5. A timeout of `300` is fine
-6. Save changes
+1. Add a custom extension
+1. Give it a name
+1. Select `HTTP` type
+1. Add a description
+1. Add this endpoint: https://mcp-aharvard.netlify.app/mcp
+1. A timeout of `300` is fine
+1. Save changes
 
 ### Using the MCP Inspector
 
