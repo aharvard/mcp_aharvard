@@ -2,7 +2,7 @@ import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { WeatherData } from "./types";
-import WeatherCard from "../mcp-ui/WeatherCard";
+import WeatherCard from "./tools/WeatherCard";
 import { getWeather } from "./tools/getWeather";
 
 export const setupMCPServer = (): McpServer => {
