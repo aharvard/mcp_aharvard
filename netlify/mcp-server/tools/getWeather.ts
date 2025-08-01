@@ -134,6 +134,8 @@ export const getWeather = async (
 
         const weatherData: OpenMeteoResponse = await weatherResponse.json();
 
+        console.log({ location, weatherData });
+
         // Extract and convert data
         const temperature = convertTemperature(
             weatherData.current.temperature_2m,

@@ -2,7 +2,14 @@ import "./App.css";
 import MCPUIResourceRenderer from "./MCPUIResourceRenderer";
 
 function App() {
-    const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Miami"];
+    const cities = [
+        "Knoxville",
+        "New York",
+        "Los Angeles",
+        "Chicago",
+        "Houston",
+        "Miami",
+    ];
 
     return (
         <div className="App">
