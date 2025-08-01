@@ -17,31 +17,37 @@ export default function WeatherCard(data: WeatherData) {
    overflow: hidden;
   }
   body {
-    margin: 10px;
+    margin: 0;
     padding: 0;
-    background-color: #000000;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
     --card-background-color: #000000;
     --card-text-color: #ffffff;
   }
   .weather-card {
+    margin: 10px;
     background-color: var(--card-background-color);
+    width: 100%;
+    max-width: 500px;
     color: var(--card-text-color);
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .15);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
     grid-template-areas:
       "location temperature"
       "condition-container temperature "
   }
-  .weather-card *{
+  .weather-card * {
     margin: 0;
     line-height: 1;
   }
   .location {
     font-size: 24px;
+    font-weight: 700;
     grid-area: location;
   }
   .temperature {
@@ -53,6 +59,9 @@ export default function WeatherCard(data: WeatherData) {
   .temperature-value {
     font-weight: 900;
     font-size: 90px;
+    line-height: 0.8;
+    transform: translateY(10px);
+    filter: drop-shadow(0 2px 1px rgba(120, 120, 120, 0.25));
   }
   .temperature-unit {
     font-size: 30px;
@@ -60,15 +69,27 @@ export default function WeatherCard(data: WeatherData) {
   }
   .weather-condition-container{
     text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     grid-area: condition-container;
   }
+  .condition {
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .wind-speed,
+  .humidity {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  
   .weather-condition-sunny {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffb347 100%);
     --card-text-color: #000000;
@@ -140,13 +161,13 @@ export default function WeatherCard(data: WeatherData) {
   <div class="weather-condition-container">
     <p class="condition">${data.condition}</p>
     <p class="wind-speed">
-      <span class="wind-speed-label">Winds</span>
       <span class="wind-speed-value">${data.windSpeed}</span>
       <span class="wind-speed-unit">${data.windUnit}</span>
+      <span class="wind-speed-label">Winds</span>
     </p>
     <p class="humidity">
-      <span class="humidity-label">Humidity</span>
-      <span class="humidity-value">${data.humidity}%</span>
+    <span class="humidity-value">${data.humidity}%</span>
+    <span class="humidity-label">Humidity</span>
     </p>
   </div>
 </div>
