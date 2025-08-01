@@ -184,12 +184,41 @@ export default function WeatherCard(data: WeatherData | null) {
     // inform MCP host of UI height
     const postMessageHeight = `
 <script>
-  window.parent.postMessage({ 
-    type: 'size-change', 
-    payload: {         
-      height: document.documentElement.scrollHeight + 'px'
-    } 
-  }, '*')
+  // Function to post height to parent
+  function postHeight() {
+    window.parent.postMessage({ 
+      type: 'size-change', 
+      payload: {         
+        height: document.documentElement.scrollHeight + 'px'
+      } 
+    }, '*');
+  }
+
+  // Post height immediately
+  postHeight();
+
+  // Post height after a short delay to ensure content is loaded
+  setTimeout(postHeight, 100);
+
+  // Create ResizeObserver to watch for size changes
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      // Post height whenever document size changes
+      postHeight();
+    }
+  });
+
+  // Start observing the document element
+  resizeObserver.observe(document.documentElement);
+
+  // Also observe the body element for additional coverage
+  resizeObserver.observe(document.body);
+
+  // Post height when window loads
+  window.addEventListener('load', postHeight);
+
+  // Post height when DOM content is loaded
+  document.addEventListener('DOMContentLoaded', postHeight);
 </script>
   `;
 
