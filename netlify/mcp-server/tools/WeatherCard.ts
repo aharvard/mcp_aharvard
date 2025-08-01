@@ -95,7 +95,7 @@ export default function WeatherCard(data: WeatherData) {
   window.parent.postMessage({ 
     type: 'size-change', 
     payload: {         
-      height: document.documentElement.scrollHeight
+      height: document.documentElement.scrollHeight + 'px'
     } 
   }, '*')
 </script>

@@ -35,7 +35,16 @@ export const setupMCPServer = (): McpServer => {
                 // Simulate weather data (in a real implementation, you'd call a weather API)
                 const weatherData: WeatherData = getWeather(location, units);
                 return {
-                    content: [WeatherCard(weatherData)],
+                    content: [
+                        {
+                            type: "text",
+                            text: JSON.stringify(weatherData),
+                            annotations: {
+                                audience: ["user"],
+                            },
+                        },
+                        WeatherCard(weatherData),
+                    ],
                 };
             } catch (error) {
                 console.error("Error getting weather:", error);
