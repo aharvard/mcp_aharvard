@@ -4,8 +4,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     plugins: [react()],
     build: {
-        outDir: "public",
-        emptyOutDir: false, // Don't empty the public folder to preserve existing files
+        outDir: "dist",
+        emptyOutDir: true, // Empty the dist folder for clean builds
         rollupOptions: {
             input: {
                 main: "index.html",
