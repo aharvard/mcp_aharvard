@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "mcp-aharvard": {
+            "type": "http",
+            "url": "https://mcp-aharvard.netlify.app/mcp"
+        }
+    }
+}
