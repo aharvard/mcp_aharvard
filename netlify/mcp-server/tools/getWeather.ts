@@ -33,7 +33,6 @@ const getWeatherConditionsForTemp = (temp: number, units: string): string[] => {
     const coolTemp = isMetric ? 10 : 50;
     const moderateTemp = isMetric ? 20 : 68;
     const warmTemp = isMetric ? 25 : 77;
-    const hotTemp = isMetric ? 30 : 86;
 
     let conditions: string[] = [];
 
