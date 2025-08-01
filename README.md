@@ -47,23 +47,14 @@ The built files will be in the `public` directory, ready for deployment.
 
 This project includes MCP (Model Context Protocol) integration through Express serverless functions.
 
-### Using an MCP Client
+### Using as a Goose Extension
 
-Provide the following configuration to your MCP client:
-
-```json
-{
-    "mcpServers": {
-        "express-mcp": {
-            "command": "npx",
-            "args": [
-                "mcp-remote@next",
-                "https://mcp-example-express.netlify.app/mcp"
-            ]
-        }
-    }
-}
-```
+1. Add a name
+2. Select type: `HTTP`
+3. Add a description
+4. Add this endpoint: https://mcp-aharvard.netlify.app/mcp
+5. A timeout of `300` is fine
+6. Save changes
 
 ### Using the MCP Inspector
 
