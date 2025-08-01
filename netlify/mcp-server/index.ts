@@ -6,6 +6,7 @@ import {
     ReadResourceResult,
 } from "@modelcontextprotocol/sdk/types.js";
 import { WeatherData } from "../types";
+import WeatherCard from "../mcp-ui/WeatherCard";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -52,6 +53,7 @@ export const setupMCPServer = (): McpServer => {
                             type: "text",
                             text: `${weatherData.description}: ${weatherData.temperature}${weatherData.unit}, ${weatherData.condition}. Humidity: ${weatherData.humidity}%. Wind: ${weatherData.windSpeed} ${weatherData.windUnit}.`,
                         },
+                        WeatherCard(weatherData),
                     ],
                 };
             } catch (error) {
