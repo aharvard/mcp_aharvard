@@ -9,6 +9,7 @@
         "inspect": "npx @modelcontextprotocol/inspector --config mcp-config.json --server mcp-aharvard"
     },
     "dependencies": {
+        "@mcp-ui/server": "^5.2.0",
         "@modelcontextprotocol/sdk": "^1.10.2",
         "@netlify/functions": "^2.5.1",
         "@types/express": "^5.0.1",

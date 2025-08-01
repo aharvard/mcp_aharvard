@@ -5,6 +5,7 @@ import {
     GetPromptResult,
     ReadResourceResult,
 } from "@modelcontextprotocol/sdk/types.js";
+import { WeatherData } from "../types";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -34,7 +35,7 @@ export const setupMCPServer = (): McpServer => {
         async ({ location, units }): Promise<CallToolResult> => {
             try {
                 // Simulate weather data (in a real implementation, you'd call a weather API)
-                const weatherData = {
+                const weatherData: WeatherData = {
                     location: location,
                     temperature: units === "metric" ? 22 : 72,
                     unit: units === "metric" ? "°C" : "°F",
