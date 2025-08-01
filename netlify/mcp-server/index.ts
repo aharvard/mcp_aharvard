@@ -4,6 +4,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { WeatherData } from "./types";
 import WeatherCard from "./tools/WeatherCard";
 import { getWeather } from "./tools/getWeather";
+import { createUIResource } from "@mcp-ui/server";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -44,7 +45,19 @@ export const setupMCPServer = (): McpServer => {
                                 mimeType: "application/json",
                             },
                         },
-                        WeatherCard(weatherData),
+                        {
+                            ...createUIResource({
+                                uri: "ui://mcp-aharvard/weather-card",
+                                content: {
+                                    type: "rawHtml",
+                                    htmlString: WeatherCard(weatherData),
+                                },
+                                encoding: "text",
+                            }),
+                            annotations: {
+                                audience: ["user"],
+                            },
+                        },
                     ],
                 };
             } catch (error) {

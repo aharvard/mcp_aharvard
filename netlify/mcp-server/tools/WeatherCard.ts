@@ -1,4 +1,3 @@
-import { createUIResource } from "@mcp-ui/server";
 import { WeatherData } from "../types";
 
 export default function WeatherCard(data: WeatherData) {
@@ -101,19 +100,7 @@ export default function WeatherCard(data: WeatherData) {
 </script>
   `;
 
-    const uiResource = createUIResource({
-        uri: "ui://mcp-aharvard/weather-card",
-        content: {
-            type: "rawHtml",
-            htmlString: style + html + postMessageHeight,
-        },
-        encoding: "text",
-    });
+    const htmlString = style + html + postMessageHeight;
 
-    return {
-        ...uiResource,
-        annotations: {
-            audience: ["user"],
-        },
-    };
+    return htmlString;
 }
