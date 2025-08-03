@@ -62,22 +62,81 @@ export default function SeatSelection() {
   .sky {
     background-color: #87CEEB;
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
   .cabin {
     background-color: #000000;
-    width: 100%;
     background-color: gray;
     max-width: 350px;
     padding: 0 10px;
+  }
+  .selection-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-width: 250px;
+    max-width: 300px;
+  }
+  .card-header h3 {
+    margin: 0 0 16px 0;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .card-content {
+    margin-bottom: 20px;
+  }
+  .card-content p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+  }
+  .card-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+  .btn-secondary {
+    background-color: #e5e7eb;
+    color: #374151;
+  }
+  .btn-secondary:hover {
+    background-color: #d1d5db;
+  }
+  
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .btn:disabled:hover {
+    background-color: inherit;
   }
   .seats {
     background-color: white;
     padding: 40px 10px;
     display: grid;
     grid-template-columns: repeat(13, 1fr);
-    gap: 30px 1px;
+    gap: 30px 6px;
     grid-template-areas:
       "seat-1 seat-1 seat-1 seat-2 seat-2 seat-2 . seat-3 seat-3 seat-3 seat-4 seat-4 seat-4"
       "seat-5 seat-5 seat-5 seat-6 seat-6 seat-6 . seat-7 seat-7 seat-7 seat-8 seat-8 seat-8"
@@ -122,6 +181,13 @@ export default function SeatSelection() {
     background-color: #c4b5fd;
     color: #6b7280;
   }
+  
+  .seat.selected {
+    background-color: #10b981;
+    border-color: #059669;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  }
 </style>
   `;
 
@@ -131,6 +197,27 @@ export default function SeatSelection() {
     <div class="cabin">
       <div class="seats">
         ${seats}
+      </div>
+    </div>
+    <div class="selection-card">
+      <div class="card-header">
+        <h3>Seat Selection</h3>
+      </div>
+      <div class="card-content">
+        <div id="selection-status">
+          <p>Please select a seat</p>
+        </div>
+        <div id="selected-seat-info" style="display: none;">
+          <p><strong>Selected Seat:</strong> <span id="selected-seat-number"></span></p>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button id="clear-selection" class="btn btn-secondary" disabled onclick="clearSelection()">
+          Clear Selection
+        </button>
+        <button id="confirm-seat" class="btn btn-primary" disabled onclick="confirmSeat()">
+          Confirm Seat
+        </button>
       </div>
     </div>
     <div class="clouds"></div>
@@ -153,21 +240,75 @@ export default function SeatSelection() {
 
   const handleInteractions = `
 <script>
+  let selectedSeat = null;
 
   function handleClick(seatNumber) {
-    window.parent.postMessage({
-      type: 'tool',
-      payload: {
-        toolName: 'seat-selection',
-        params: {
-          seatNumber: seatNumber
-        }
-      }
-    }, '*');
+    if (selectedSeat === seatNumber) {
+      // Deselect if clicking the same seat
+      clearSelection();
+      return;
+    }
+    
+    // Update selected seat
+    selectedSeat = seatNumber;
+    
+    // Update UI
+    updateSelectionUI();
+    
+    // Highlight selected seat
+    document.querySelectorAll('.seat').forEach(seat => {
+      seat.classList.remove('selected');
+    });
+    document.querySelector('.seat[style*="seat-' + seatNumber + '"]').classList.add('selected');
   }
 
+  function clearSelection() {
+    selectedSeat = null;
+    
+    // Remove selection highlight
+    document.querySelectorAll('.seat').forEach(seat => {
+      seat.classList.remove('selected');
+    });
+    
+    // Update UI
+    updateSelectionUI();
+  }
 
-  
+  function confirmSeat() {
+    if (selectedSeat) {
+      window.parent.postMessage({
+        type: 'tool',
+        payload: {
+          toolName: 'seat-selection',
+          params: {
+            seatNumber: selectedSeat,
+            confirmed: true
+          }
+        }
+      }, '*');
+    }
+  }
+
+  function updateSelectionUI() {
+    const statusDiv = document.getElementById('selection-status');
+    const seatInfoDiv = document.getElementById('selected-seat-info');
+    const seatNumberSpan = document.getElementById('selected-seat-number');
+    const clearBtn = document.getElementById('clear-selection');
+    const confirmBtn = document.getElementById('confirm-seat');
+    
+    if (selectedSeat) {
+      statusDiv.style.display = 'none';
+      seatInfoDiv.style.display = 'block';
+      seatNumberSpan.textContent = selectedSeat;
+      clearBtn.disabled = false;
+      confirmBtn.disabled = false;
+    } else {
+      statusDiv.style.display = 'block';
+      seatInfoDiv.style.display = 'none';
+      clearBtn.disabled = true;
+      confirmBtn.disabled = true;
+    }
+  }
 </script>`;
 
   const htmlString =
