@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createUIResource } from "@mcp-ui/server";
 import MCPUIResourceRenderer from "../../components/MCPUIResourceRenderer";
+import WeatherCard from "../../netlify/mcp-server/tools/WeatherCard";
+import { getWeather } from "../../netlify/mcp-server/tools/getWeather";
 
 export default function GetWeatherPage() {
   const cities = [
@@ -33,6 +36,67 @@ export default function GetWeatherPage() {
   ];
 
   const [selectedCity, setSelectedCity] = useState<string>("Atlanta");
+  const [weatherData, setWeatherData] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch weather data when city changes
+  useEffect(() => {
+    if (!selectedCity) return;
+
+    setError(null);
+    setWeatherData(null);
+
+    getWeather(selectedCity, "imperial")
+      .then((data) => {
+        setWeatherData(data);
+      })
+      .catch((err) => {
+        console.error("Error fetching weather data:", err);
+        setError(err.message || "Failed to fetch weather data");
+      });
+  }, [selectedCity]);
+
+  // Create UI resource based on weather data state
+  const createWeatherResource = () => {
+    if (error) {
+      return createUIResource({
+        uri: `ui://mcp-aharvard/weather-card`,
+        content: {
+          type: "rawHtml",
+          htmlString: `
+            <div class="p-5 text-center font-sans text-red-500 bg-red-50 rounded-lg border border-red-200">
+                <p>Error: ${error}</p>
+            </div>
+          `,
+        },
+        encoding: "text",
+      });
+    }
+
+    if (!weatherData) {
+      return createUIResource({
+        uri: `ui://mcp-aharvard/weather-card`,
+        content: {
+          type: "rawHtml",
+          htmlString: `
+            <div class="p-5 text-center font-sans text-gray-600 bg-gray-50 rounded-lg border border-gray-200">
+                <p>Loading weather data for ${selectedCity}...</p>
+            </div>
+          `,
+        },
+        encoding: "text",
+      });
+    }
+
+    return createUIResource({
+      uri: `ui://mcp-aharvard/weather-card`,
+      content: {
+        type: "rawHtml",
+        htmlString: WeatherCard(weatherData),
+      },
+      encoding: "text",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -62,8 +126,10 @@ export default function GetWeatherPage() {
         </div>
 
         {selectedCity && (
-          <div className="max-w-2xl">
-            <MCPUIResourceRenderer city={selectedCity} />
+          <div className="w-1/2">
+            <MCPUIResourceRenderer
+              resource={createWeatherResource().resource}
+            />
           </div>
         )}
       </div>
