@@ -40,7 +40,6 @@ export default function SeatSelection() {
 
       let row = 1;
       let colIndex = 0;
-      let currentPos = 0;
 
       // Row 1: 4 seats
       if (gridPosition < 4) {
