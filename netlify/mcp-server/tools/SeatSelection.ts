@@ -1,16 +1,37 @@
 import { postMessageHeight } from "./utils/postMessageHeight";
 
 export default function SeatSelection() {
-  const seat = (seatNumber: number) => `
+  // Generate random disabled seats (about 65% of 56 seats = ~36 seats)
+  const totalSeats = 56;
+  const disabledCount = Math.floor(totalSeats * 0.65); // ~36 seats
+  const disabledSeats = new Set<number>();
+
+  // Randomly select seats to disable
+  while (disabledSeats.size < disabledCount) {
+    const randomSeat = Math.floor(Math.random() * totalSeats) + 1;
+    disabledSeats.add(randomSeat);
+  }
+
+  const seat = (seatNumber: number) => {
+    const isDisabled = disabledSeats.has(seatNumber);
+    const disabledClass = isDisabled ? " disabled" : "";
+    const disabledAttr = isDisabled ? "disabled" : "";
+    const disabledStyle = isDisabled ? "pointer-events: none;" : "";
+
+    return `
   <button 
-    class="seat" 
-    style="grid-area: seat-${seatNumber};" 
+    class="seat${disabledClass}" 
+    style="grid-area: seat-${seatNumber}; ${disabledStyle}" 
+    ${disabledAttr}
     onclick="( function() { 
-      handleClick(${seatNumber});
+      if (!${isDisabled}) {
+        handleClick(${seatNumber});
+      }
     })()">
       <span class="seat-number-${seatNumber}" >${seatNumber}</span>
   </button>
   `;
+  };
 
   const seats = Array.from({ length: 56 }, (_, i) => seat(i + 1)).join("");
 
@@ -71,15 +92,35 @@ export default function SeatSelection() {
       ;
   }
   .seat {
-    background-color: #000000;
+    background-color: #1e40af;
     color: #ffffff;
-    border: 1px solid #ffffff;
+    border: 1px solid #3b82f6;
     border-radius: 5px;
     padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .seat:hover:not(.disabled) {
+    background-color: #3b82f6;
+    transform: scale(1.05);
+  }
+  
+  .seat.disabled {
+    background-color: #93c5fd;
+    color: #6b7280;
+    border-color: #d1d5db;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
     
   .seat:nth-child(-n + 8) { 
-    background-color: red; 
+    background-color: #7c3aed; 
+  }
+  
+  .seat:nth-child(-n + 8).disabled {
+    background-color: #c4b5fd;
+    color: #6b7280;
   }
 </style>
   `;
