@@ -18,12 +18,6 @@ export const postMessageHeight = `
     }, '*');
   }
 
-  // Post height immediately
-  postHeight("initial");
-
-  // Post height after a short delay to ensure content is loaded
-  // setTimeout(postHeight, 100);
-
   // Create ResizeObserver to watch for size changes
   const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
@@ -38,10 +32,6 @@ export const postMessageHeight = `
   // Also observe the body element for additional coverage
   resizeObserver.observe(document.body);
 
-
-  // Post height when DOM content is loaded
-  document.addEventListener('DOMContentLoaded', () => postHeight("DOMContentLoaded"));
-  
   
 </script>
   `;

@@ -93,7 +93,7 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
             duration: 4000,
             message: `Tool action triggered: ${
               result.payload.toolName
-            } with params: ${JSON.stringify(result.payload.params)}`,
+            } with params: ${JSON.stringify(result.payload)}`,
           });
           break;
       }
@@ -104,7 +104,7 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
   );
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden border-2 border-red-500">
       <UIResourceRenderer
         resource={resource}
         onUIAction={handleUIAction}

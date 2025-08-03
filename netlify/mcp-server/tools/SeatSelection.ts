@@ -18,6 +18,58 @@ export default function SeatSelection() {
     const disabledAttr = isDisabled ? "disabled" : "";
     const disabledStyle = isDisabled ? "pointer-events: none;" : "";
 
+    // Convert seat number to airplane format (row + column)
+    const getAirplaneSeatLabel = (seatNum: number) => {
+      // Map seat numbers to actual grid positions
+      const seatMap = [
+        // Row 1: 4 seats (A, B, C, D)
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+        39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
+      ];
+
+      // Find the position of this seat in the grid
+      const gridPosition = seatMap.indexOf(seatNum);
+
+      // Calculate row and column based on grid position
+      // Each row has different number of seats:
+      // Row 1: 4 seats (A, B, C, D)
+      // Row 2: 4 seats (A, B, C, D)
+      // Row 3: 6 seats (A, B, C, D, E, F)
+      // Row 4+: 6 seats (A, B, C, D, E, F)
+
+      let row = 1;
+      let colIndex = 0;
+      let currentPos = 0;
+
+      // Row 1: 4 seats
+      if (gridPosition < 4) {
+        row = 1;
+        colIndex = gridPosition;
+      }
+      // Row 2: 4 seats
+      else if (gridPosition < 8) {
+        row = 2;
+        colIndex = gridPosition - 4;
+      }
+      // Row 3: 6 seats
+      else if (gridPosition < 14) {
+        row = 3;
+        colIndex = gridPosition - 8;
+      }
+      // Row 4+: 6 seats each
+      else {
+        const remainingPos = gridPosition - 14;
+        row = 4 + Math.floor(remainingPos / 6);
+        colIndex = remainingPos % 6;
+      }
+
+      const columns = ["a", "b", "c", "d", "e", "f"];
+      return `${row}${columns[colIndex]}`;
+    };
+
+    const seatLabel = getAirplaneSeatLabel(seatNumber);
+
     return `
   <button 
     class="seat${disabledClass}" 
@@ -28,7 +80,7 @@ export default function SeatSelection() {
         handleClick(${seatNumber});
       }
     })()">
-      <span class="seat-number-${seatNumber}" >${seatNumber}</span>
+      <span class="seat-number-${seatNumber}" >${seatLabel}</span>
   </button>
   `;
   };
@@ -63,9 +115,11 @@ export default function SeatSelection() {
     background-color: #87CEEB;
     width: 100%;
     display: flex;
+    padding: 0 10px ;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    position: relative;
   }
   .cabin {
     background-color: #000000;
@@ -100,7 +154,7 @@ export default function SeatSelection() {
     gap: 8px;
   }
   .btn {
-    padding: 8px 16px;
+    padding: 12px 10px;
     border: none;
     border-radius: 6px;
     font-size: 14px;
@@ -188,6 +242,37 @@ export default function SeatSelection() {
     transform: scale(1.1);
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
   }
+  
+  .thank-you-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #1f2937;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 100;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    /* Hidden by default, will be revealed when plane flies away */
+  }
+  
+  .thank-you-message h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    color: #059669;
+  }
+  
+  .thank-you-message p {
+    font-size: 18px;
+    margin: 0;
+    color: #6b7280;
+  }
 </style>
   `;
 
@@ -221,6 +306,10 @@ export default function SeatSelection() {
       </div>
     </div>
     <div class="clouds"></div>
+  </div>
+  <div id="thank-you-message" class="thank-you-message">
+    <h2>Thanks for flying with us!</h2>
+    <p>Your seat has been confirmed.</p>
   </div>
 </article>
   `;
@@ -275,17 +364,55 @@ export default function SeatSelection() {
   }
 
   function confirmSeat() {
+    console.log('confirmSeat called with selectedSeat:', selectedSeat);
     if (selectedSeat) {
-      window.parent.postMessage({
-        type: 'tool',
-        payload: {
-          toolName: 'seat-selection',
-          params: {
-            seatNumber: selectedSeat,
-            confirmed: true
-          }
+      // Add flying animation
+      const sky = document.querySelector('.sky');
+      console.log('Sky element found:', sky);
+      sky.style.transition = 'transform 2s ease-in-out';
+      sky.style.transform = 'translateY(-100vh)';
+      
+      // Reveal thank you message after a short delay
+      setTimeout(() => {
+        const thankYouMessage = document.getElementById('thank-you-message');
+        if (thankYouMessage) {
+          thankYouMessage.style.opacity = '1';
+          console.log('Thank you message revealed');
+        } else {
+          console.log('Thank you message element not found');
         }
-      }, '*');
+      }, 800);
+      
+      // Send message after animation starts
+      setTimeout(() => {
+        window.parent.postMessage({
+          type: 'tool',
+          payload: {
+            toolName: 'seat-selection',
+            params: {
+              seatNumber: selectedSeat,
+              confirmed: true
+            }
+          }
+        }, '*');
+      }, 500);
+      
+      // Send size change message after animation completes
+      setTimeout(() => {
+        // Ensure the plane stays hidden
+        const sky = document.querySelector('.sky');
+        sky.style.transform = 'translateY(-100vh)';
+        sky.style.transition = 'none'; // Remove transition to prevent any animation
+        sky.style.display = 'none'; // Completely hide the plane
+        
+        window.parent.postMessage({
+          type: 'size-change',
+          payload: {
+            height: '400px',
+            info: 'plane animation completed'
+          }
+        }, '*');
+      }, 2000);
     }
   }
 
@@ -297,9 +424,52 @@ export default function SeatSelection() {
     const confirmBtn = document.getElementById('confirm-seat');
     
     if (selectedSeat) {
+      // Convert seat number to airplane format
+      const getAirplaneSeatLabel = (seatNum) => {
+        // Map seat numbers to actual grid positions
+        const seatMap = [
+          // Row 1: 4 seats (A, B, C, D)
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+          41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56
+        ];
+        
+        // Find the position of this seat in the grid
+        const gridPosition = seatMap.indexOf(seatNum);
+        
+        // Calculate row and column based on grid position
+        let row = 1;
+        let colIndex = 0;
+        
+        // Row 1: 4 seats
+        if (gridPosition < 4) {
+          row = 1;
+          colIndex = gridPosition;
+        }
+        // Row 2: 4 seats  
+        else if (gridPosition < 8) {
+          row = 2;
+          colIndex = gridPosition - 4;
+        }
+        // Row 3: 6 seats
+        else if (gridPosition < 14) {
+          row = 3;
+          colIndex = gridPosition - 8;
+        }
+        // Row 4+: 6 seats each
+        else {
+          const remainingPos = gridPosition - 14;
+          row = 4 + Math.floor(remainingPos / 6);
+          colIndex = remainingPos % 6;
+        }
+        
+        const columns = ['a', 'b', 'c', 'd', 'e', 'f'];
+        return row + columns[colIndex];
+      };
+      
       statusDiv.style.display = 'none';
       seatInfoDiv.style.display = 'block';
-      seatNumberSpan.textContent = selectedSeat;
+      seatNumberSpan.textContent = getAirplaneSeatLabel(selectedSeat);
       clearBtn.disabled = false;
       confirmBtn.disabled = false;
     } else {
