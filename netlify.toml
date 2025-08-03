@@ -1,11 +1,11 @@
 [build]
 command = "npm run build"
-publish = "dist"
+publish = ".next"
 ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [dev]
 command = "npm run dev"
-publish = "dist"
+publish = ".next"
 
 [[redirects]]
 force = true
