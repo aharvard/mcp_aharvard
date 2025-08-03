@@ -9,6 +9,11 @@ publish = ".next"
 
 # Next.js redirects for client-side routing
 [[redirects]]
+from = "/mcp/*"
+to = "/.netlify/functions/express-mcp-server"
+status = 200
+
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
