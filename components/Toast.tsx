@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
