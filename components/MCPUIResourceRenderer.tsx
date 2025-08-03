@@ -26,12 +26,12 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
       if (event.data && event.data.type === "size-change") {
         console.log("Received size-change message from iframe:", event.data);
         setIframeHeight(event.data.payload.height);
-        // showToast({
-        //   type: "success",
-        //   title: "Size Updated",
-        //   message: `Iframe height changed to ${event.data.payload.height} from ${event.data.payload.info}`,
-        //   duration: 10000,
-        // });
+        showToast({
+          type: "success",
+          title: "Size Updated",
+          message: `Iframe height changed to ${event.data.payload.height} from ${event.data.payload.info}`,
+          duration: 4000,
+        });
       }
     };
 
@@ -90,8 +90,10 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
           showToast({
             type: "info",
             title: "Tool Action",
-            message: "A tool action was triggered from the UI resource",
             duration: 4000,
+            message: `Tool action triggered: ${
+              result.payload.toolName
+            } with params: ${JSON.stringify(result.payload.params)}`,
           });
           break;
       }

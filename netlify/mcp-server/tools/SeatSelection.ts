@@ -2,8 +2,13 @@ import { postMessageHeight } from "./utils/postMessageHeight";
 
 export default function SeatSelection() {
   const seat = (seatNumber: number) => `
-  <button class="seat" style="grid-area: seat-${seatNumber};">
-    <span class="seat-number-${seatNumber}" >${seatNumber}</span>
+  <button 
+    class="seat" 
+    style="grid-area: seat-${seatNumber};" 
+    onclick="( function() { 
+      handleClick(${seatNumber});
+    })()">
+      <span class="seat-number-${seatNumber}" >${seatNumber}</span>
   </button>
   `;
 
@@ -31,7 +36,7 @@ export default function SeatSelection() {
     padding: 0;
     background-color: transparent;
   }
-  .mcp-ui-container {}
+  .mcp-ui-container {} 
   
   .sky {
     background-color: #87CEEB;
@@ -39,14 +44,19 @@ export default function SeatSelection() {
     display: grid;
     place-items: center;
   }
-
-  .seats {
-    max-width: 350px;
-    padding: 40px 10px;
+  .cabin {
+    background-color: #000000;
+    width: 100%;
     background-color: gray;
+    max-width: 350px;
+    padding: 0 10px;
+  }
+  .seats {
+    background-color: white;
+    padding: 40px 10px;
     display: grid;
     grid-template-columns: repeat(13, 1fr);
-    gap: 30px 10px;
+    gap: 30px 1px;
     grid-template-areas:
       "seat-1 seat-1 seat-1 seat-2 seat-2 seat-2 . seat-3 seat-3 seat-3 seat-4 seat-4 seat-4"
       "seat-5 seat-5 seat-5 seat-6 seat-6 seat-6 . seat-7 seat-7 seat-7 seat-8 seat-8 seat-8"
@@ -98,10 +108,29 @@ export default function SeatSelection() {
   link2.rel = 'stylesheet';
   link2.href = 'https://rsms.me/inter/inter.css';
   document.head.appendChild(link2);
-</script>
-    `;
+</script>`;
 
-  const htmlString = style + html + postMessageHeight + addFontToHead;
+  const handleInteractions = `
+<script>
+
+  function handleClick(seatNumber) {
+    window.parent.postMessage({
+      type: 'tool',
+      payload: {
+        toolName: 'seat-selection',
+        params: {
+          seatNumber: seatNumber
+        }
+      }
+    }, '*');
+  }
+
+
+  
+</script>`;
+
+  const htmlString =
+    style + addFontToHead + html + postMessageHeight + handleInteractions;
 
   return htmlString;
 }

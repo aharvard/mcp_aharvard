@@ -5,6 +5,9 @@ export const postMessageHeight = `
   function postHeight(info) {
     const mcpUIContainer = document.querySelector('.mcp-ui-container');
     const height = mcpUIContainer ? mcpUIContainer.getBoundingClientRect().height : document.documentElement.scrollHeight;
+
+  console.log('posting height', {height});
+
     
     window.parent.postMessage({ 
       type: 'size-change', 
@@ -38,5 +41,7 @@ export const postMessageHeight = `
 
   // Post height when DOM content is loaded
   document.addEventListener('DOMContentLoaded', () => postHeight("DOMContentLoaded"));
+  
+  
 </script>
   `;
