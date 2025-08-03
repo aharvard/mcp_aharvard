@@ -1,12 +1,19 @@
 [build]
 command = "npm run build"
-publish = ".next"
+publish = "out"
 ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [dev]
 command = "npm run dev"
 publish = ".next"
 
+# Next.js redirects for client-side routing
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+# MCP function redirect
 [[redirects]]
 force = true
 from = "/mcp"
