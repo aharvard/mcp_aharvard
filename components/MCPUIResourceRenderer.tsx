@@ -5,6 +5,7 @@ import { UIActionResult, UIResourceRenderer } from "@mcp-ui/client";
 import { createUIResource } from "@mcp-ui/server";
 import WeatherCard from "../netlify/mcp-server/tools/WeatherCard";
 import { getWeather } from "../netlify/mcp-server/tools/getWeather";
+import { useToast } from "./ToastContainer";
 
 // Extend UIActionResult to include size-change type
 type ExtendedUIActionResult =
@@ -26,12 +27,16 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
   const [iframeHeight, setIframeHeight] = useState("100px");
   const [weatherData, setWeatherData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const UIResources = () => {
     useEffect(() => {
       setError(null); // Clear any previous errors
+
       getWeather(city, "imperial")
-        .then(setWeatherData)
+        .then((data) => {
+          setWeatherData(data);
+        })
         .catch((err) => {
           console.error("Error fetching weather data:", err);
           setError(err.message || "Failed to fetch weather data");
@@ -86,23 +91,48 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
     // Handle UI actions here
     switch (result.type) {
       case "intent":
-        // TODO: Implement intent handling
+        showToast({
+          type: "info",
+          title: "Intent Received",
+          message: "An intent action was triggered from the UI resource",
+          duration: 4000,
+        });
         break;
 
       case "link":
-        // TODO: Implement link handling
+        showToast({
+          type: "info",
+          title: "Link Action",
+          message: "A link action was triggered from the UI resource",
+          duration: 4000,
+        });
         break;
 
       case "notify":
-        // TODO: Implement notification handling
+        showToast({
+          type: "success",
+          title: "Notification",
+          message: "A notification action was triggered from the UI resource",
+          duration: 5000,
+        });
         break;
 
       case "prompt":
-        // TODO: Implement prompt handling
+        showToast({
+          type: "warning",
+          title: "Prompt Action",
+          message: "A prompt action was triggered from the UI resource",
+          duration: 6000,
+        });
         break;
 
       case "tool":
-        // TODO: Implement tool handling
+        showToast({
+          type: "info",
+          title: "Tool Action",
+          message: "A tool action was triggered from the UI resource",
+          duration: 4000,
+        });
         break;
 
       // Currently, `size-change` is non-standard
@@ -110,6 +140,12 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
         // We expect the height to be a string with a unit
         console.log("Setting iframe height to:", result.payload.height);
         setIframeHeight(result.payload.height);
+        showToast({
+          type: "success",
+          title: "Size Updated",
+          message: `Iframe height changed to ${result.payload.height}`,
+          duration: 3000,
+        });
         break;
       }
     }

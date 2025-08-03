@@ -8,12 +8,13 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/get-weather", label: "Get Weather" },
   { href: "/pick-seat", label: "Pick Seat" },
+  // { href: "/toast-demo", label: "Toast Demo" },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
   return (
-    <NavigationMenu.Root className="w-full flex justify-center bg-white border-b border-gray-200 shadow-sm mb-6">
+    <NavigationMenu.Root className="w-full flex justify-center bg-white border-b border-gray-200 shadow-sm">
       <NavigationMenu.List className="flex gap-6 py-4">
         {navItems.map((item) => (
           <NavigationMenu.Item key={item.href}>
