@@ -84,7 +84,7 @@ export default function UIActionCard() {
     });
 
     const html = `
-<div class="dark-container">
+<div class="dark-container mcp-ui-container">
   <div class="header">
     <h1>MCP-UI Actions</h1>
     <p class="subtitle">Interactive control panel for MCP-UI actions</p>
