@@ -12,6 +12,7 @@ export const setupMCPServer = (): McpServer => {
         {
             name: "stateless-server",
             version: "1.0.0",
+            description: "This demos MCP-UI examples.",
         },
         { capabilities: { logging: {} } }
     );
@@ -19,7 +20,7 @@ export const setupMCPServer = (): McpServer => {
     // Register a tool for getting weather information
     server.tool(
         "get-weather",
-        "Gets current weather information for a specified location",
+        "Gets current weather information for a specified location. Use this tool when the user asks you to get the weather for a specific location.",
         {
             location: z
                 .string()
@@ -85,7 +86,7 @@ export const setupMCPServer = (): McpServer => {
     // Register a tool for airplane seat selection
     server.tool(
         "pick-airplane-seat",
-        "A demo of an interactive airplane seat selection tool that helps you pick a seat on a flight",
+        "A demo of an interactive airplane seat selection tool that helps you pick a seat on a flight. Use this tool when the user asks you to pick a seat on a flight.",
         {
             flightNumber: z
                 .string()
