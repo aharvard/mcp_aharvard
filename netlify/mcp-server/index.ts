@@ -5,6 +5,7 @@ import { WeatherData } from "./types";
 import WeatherCard from "./tools/WeatherCard";
 import { getWeather } from "./tools/getWeather";
 import SeatSelection from "./tools/SeatSelection";
+import UIActionCard from "./tools/UIActionCard";
 import { createUIResource } from "@mcp-ui/server";
 
 export const setupMCPServer = (): McpServer => {
@@ -160,6 +161,55 @@ export const setupMCPServer = (): McpServer => {
                         {
                             type: "text",
                             text: `Error with airplane seat selection for flight ${flightNumber}: ${
+                                error instanceof Error
+                                    ? error.message
+                                    : "Unknown error"
+                            }`,
+                        },
+                    ],
+                };
+            }
+        }
+    );
+
+    // Register a tool for MCP UI Actions demo
+    server.tool(
+        "demo-mcp-ui-actions",
+        "A demo of MCP UI Actions that showcases different types of interactive actions. Use this tool when the user asks for an MCP UI Action demo or wants to see UI action examples.",
+        {},
+        async (): Promise<CallToolResult> => {
+            try {
+                return {
+                    content: [
+                        {
+                            ...createUIResource({
+                                uri: "ui://mcp-aharvard/ui-actions-demo",
+                                content: {
+                                    type: "rawHtml",
+                                    htmlString: UIActionCard(),
+                                },
+                                encoding: "text",
+                            }),
+                            annotations: {
+                                audience: ["user"],
+                            },
+                        },
+                        {
+                            type: "text",
+                            text: "MCP UI Actions demo loaded! This interactive panel demonstrates various types of UI actions including tool execution, intent handling, prompts, notifications, and link navigation. Click on any action to see how it works.",
+                            annotations: {
+                                audience: ["assistant"],
+                            },
+                        },
+                    ],
+                };
+            } catch (error) {
+                console.error("Error with MCP UI Actions demo:", error);
+                return {
+                    content: [
+                        {
+                            type: "text",
+                            text: `Error loading MCP UI Actions demo: ${
                                 error instanceof Error
                                     ? error.message
                                     : "Unknown error"
