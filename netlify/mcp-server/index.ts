@@ -221,5 +221,37 @@ export const setupMCPServer = (): McpServer => {
         }
     );
 
+    // Register a tool to show user Goose website
+    server.tool(
+        "show-goose-website",
+        "A demo of the Goose website. Use this tool when the user asks you to show the Goose website.",
+        {},
+        async (): Promise<CallToolResult> => {
+            return {
+                content: [
+                    {
+                        ...createUIResource({
+                            uri: "ui://mcp-aharvard/goose-website",
+                            content: {
+                                type: "externalUrl",
+                                iframeUrl: "https://block.github.io/goose/",
+                            },
+                            encoding: "text",
+                        }),
+                        annotations: {
+                            audience: ["user"],
+                        },
+                    },
+                    {
+                        type: "text",
+                        text: "TBD",
+                        annotations: {
+                            audience: ["assistant"],
+                        },
+                    },
+                ],
+            };
+        }
+    );
     return server;
 };
