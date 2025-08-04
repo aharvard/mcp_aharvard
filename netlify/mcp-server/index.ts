@@ -243,8 +243,8 @@ export const setupMCPServer = (): McpServer => {
                             encoding: "text",
                         }),
                         annotations: {
-                            audience: ["user"],
                             gooseConfig,
+                            audience: ["user", "something else"],
                         },
                     },
                     {
