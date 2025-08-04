@@ -84,7 +84,8 @@ export default function UIActionCard() {
     });
 
     const html = `
-<div class="dark-container mcp-ui-container">
+    <article class="mcp-ui-container">
+<div class="dark-container">
   <div class="header">
     <h1>MCP-UI Actions</h1>
     <p class="subtitle">Interactive control panel for MCP-UI actions</p>
@@ -134,6 +135,7 @@ export default function UIActionCard() {
     </div>
   </div>
 </div>
+</article>
 
 <script>
 function inspectMessage(button) {
@@ -196,6 +198,10 @@ function hideInspection() {
     line-height: 1.6;
   }
   
+  .mcp-ui-container {
+   padding: 1rem;
+  }
+
   .dark-container {
     max-width: 1200px;
     margin: 0 auto;
