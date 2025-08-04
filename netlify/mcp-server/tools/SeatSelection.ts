@@ -1,75 +1,76 @@
 import { postMessageHeight } from "./utils/postMessageHeight";
 
 export default function SeatSelection() {
-  // Generate random disabled seats (about 65% of 56 seats = ~36 seats)
-  const totalSeats = 56;
-  const disabledCount = Math.floor(totalSeats * 0.65); // ~36 seats
-  const disabledSeats = new Set<number>();
+    // Generate random disabled seats (about 65% of 56 seats = ~36 seats)
+    const totalSeats = 56;
+    const disabledCount = Math.floor(totalSeats * 0.65); // ~36 seats
+    const disabledSeats = new Set<number>();
 
-  // Randomly select seats to disable
-  while (disabledSeats.size < disabledCount) {
-    const randomSeat = Math.floor(Math.random() * totalSeats) + 1;
-    disabledSeats.add(randomSeat);
-  }
+    // Randomly select seats to disable
+    while (disabledSeats.size < disabledCount) {
+        const randomSeat = Math.floor(Math.random() * totalSeats) + 1;
+        disabledSeats.add(randomSeat);
+    }
 
-  const seat = (seatNumber: number) => {
-    const isDisabled = disabledSeats.has(seatNumber);
-    const disabledClass = isDisabled ? " disabled" : "";
-    const disabledAttr = isDisabled ? "disabled" : "";
-    const disabledStyle = isDisabled ? "pointer-events: none;" : "";
+    const seat = (seatNumber: number) => {
+        const isDisabled = disabledSeats.has(seatNumber);
+        const disabledClass = isDisabled ? " disabled" : "";
+        const disabledAttr = isDisabled ? "disabled" : "";
+        const disabledStyle = isDisabled ? "pointer-events: none;" : "";
 
-    // Convert seat number to airplane format (row + column)
-    const getAirplaneSeatLabel = (seatNum: number) => {
-      // Map seat numbers to actual grid positions
-      const seatMap = [
-        // Row 1: 4 seats (A, B, C, D)
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
-        39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
-      ];
+        // Convert seat number to airplane format (row + column)
+        const getAirplaneSeatLabel = (seatNum: number) => {
+            // Map seat numbers to actual grid positions
+            const seatMap = [
+                // Row 1: 4 seats (A, B, C, D)
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+                35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                51, 52, 53, 54, 55, 56,
+            ];
 
-      // Find the position of this seat in the grid
-      const gridPosition = seatMap.indexOf(seatNum);
+            // Find the position of this seat in the grid
+            const gridPosition = seatMap.indexOf(seatNum);
 
-      // Calculate row and column based on grid position
-      // Each row has different number of seats:
-      // Row 1: 4 seats (A, B, C, D)
-      // Row 2: 4 seats (A, B, C, D)
-      // Row 3: 6 seats (A, B, C, D, E, F)
-      // Row 4+: 6 seats (A, B, C, D, E, F)
+            // Calculate row and column based on grid position
+            // Each row has different number of seats:
+            // Row 1: 4 seats (A, B, C, D)
+            // Row 2: 4 seats (A, B, C, D)
+            // Row 3: 6 seats (A, B, C, D, E, F)
+            // Row 4+: 6 seats (A, B, C, D, E, F)
 
-      let row = 1;
-      let colIndex = 0;
+            let row = 1;
+            let colIndex = 0;
 
-      // Row 1: 4 seats
-      if (gridPosition < 4) {
-        row = 1;
-        colIndex = gridPosition;
-      }
-      // Row 2: 4 seats
-      else if (gridPosition < 8) {
-        row = 2;
-        colIndex = gridPosition - 4;
-      }
-      // Row 3: 6 seats
-      else if (gridPosition < 14) {
-        row = 3;
-        colIndex = gridPosition - 8;
-      }
-      // Row 4+: 6 seats each
-      else {
-        const remainingPos = gridPosition - 14;
-        row = 4 + Math.floor(remainingPos / 6);
-        colIndex = remainingPos % 6;
-      }
+            // Row 1: 4 seats
+            if (gridPosition < 4) {
+                row = 1;
+                colIndex = gridPosition;
+            }
+            // Row 2: 4 seats
+            else if (gridPosition < 8) {
+                row = 2;
+                colIndex = gridPosition - 4;
+            }
+            // Row 3: 6 seats
+            else if (gridPosition < 14) {
+                row = 3;
+                colIndex = gridPosition - 8;
+            }
+            // Row 4+: 6 seats each
+            else {
+                const remainingPos = gridPosition - 14;
+                row = 4 + Math.floor(remainingPos / 6);
+                colIndex = remainingPos % 6;
+            }
 
-      const columns = ["a", "b", "c", "d", "e", "f"];
-      return `${row}${columns[colIndex]}`;
-    };
+            const columns = ["a", "b", "c", "d", "e", "f"];
+            return `${row}${columns[colIndex]}`;
+        };
 
-    const seatLabel = getAirplaneSeatLabel(seatNumber);
+        const seatLabel = getAirplaneSeatLabel(seatNumber);
 
-    return `
+        return `
   <button 
     class="seat${disabledClass}" 
     style="grid-area: seat-${seatNumber}; ${disabledStyle}" 
@@ -82,11 +83,11 @@ export default function SeatSelection() {
       <span class="seat-number-${seatNumber}" >${seatLabel}</span>
   </button>
   `;
-  };
+    };
 
-  const seats = Array.from({ length: 56 }, (_, i) => seat(i + 1)).join("");
+    const seats = Array.from({ length: 56 }, (_, i) => seat(i + 1)).join("");
 
-  const style = `
+    const style = `
 <style>
   * {
     box-sizing: border-box;
@@ -251,7 +252,7 @@ export default function SeatSelection() {
     color: #1f2937;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    z-index: 100;
+    z-index: -100;
     background-color: white;
     padding: 40px;
     border-radius: 12px;
@@ -275,7 +276,7 @@ export default function SeatSelection() {
 </style>
   `;
 
-  const html = `
+    const html = `
 <article class="mcp-ui-container">
   <div class="sky">
     <div class="cabin">
@@ -313,7 +314,7 @@ export default function SeatSelection() {
 </article>
   `;
 
-  const addFontToHead = `
+    const addFontToHead = `
 <script>
   const link = document.createElement('link');
   link.rel = 'preconnect';
@@ -326,7 +327,7 @@ export default function SeatSelection() {
   document.head.appendChild(link2);
 </script>`;
 
-  const handleInteractions = `
+    const handleInteractions = `
 <script>
   let selectedSeat = null;
 
@@ -480,8 +481,8 @@ export default function SeatSelection() {
   }
 </script>`;
 
-  const htmlString =
-    style + addFontToHead + html + postMessageHeight + handleInteractions;
+    const htmlString =
+        style + addFontToHead + html + postMessageHeight + handleInteractions;
 
-  return htmlString;
+    return htmlString;
 }
