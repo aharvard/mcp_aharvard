@@ -1,7 +1,7 @@
 import { createUIResource } from "@mcp-ui/server";
 import MCPUIResourceRenderer from "../../components/MCPUIResourceRenderer";
 import SeatSelection from "../../netlify/mcp-server/tools/SeatSelection";
-import { User, Users, Ticket, MapPin, Clock, Star } from "lucide-react";
+import { User, Users, Ticket, MapPin } from "lucide-react";
 
 export default function PickSeatPage() {
     // Create UI resource based on weather data state
