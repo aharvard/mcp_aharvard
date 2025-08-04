@@ -96,8 +96,17 @@ export const setupMCPServer = (): McpServer => {
                 .string()
                 .describe("Destination city")
                 .default("New York"),
+            origin: z.string().describe("Origin city").default("San Francisco"),
+            date: z
+                .string()
+                .describe("Date of flight")
+                .default("3 weeks from now"),
         },
-        async ({ flightNumber, destination }): Promise<CallToolResult> => {
+        async ({
+            flightNumber,
+            destination,
+            origin,
+        }): Promise<CallToolResult> => {
             try {
                 // Create flight data with date 3 weeks from now
                 const now = new Date();
@@ -107,7 +116,7 @@ export const setupMCPServer = (): McpServer => {
                 const flightData = {
                     flightNumber,
                     destination,
-                    origin: "SFO", // Default origin
+                    origin,
                     date: threeWeeksFromNow.toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
@@ -122,10 +131,6 @@ export const setupMCPServer = (): McpServer => {
 
                 return {
                     content: [
-                        {
-                            type: "text",
-                            text: `Seat selection interface loaded for flight ${flightNumber} to ${destination}. Please select your seat from the interactive map above.`,
-                        },
                         {
                             ...createUIResource({
                                 uri: "ui://mcp-aharvard/airplane-seat-selection",
@@ -142,6 +147,9 @@ export const setupMCPServer = (): McpServer => {
                         {
                             type: "text",
                             text: `Airplane seat selection interface loaded for flight ${flightNumber} to ${destination}. Please select your seat from the interactive map above.`,
+                            annotations: {
+                                audience: ["assistant"],
+                            },
                         },
                     ],
                 };
