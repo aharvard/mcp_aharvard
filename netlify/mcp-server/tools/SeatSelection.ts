@@ -131,6 +131,8 @@ export default function SeatSelection(flightData?: FlightData) {
     align-items: center;
     gap: 20px;
     position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
   .cabin {
     background-color: #000000;
@@ -353,66 +355,404 @@ export default function SeatSelection(flightData?: FlightData) {
   .flight-summary p:last-child {
     margin-bottom: 0;
   }
+  
+  /* Cloud animations */
+  .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    filter: contrast(0.9) brightness(1.1);
+  }
+  
+  /* Add atmospheric noise overlay */
+  .clouds::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.1), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.1), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.1), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.1), transparent);
+    animation: noise 4s linear infinite;
+  }
+  
+  @keyframes noise {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5px, -5px); }
+    20% { transform: translate(-10px, 5px); }
+    30% { transform: translate(5px, -10px); }
+    40% { transform: translate(-5px, 15px); }
+    50% { transform: translate(-10px, 5px); }
+    60% { transform: translate(15px, -5px); }
+    70% { transform: translate(10px, 10px); }
+    80% { transform: translate(3px, 15px); }
+    90% { transform: translate(10px, 5px); }
+    100% { transform: translate(5px, 0); }
+  }
+  
+  .cloud {
+    position: absolute;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.6) 50%, rgba(255,255,255,0.3) 100%);
+    border-radius: 200px;
+    opacity: 0.7;
+    filter: blur(8px) contrast(0.8) brightness(1.2);
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(255, 255, 255, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+  }
+  
+  .cloud:before,
+  .cloud:after {
+    content: '';
+    position: absolute;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(240,248,255,0.5) 60%, rgba(255,255,255,0.2) 100%);
+    border-radius: 150px;
+    filter: blur(6px);
+    box-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.1);
+  }
+  
+  .cloud-1 {
+    width: 240px;
+    height: 160px;
+    left: 5%;
+    animation: float1 12s linear infinite;
+    transform: scale(2);
+  }
+  
+  .cloud-1:before {
+    width: 120px;
+    height: 200px;
+    top: -80px;
+    left: 30px;
+  }
+  
+  .cloud-1:after {
+    width: 140px;
+    height: 120px;
+    top: -50px;
+    right: 30px;
+  }
+  
+  .cloud-1::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.6) 0%, rgba(240,248,255,0.3) 100%);
+    border-radius: 100px;
+    top: -5px;
+    left: 30px;
+    filter: blur(4px);
+    opacity: 0.8;
+  }
+  
+  .cloud-2 {
+    width: 200px;
+    height: 130px;
+    left: 25%;
+    animation: float2 16s linear infinite;
+    transform: scale(2);
+  }
+  
+  .cloud-2:before {
+    width: 100px;
+    height: 170px;
+    top: -70px;
+    left: 24px;
+  }
+  
+  .cloud-2:after {
+    width: 110px;
+    height: 100px;
+    top: -40px;
+    right: 24px;
+  }
+  
+  .cloud-3 {
+    width: 280px;
+    height: 180px;
+    left: 45%;
+    animation: float3 20s linear infinite;
+    transform: scale(3);
+  }
+  
+  .cloud-3:before {
+    width: 140px;
+    height: 240px;
+    top: -100px;
+    left: 40px;
+  }
+  
+  .cloud-3:after {
+    width: 160px;
+    height: 140px;
+    top: -60px;
+    right: 40px;
+  }
+  
+  .cloud-4 {
+    width: 220px;
+    height: 140px;
+    left: 65%;
+    animation: float4 14s linear infinite;
+    transform: scale(2);
+  }
+  
+  .cloud-4:before {
+    width: 110px;
+    height: 180px;
+    top: -70px;
+    left: 30px;
+  }
+  
+  .cloud-4:after {
+    width: 130px;
+    height: 110px;
+    top: -50px;
+    right: 30px;
+  }
+  
+  .cloud-5 {
+    width: 180px;
+    height: 110px;
+    left: 85%;
+    animation: float5 18s linear infinite;
+    transform: scale(2);
+  }
+  
+  .cloud-5:before {
+    width: 90px;
+    height: 150px;
+    top: -60px;
+    left: 20px;
+  }
+  
+  .cloud-5:after {
+    width: 100px;
+    height: 80px;
+    top: -30px;
+    right: 20px;
+  }
+  
+  .cloud-6 {
+    width: 260px;
+    height: 170px;
+    left: 15%;
+    animation: float6 22s linear infinite;
+    transform: scale(3);
+  }
+  
+  .cloud-6:before {
+    width: 130px;
+    height: 220px;
+    top: -90px;
+    left: 36px;
+  }
+  
+  .cloud-6:after {
+    width: 150px;
+    height: 120px;
+    top: -50px;
+    right: 36px;
+  }
+  
+  .cloud-7 {
+    width: 190px;
+    height: 120px;
+    left: 55%;
+    animation: float7 15s linear infinite;
+    transform: scale(2);
+  }
+  
+  .cloud-7:before {
+    width: 96px;
+    height: 160px;
+    top: -60px;
+    left: 24px;
+  }
+  
+  .cloud-7:after {
+    width: 116px;
+    height: 90px;
+    top: -36px;
+    right: 24px;
+  }
+  
+  .cloud-8 {
+    width: 300px;
+    height: 200px;
+    left: 75%;
+    animation: float8 24s linear infinite;
+    transform: scale(4);
+  }
+  
+  .cloud-8:before {
+    width: 150px;
+    height: 260px;
+    top: -110px;
+    left: 50px;
+  }
+  
+  .cloud-8:after {
+    width: 170px;
+    height: 140px;
+    top: -70px;
+    right: 50px;
+  }
+  
+  /* Add whispy noise elements to all clouds */
+  .cloud::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(240,248,255,0.1) 100%);
+    border-radius: 50px;
+    filter: blur(5px);
+    opacity: 0.6;
+    animation: whisp 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes whisp {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    100% { transform: scale(0.8) rotate(360deg); opacity: 0.4; }
+  }
+  
+  .cloud-5:before {
+    width: 35px;
+    height: 35px;
+    top: -12px;
+    left: 8px;
+  }
+  
+  .cloud-5:after {
+    width: 40px;
+    height: 20px;
+    top: -8px;
+    right: 8px;
+  }
+  
+  @keyframes float1 {
+    0% { top: -80px; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(20px); }
+  }
+  
+  @keyframes float2 {
+    0% { top: 20%; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(-15px); }
+  }
+  
+  @keyframes float3 {
+    0% { top: -100px; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(30px); }
+  }
+  
+  @keyframes float4 {
+    0% { top: 40%; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(-25px); }
+  }
+  
+  @keyframes float5 {
+    0% { top: -50px; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(10px); }
+  }
+  
+  @keyframes float6 {
+    0% { top: 60%; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(-20px); }
+  }
+  
+  @keyframes float7 {
+    0% { top: -65px; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(15px); }
+  }
+  
+  @keyframes float8 {
+    0% { top: 80%; transform: translateX(0px); }
+    100% { top: 100%; transform: translateX(-30px); }
+  }
 </style>
   `;
 
     const html = `
 <article class="mcp-ui-container">
-  <div class="sky">
-    <div class="cabin">
-      <div class="seats">
-        ${seats}
+      <div class="sky">
+      <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+        <div class="cloud cloud-6"></div>
+        <div class="cloud cloud-7"></div>
+        <div class="cloud cloud-8"></div>
       </div>
-    </div>
-    <div class="selection-card">
-      <div class="card-header">
-        <h3>Seat Selection</h3>
-        <div class="flight-info">
-          <div class="flight-details">
-            <div class="flight-number">
-              <span class="label">Flight:</span>
-              <span class="value">${
-                  flightData?.flightNumber || "AA 1234"
-              }</span>
-            </div>
-            <div class="route">
-              <span class="label">Route:</span>
-              <span class="value">${flightData?.origin || "SFO"} → ${
+      <div class="cabin">
+        <div class="seats">
+          ${seats}
+        </div>
+      </div>
+      <div class="selection-card">
+        <div class="card-header">
+          <h3>Seat Selection</h3>
+          <div class="flight-info">
+            <div class="flight-details">
+              <div class="flight-number">
+                <span class="label">Flight:</span>
+                <span class="value">${
+                    flightData?.flightNumber || "AA 1234"
+                }</span>
+              </div>
+              <div class="route">
+                <span class="label">Route:</span>
+                <span class="value">${flightData?.origin || "SFO"} → ${
         flightData?.destination || "JFK"
     }</span>
-            </div>
-            <div class="date-time">
-              <span class="label">Date:</span>
-              <span class="value">${flightData?.date || "Dec 15, 2024"}</span>
-            </div>
-            <div class="departure">
-              <span class="label">Departure:</span>
-              <span class="value">${
-                  flightData?.departureTime || "10:30 AM"
-              }</span>
+              </div>
+              <div class="date-time">
+                <span class="label">Date:</span>
+                <span class="value">${flightData?.date || "Dec 15, 2024"}</span>
+              </div>
+              <div class="departure">
+                <span class="label">Departure:</span>
+                <span class="value">${
+                    flightData?.departureTime || "10:30 AM"
+                }</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-content">
-        <div id="selection-status">
-          <p>Please select a seat</p>
+        <div class="card-content">
+          <div id="selection-status">
+            <p>Please select a seat</p>
+          </div>
+          <div id="selected-seat-info" style="display: none;">
+            <p><strong>Selected Seat:</strong> <span id="selected-seat-number"></span></p>
+          </div>
         </div>
-        <div id="selected-seat-info" style="display: none;">
-          <p><strong>Selected Seat:</strong> <span id="selected-seat-number"></span></p>
+        <div class="card-actions">
+          <button id="clear-selection" class="btn btn-secondary" disabled onclick="clearSelection()">
+            Clear Selection
+          </button>
+          <button id="confirm-seat" class="btn btn-primary" disabled onclick="confirmSeat()">
+            Confirm Seat
+          </button>
         </div>
-      </div>
-      <div class="card-actions">
-        <button id="clear-selection" class="btn btn-secondary" disabled onclick="clearSelection()">
-          Clear Selection
-        </button>
-        <button id="confirm-seat" class="btn btn-primary" disabled onclick="confirmSeat()">
-          Confirm Seat
-        </button>
       </div>
     </div>
-    <div class="clouds"></div>
-  </div>
   <div id="thank-you-message" class="thank-you-message">
     <h2>Thanks for flying with us!</h2>
     <p>Your seat has been confirmed.</p>
