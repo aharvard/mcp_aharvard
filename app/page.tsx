@@ -9,11 +9,11 @@ export default function Home() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-4 text-gray-900">
-                        MCP-UI Sandbox Demos
+                        MCP-UI Demos
                     </h1>
                     <p className="text-xl text-gray-600 mb-6">
-                        Visualize and test MCP-UI components in a convenient
-                        sandbox environment
+                        This site demos some MCP-UI examples outside of MCP
+                        hosts like Goose.
                     </p>
                     <div className="flex justify-center gap-4 mb-8">
                         <a
@@ -46,44 +46,10 @@ export default function Home() {
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                             >
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" />
                             </svg>
-                            MCP-UI Documentation
+                            Read MCP-UI Docs
                         </a>
-                    </div>
-                </div>
-
-                {/* What is this section */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                    <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                        What is this Sandbox?
-                    </h2>
-                    <div className="prose prose-lg max-w-none">
-                        <p className="text-gray-700 mb-4">
-                            This is a <strong>visualization sandbox</strong> for
-                            testing MCP-UI components and interactions. It
-                            provides a convenient environment to:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
-                            <li>
-                                Test UI components that can be rendered by
-                                MCP-UI clients
-                            </li>
-                            <li>Simulate tool calls and user interactions</li>
-                            <li>
-                                Debug message passing between MCP servers and UI
-                                clients
-                            </li>
-                            <li>
-                                Prototype new UI patterns for MCP applications
-                            </li>
-                        </ul>
-                        <p className="text-gray-700">
-                            The sandbox runs on{" "}
-                            <strong>Netlify serverless functions</strong>,
-                            making it easy to deploy and share with others
-                            without managing infrastructure.
-                        </p>
                     </div>
                 </div>
 
@@ -123,6 +89,101 @@ export default function Home() {
                             </p>
                         </div>
                     </Link>
+                </div>
+
+                {/* What is this section */}
+                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h2 className="text-2xl font-bold mb-4 text-gray-900">
+                        What is this site?
+                    </h2>
+                    <div className="prose prose-lg max-w-none">
+                        <p className="text-gray-700 mb-4">
+                            This is a demo sandbox for exploring and showcasing
+                            MCP-UI examples. It provides a hands-on environment
+                            to:
+                        </p>
+                        <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
+                            <li>
+                                View UI components that can be rendered by
+                                MCP-UI clients
+                            </li>
+                            <li>Simulate tool calls and user interactions</li>
+                            <li>
+                                Debug message passing between MCP servers and UI
+                                clients
+                            </li>
+                            <li>
+                                Prototype new UI patterns for MCP applications
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Usage Instructions */}
+                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-900">
+                        How to Use
+                    </h2>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                                For Developers
+                            </h3>
+                            <div className="space-y-3 text-gray-700">
+                                <p>
+                                    1. <strong>Clone the repo:</strong>{" "}
+                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                        git clone
+                                        https://github.com/aharvard/mcp_aharvard
+                                    </code>
+                                </p>
+                                <p>
+                                    2. <strong>Install dependencies:</strong>{" "}
+                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                        pnpm install
+                                    </code>
+                                </p>
+                                <p>
+                                    3. <strong>Run locally:</strong>{" "}
+                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                        pnpm dev
+                                    </code>
+                                </p>
+                                <p>
+                                    4. <strong>Test MCP server:</strong>{" "}
+                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                        pnpm inspect
+                                    </code>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                                For MCP Clients
+                            </h3>
+                            <div className="space-y-3 text-gray-700">
+                                <p>
+                                    1. <strong>Add as extension</strong> in your
+                                    MCP client
+                                </p>
+                                <p>
+                                    2. <strong>Endpoint:</strong>{" "}
+                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                        https://mcp-aharvard.netlify.app/mcp
+                                    </code>
+                                </p>
+                                <p>
+                                    3. <strong>Timeout:</strong> 300 seconds
+                                </p>
+                                <p>
+                                    4. <strong>Test:</strong> Ask for weather in
+                                    any city!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Netlify Serverless Architecture */}
@@ -288,73 +349,6 @@ export default function Home() {
                                     </div>
                                     <div>• notify - Show notifications</div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Usage Instructions */}
-                <div className="bg-white rounded-xl shadow-lg p-8">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-900">
-                        How to Use
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                                For Developers
-                            </h3>
-                            <div className="space-y-3 text-gray-700">
-                                <p>
-                                    1. <strong>Clone the repo:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        git clone
-                                        https://github.com/aharvard/mcp_aharvard
-                                    </code>
-                                </p>
-                                <p>
-                                    2. <strong>Install dependencies:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        pnpm install
-                                    </code>
-                                </p>
-                                <p>
-                                    3. <strong>Run locally:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        pnpm dev
-                                    </code>
-                                </p>
-                                <p>
-                                    4. <strong>Test MCP server:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        pnpm inspect
-                                    </code>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                                For MCP Clients
-                            </h3>
-                            <div className="space-y-3 text-gray-700">
-                                <p>
-                                    1. <strong>Add as extension</strong> in your
-                                    MCP client
-                                </p>
-                                <p>
-                                    2. <strong>Endpoint:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        https://mcp-aharvard.netlify.app/mcp
-                                    </code>
-                                </p>
-                                <p>
-                                    3. <strong>Timeout:</strong> 300 seconds
-                                </p>
-                                <p>
-                                    4. <strong>Test:</strong> Ask for weather in
-                                    any city!
-                                </p>
                             </div>
                         </div>
                     </div>
