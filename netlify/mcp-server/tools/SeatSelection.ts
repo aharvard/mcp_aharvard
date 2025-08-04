@@ -646,43 +646,43 @@ export default function SeatSelection(flightData?: FlightData) {
   }
   
   @keyframes float1 {
-    0% { top: -80px; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(20px); }
+    0% { top: -200px; transform: translateX(0px); }
+    100% { top: 120%; transform: translateX(20px); }
   }
   
   @keyframes float2 {
-    0% { top: 20%; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(-15px); }
+    0% { top: -150px; transform: translateX(0px); }
+    100% { top: 130%; transform: translateX(-15px); }
   }
   
   @keyframes float3 {
-    0% { top: -100px; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(30px); }
+    0% { top: -300px; transform: translateX(0px); }
+    100% { top: 140%; transform: translateX(30px); }
   }
   
   @keyframes float4 {
-    0% { top: 40%; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(-25px); }
+    0% { top: -180px; transform: translateX(0px); }
+    100% { top: 125%; transform: translateX(-25px); }
   }
   
   @keyframes float5 {
-    0% { top: -50px; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(10px); }
+    0% { top: -120px; transform: translateX(0px); }
+    100% { top: 135%; transform: translateX(10px); }
   }
   
   @keyframes float6 {
-    0% { top: 60%; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(-20px); }
+    0% { top: -250px; transform: translateX(0px); }
+    100% { top: 145%; transform: translateX(-20px); }
   }
   
   @keyframes float7 {
-    0% { top: -65px; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(15px); }
+    0% { top: -160px; transform: translateX(0px); }
+    100% { top: 128%; transform: translateX(15px); }
   }
   
   @keyframes float8 {
-    0% { top: 80%; transform: translateX(0px); }
-    100% { top: 100%; transform: translateX(-30px); }
+    0% { top: -400px; transform: translateX(0px); }
+    100% { top: 150%; transform: translateX(-30px); }
   }
 </style>
   `;
