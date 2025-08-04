@@ -33,9 +33,8 @@ export default function Home() {
                         MCP-UI Demos
                     </h1>
                     <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        Explore interactive MCP-UI examples in a modern sandbox
-                        environment. Test real-time weather data, interactive
-                        seat selection, and dynamic UI actions.
+                        Preview MCP-UI examples: real-time weather data,
+                        interactive seat selection, and dynamic UI actions.
                     </p>
                     <div className="flex justify-center gap-6 mb-16">
                         <a
@@ -142,10 +141,10 @@ export default function Home() {
                         </h2>
                     </div>
                     <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                        This is a modern demo sandbox for exploring and
-                        showcasing MCP-UI examples. It provides a hands-on
-                        environment to test and visualize the capabilities of
-                        Model Context Protocol UI components.
+                        This is a sandbox for exploring and showcasing MCP-UI
+                        examples. It provides a hands-on environment to test and
+                        visualize the capabilities of Model Context Protocol UI
+                        components.
                     </p>
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-4">
