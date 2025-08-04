@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Home() {
     return (
         <div className="min-h-screen py-8 bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -87,7 +89,7 @@ export default function Home() {
 
                 {/* Demo Links */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <a href="/get-weather" className="group">
+                    <Link href="/get-weather" className="group">
                         <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                             <div className="text-3xl mb-4">🌤️</div>
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
@@ -98,8 +100,8 @@ export default function Home() {
                                 Open-Meteo
                             </p>
                         </div>
-                    </a>
-                    <a href="/pick-seat" className="group">
+                    </Link>
+                    <Link href="/pick-seat" className="group">
                         <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                             <div className="text-3xl mb-4">🎫</div>
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
@@ -109,8 +111,8 @@ export default function Home() {
                                 Interactive seat picker with visual feedback
                             </p>
                         </div>
-                    </a>
-                    <a href="/ui-actions" className="group">
+                    </Link>
+                    <Link href="/ui-actions" className="group">
                         <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                             <div className="text-3xl mb-4">⚡</div>
                             <h3 className="text-xl font-semibold mb-2 text-gray-900">
@@ -120,7 +122,7 @@ export default function Home() {
                                 Test different types of MCP-UI message actions
                             </p>
                         </div>
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Netlify Serverless Architecture */}

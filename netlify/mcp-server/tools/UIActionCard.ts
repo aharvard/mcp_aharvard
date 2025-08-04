@@ -192,7 +192,6 @@ function hideInspection() {
   }
   
   html, body {
-    overflow: hidden;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
