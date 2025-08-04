@@ -1,6 +1,14 @@
 import { postMessageHeight } from "./utils/postMessageHeight";
 
-export default function SeatSelection() {
+interface FlightData {
+    flightNumber: string;
+    destination: string;
+    origin?: string;
+    date?: string;
+    departureTime?: string;
+}
+
+export default function SeatSelection(flightData?: FlightData) {
     // Generate random disabled seats (about 65% of 56 seats = ~36 seats)
     const totalSeats = 56;
     const disabledCount = Math.floor(totalSeats * 0.65); // ~36 seats
@@ -363,19 +371,25 @@ export default function SeatSelection() {
           <div class="flight-details">
             <div class="flight-number">
               <span class="label">Flight:</span>
-              <span class="value">AA 1234</span>
+              <span class="value">${
+                  flightData?.flightNumber || "AA 1234"
+              }</span>
             </div>
             <div class="route">
               <span class="label">Route:</span>
-              <span class="value">SFO → JFK</span>
+              <span class="value">${flightData?.origin || "SFO"} → ${
+        flightData?.destination || "JFK"
+    }</span>
             </div>
             <div class="date-time">
               <span class="label">Date:</span>
-              <span class="value">Dec 15, 2024</span>
+              <span class="value">${flightData?.date || "Dec 15, 2024"}</span>
             </div>
             <div class="departure">
               <span class="label">Departure:</span>
-              <span class="value">10:30 AM</span>
+              <span class="value">${
+                  flightData?.departureTime || "10:30 AM"
+              }</span>
             </div>
           </div>
         </div>
@@ -403,9 +417,11 @@ export default function SeatSelection() {
     <h2>Thanks for flying with us!</h2>
     <p>Your seat has been confirmed.</p>
     <div class="flight-summary">
-      <p><strong>Flight:</strong> AA 1234</p>
-      <p><strong>Route:</strong> SFO → JFK</p>
-      <p><strong>Date:</strong> Dec 15, 2024</p>
+      <p><strong>Flight:</strong> ${flightData?.flightNumber || "AA 1234"}</p>
+      <p><strong>Route:</strong> ${flightData?.origin || "SFO"} → ${
+        flightData?.destination || "JFK"
+    }</p>
+      <p><strong>Date:</strong> ${flightData?.date || "Dec 15, 2024"}</p>
       <p><strong>Selected Seat:</strong> <span id="thank-you-seat-number"></span></p>
     </div>
   </div>

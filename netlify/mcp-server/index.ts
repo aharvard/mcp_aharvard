@@ -99,29 +99,39 @@ export const setupMCPServer = (): McpServer => {
         },
         async ({ flightNumber, destination }): Promise<CallToolResult> => {
             try {
-                const seatData = {
+                // Create flight data with date 3 weeks from now
+                const now = new Date();
+                const threeWeeksFromNow = new Date(
+                    now.getTime() + 21 * 24 * 60 * 60 * 1000
+                ); // 21 days
+                const flightData = {
                     flightNumber,
                     destination,
-                    availableSeats: Array.from({ length: 56 }, (_, i) => i + 1),
-                    timestamp: new Date().toISOString(),
+                    origin: "SFO", // Default origin
+                    date: threeWeeksFromNow.toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                    }),
+                    departureTime: now.toLocaleTimeString("en-US", {
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true,
+                    }),
                 };
 
                 return {
                     content: [
                         {
-                            type: "resource",
-                            resource: {
-                                uri: "http://mcp-aharvard/airplane-seat-data",
-                                text: JSON.stringify(seatData),
-                                mimeType: "application/json",
-                            },
+                            type: "text",
+                            text: `Seat selection interface loaded for flight ${flightNumber} to ${destination}. Please select your seat from the interactive map above.`,
                         },
                         {
                             ...createUIResource({
                                 uri: "ui://mcp-aharvard/airplane-seat-selection",
                                 content: {
                                     type: "rawHtml",
-                                    htmlString: SeatSelection(),
+                                    htmlString: SeatSelection(flightData),
                                 },
                                 encoding: "text",
                             }),
