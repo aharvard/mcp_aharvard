@@ -1,16 +1,17 @@
 import { WeatherData } from "../types";
 import { postMessageHeight } from "./utils/postMessageHeight";
+import { addFontToHead } from "./utils/addFontToHead";
 
 export default function WeatherCard(data: WeatherData | null) {
-  // Handle null or undefined data
-  if (!data) {
-    return `
+    // Handle null or undefined data
+    if (!data) {
+        return `
             <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
                 <p>No weather data available</p>
             </div>
         `;
-  }
-  const style = `
+    }
+    const style = `
 <style>
   * {
     box-sizing: border-box;
@@ -336,11 +337,11 @@ export default function WeatherCard(data: WeatherData | null) {
 </style>
   `;
 
-  const html = `
+    const html = `
 <article class="mcp-ui-container">
   <div class="weather-card weather-condition-${data.condition
-    .toLowerCase()
-    .replace(/ /g, "-")}">
+      .toLowerCase()
+      .replace(/ /g, "-")}">
     <p class="location">${data.location}</p>
     <p class="temperature">
       <span class="temperature-value">${data.temperature}</span>
@@ -362,21 +363,7 @@ export default function WeatherCard(data: WeatherData | null) {
 </article>
   `;
 
-  const addFontToHead = `
-<script>
-  const link = document.createElement('link');
-  link.rel = 'preconnect';
-  link.href = 'https://rsms.me/';
-  document.head.appendChild(link);
+    const htmlString = style + html + postMessageHeight + addFontToHead;
 
-  const link2 = document.createElement('link');
-  link2.rel = 'stylesheet';
-  link2.href = 'https://rsms.me/inter/inter.css';
-  document.head.appendChild(link2);
-</script>
-    `;
-
-  const htmlString = style + html + postMessageHeight + addFontToHead;
-
-  return htmlString;
+    return htmlString;
 }

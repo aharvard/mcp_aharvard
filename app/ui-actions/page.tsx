@@ -1,15 +1,15 @@
 import { createUIResource } from "@mcp-ui/server";
 import MCPUIResourceRenderer from "../../components/MCPUIResourceRenderer";
-import SeatSelection from "../../netlify/mcp-server/tools/SeatSelection";
+import UIActionCard from "../../netlify/mcp-server/tools/UIActionCard";
 
-export default function PickSeatPage() {
+export default function UIActionsPage() {
     // Create UI resource based on weather data state
-    const createWeatherResource = () => {
+    const createUIActionResource = () => {
         return createUIResource({
-            uri: `ui://mcp-aharvard/weather-card`,
+            uri: `ui://mcp-aharvard/ui-action-card`,
             content: {
                 type: "rawHtml",
-                htmlString: SeatSelection(),
+                htmlString: UIActionCard(),
             },
             encoding: "text",
         });
@@ -19,10 +19,10 @@ export default function PickSeatPage() {
         <div className="min-h-screen py-8 bg-neutral-300">
             <div className="container mx-auto px-4">
                 <h1 className="text-2xl font-bold mb-6">
-                    Pick Seat MCP-UI Demo
+                    UI Actions MCP-UI Demo
                 </h1>
                 <MCPUIResourceRenderer
-                    resource={createWeatherResource().resource}
+                    resource={createUIActionResource().resource}
                 />
             </div>
         </div>
