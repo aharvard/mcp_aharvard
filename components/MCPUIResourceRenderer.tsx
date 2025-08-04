@@ -30,7 +30,7 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 );
                 setIframeHeight(event.data.payload.height);
                 showToast({
-                    type: "success",
+                    type: "info",
                     title: "Size Updated",
                     message: `Iframe height changed to ${event.data.payload.height} from ${event.data.payload.info}`,
                     duration: 4000,
@@ -56,9 +56,16 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 case "intent":
                     showToast({
                         type: "info",
-                        title: "Intent Received",
-                        message:
-                            "An intent action was triggered from the UI resource",
+                        title: "Intent Message Sent",
+                        message: `Full Object: ${JSON.stringify(
+                            {
+                                type: "intent",
+                                payload: result.payload,
+                                messageId: "optional-intent-message-id",
+                            },
+                            null,
+                            2
+                        )}`,
                         duration: 4000,
                     });
                     break;
@@ -66,29 +73,50 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 case "link":
                     showToast({
                         type: "info",
-                        title: "Link Action",
-                        message:
-                            "A link action was triggered from the UI resource",
+                        title: "Link Message Sent",
+                        message: `Full Object: ${JSON.stringify(
+                            {
+                                type: "link",
+                                payload: result.payload,
+                                messageId: "optional-link-message-id",
+                            },
+                            null,
+                            2
+                        )}`,
                         duration: 4000,
                     });
                     break;
 
                 case "notify":
                     showToast({
-                        type: "success",
-                        title: "Notification",
-                        message:
-                            "A notification action was triggered from the UI resource",
+                        type: "info",
+                        title: "Notification Message Sent",
+                        message: `Full Object: ${JSON.stringify(
+                            {
+                                type: "notify",
+                                payload: result.payload,
+                                messageId: "optional-notify-message-id",
+                            },
+                            null,
+                            2
+                        )}`,
                         duration: 5000,
                     });
                     break;
 
                 case "prompt":
                     showToast({
-                        type: "warning",
-                        title: "Prompt Action",
-                        message:
-                            "A prompt action was triggered from the UI resource",
+                        type: "info",
+                        title: "Prompt Message Sent",
+                        message: `Full Object: ${JSON.stringify(
+                            {
+                                type: "prompt",
+                                payload: result.payload,
+                                messageId: "optional-prompt-message-id",
+                            },
+                            null,
+                            2
+                        )}`,
                         duration: 6000,
                     });
                     break;
@@ -96,11 +124,17 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 case "tool":
                     showToast({
                         type: "info",
-                        title: "Tool Action",
+                        title: "Tool Message Sent",
+                        message: `Full Object: ${JSON.stringify(
+                            {
+                                type: "tool",
+                                payload: result.payload,
+                                messageId: "optional-tool-message-id",
+                            },
+                            null,
+                            2
+                        )}`,
                         duration: 4000,
-                        message: `Tool action triggered: ${
-                            result.payload.toolName
-                        } with params: ${JSON.stringify(result.payload)}`,
                     });
                     break;
             }

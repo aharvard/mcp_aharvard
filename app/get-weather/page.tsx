@@ -134,6 +134,11 @@ export default function GetWeatherPage() {
                             Select a City
                         </h2>
                     </div>
+                    <p className="text-gray-600 mb-6">
+                        Choose a city below to fetch weather data. The weather
+                        information will be displayed as an MCP-UI resource
+                        below.
+                    </p>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                         {cities.map((city) => (
                             <button
@@ -155,8 +160,24 @@ export default function GetWeatherPage() {
                     <div className="flex items-center gap-3 mb-6">
                         <Thermometer className="w-6 h-6 text-orange-600" />
                         <h2 className="text-2xl font-bold text-gray-900">
-                            Weather Information
+                            MCP-UI Weather Resource Preview
                         </h2>
+                    </div>
+                    <p className="text-gray-600 mb-6">
+                        This section displays the weather data as rendered by
+                        MCP-UI. The content below is generated from an MCP-UI
+                        resource that can be embedded in any MCP client.
+                    </p>
+                    <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <span className="font-medium">
+                                MCP-UI Resource:
+                            </span>
+                            <code className="bg-white px-2 py-1 rounded text-xs">
+                                ui://mcp-aharvard/weather-card
+                            </code>
+                        </div>
                     </div>
                     <MCPUIResourceRenderer
                         resource={createWeatherResource().resource}

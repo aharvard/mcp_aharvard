@@ -11,11 +11,11 @@ import {
     FolderOpen,
     Zap,
     Cloud,
-    Ticket,
     Settings,
     Sparkles,
     Globe,
     Users,
+    User,
     Terminal,
 } from "lucide-react";
 
@@ -72,8 +72,9 @@ export default function Home() {
                                     Weather Demo
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed mb-4">
-                                    Get real-time weather data from Open-Meteo
-                                    API with beautiful visualizations
+                                    Preview an MCP-UI resource that displays
+                                    real-time weather data from Open-Meteo API
+                                    with beautiful visualizations
                                 </p>
                                 <div className="flex items-center text-blue-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
                                     Explore Demo
@@ -94,7 +95,8 @@ export default function Home() {
                                     Seat Selection
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed mb-4">
-                                    Interactive seat picker with visual feedback
+                                    Preview an MCP-UI resource that provides an
+                                    interactive seat picker with visual feedback
                                     and real-time updates
                                 </p>
                                 <div className="flex items-center text-green-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
@@ -116,8 +118,9 @@ export default function Home() {
                                     UI Actions
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed mb-4">
-                                    Test different types of MCP-UI message
-                                    actions and interactions
+                                    Preview an MCP-UI resource that demonstrates
+                                    different types of message actions and user
+                                    interactions
                                 </p>
                                 <div className="flex items-center text-purple-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
                                     Explore Demo
@@ -207,7 +210,7 @@ export default function Home() {
 
                 {/* How to Use */}
                 <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-gray-100">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-gray-100">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl">
                                 <Terminal className="w-6 h-6 text-white" />
@@ -216,64 +219,84 @@ export default function Home() {
                                 For Developers
                             </h3>
                         </div>
-                        <div className="space-y-4">
-                            <div className="flex items-start gap-3">
-                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
-                                    1
+                        <div className="bg-gray-900 rounded-2xl p-6 font-mono text-sm">
+                            <div className="flex items-center gap-2 mb-4">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                                 </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
-                                        Clone the repo:
-                                    </p>
-                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
-                                        git clone
-                                        https://github.com/aharvard/mcp_aharvard
-                                    </code>
-                                </div>
+                                <span className="text-gray-400 ml-2">
+                                    Terminal
+                                </span>
                             </div>
-                            <div className="flex items-start gap-3">
-                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
-                                    2
+                            <div className="space-y-4">
+                                <div className="flex items-start gap-3">
+                                    <span className="text-green-400 font-bold">
+                                        $
+                                    </span>
+                                    <div className="flex-1">
+                                        <div className="text-white mb-1">
+                                            # Clone the repository
+                                        </div>
+                                        <code className="block text-green-400">
+                                            git clone
+                                            https://github.com/aharvard/mcp_aharvard
+                                        </code>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
-                                        Install dependencies:
-                                    </p>
-                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
-                                        pnpm install
-                                    </code>
+                                <div className="flex items-start gap-3">
+                                    <span className="text-green-400 font-bold">
+                                        $
+                                    </span>
+                                    <div className="flex-1">
+                                        <div className="text-white mb-1">
+                                            # Install dependencies
+                                        </div>
+                                        <code className="block text-green-400">
+                                            pnpm install
+                                        </code>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex items-start gap-3">
-                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
-                                    3
+                                <div className="flex items-start gap-3">
+                                    <span className="text-green-400 font-bold">
+                                        $
+                                    </span>
+                                    <div className="flex-1">
+                                        <div className="text-white mb-1">
+                                            # Launch Next.js development server
+                                        </div>
+                                        <code className="block text-green-400">
+                                            pnpm dev
+                                        </code>
+                                        <div className="text-gray-400 text-xs mt-1">
+                                            → Starts the development server at
+                                            localhost:3000
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
-                                        Run locally:
-                                    </p>
-                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
-                                        pnpm dev
-                                    </code>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-3">
-                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
-                                    4
-                                </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
-                                        Test MCP server:
-                                    </p>
-                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
-                                        pnpm inspect
-                                    </code>
+                                <div className="flex items-start gap-3">
+                                    <span className="text-green-400 font-bold">
+                                        $
+                                    </span>
+                                    <div className="flex-1">
+                                        <div className="text-white mb-1">
+                                            # Launch MCP Inspector
+                                        </div>
+                                        <code className="block text-green-400">
+                                            pnpm inspect
+                                        </code>
+                                        <div className="text-gray-400 text-xs mt-1">
+                                            → Opens the MCP Inspector to test
+                                            the MCP server
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-gray-100">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-lg p-8 border border-gray-100">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
                                 <CheckCircle className="w-6 h-6 text-white" />
@@ -282,34 +305,55 @@ export default function Home() {
                                 For MCP Clients
                             </h3>
                         </div>
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                             <div className="flex items-start gap-3">
                                 <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
                                     1
                                 </div>
-                                <p className="text-gray-700">
-                                    Add as extension in your MCP client
-                                </p>
+                                <div className="flex-1">
+                                    <p className="text-gray-700 mb-3">
+                                        Add as extension in your MCP client
+                                    </p>
+                                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-sm font-medium text-blue-900">
+                                                For Goose users:
+                                            </span>
+                                            <a
+                                                href="https://block.github.io/goose/docs/getting-started/using-extensions"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-sm text-blue-600 hover:underline"
+                                            >
+                                                View extension setup guide
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="flex items-start gap-3">
                                 <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
                                     2
                                 </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
-                                        Endpoint:
+                                <div className="flex-1">
+                                    <p className="font-medium text-gray-900 mb-2">
+                                        HTTP Endpoint:
                                     </p>
-                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800 mb-2">
                                         https://mcp-aharvard.netlify.app/mcp
                                     </code>
+                                    <p className="text-gray-600 text-sm">
+                                        HTTP type MCP server with streaming
+                                        transport
+                                    </p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
                                 <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
                                     3
                                 </div>
-                                <div>
-                                    <p className="font-medium text-gray-900 mb-1">
+                                <div className="flex-1">
+                                    <p className="font-medium text-gray-900">
                                         Timeout: 300 seconds
                                     </p>
                                 </div>
@@ -318,9 +362,79 @@ export default function Home() {
                                 <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
                                     4
                                 </div>
-                                <p className="text-gray-700">
-                                    Test: Ask for weather in any city!
-                                </p>
+                                <div className="flex-1">
+                                    <p className="font-medium text-gray-900 mb-4">
+                                        Test with these examples:
+                                    </p>
+                                    <div className="space-y-4">
+                                        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <Cloud className="w-5 h-5 text-blue-500" />
+                                                <h4 className="text-base font-semibold text-gray-900">
+                                                    Weather Demo:
+                                                </h4>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "What's the weather in
+                                                        New York?"
+                                                    </code>
+                                                </div>
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "Get weather for Los
+                                                        Angeles"
+                                                    </code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <User className="w-5 h-5 text-green-500" />
+                                                <h4 className="text-base font-semibold text-gray-900">
+                                                    Seat Selection:
+                                                </h4>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "Show me available seats
+                                                        for flight AA1234"
+                                                    </code>
+                                                </div>
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "I want to select seat
+                                                        2A"
+                                                    </code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <Zap className="w-5 h-5 text-purple-500" />
+                                                <h4 className="text-base font-semibold text-gray-900">
+                                                    UI Actions:
+                                                </h4>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "Show me the tool
+                                                        actions"
+                                                    </code>
+                                                </div>
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "Demonstrate the prompt
+                                                        action"
+                                                    </code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,35 +3,59 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, Cloud, User, Zap } from "lucide-react";
 
 const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/get-weather", label: "Get Weather" },
-    { href: "/pick-seat", label: "Pick Seat" },
-    { href: "/ui-actions", label: "UI Actions" },
+    { href: "/", label: "Home", icon: Home },
+    { href: "/get-weather", label: "Get Weather", icon: Cloud },
+    { href: "/pick-seat", label: "Pick Seat", icon: User },
+    { href: "/ui-actions", label: "UI Actions", icon: Zap },
     // { href: "/toast-demo", label: "Toast Demo" },
 ];
 
 export default function Navigation() {
     const pathname = usePathname();
+
+    const isActiveRoute = (href: string) => {
+        if (href === "/") {
+            return pathname === "/";
+        }
+        return pathname.startsWith(href);
+    };
+
     return (
-        <NavigationMenu.Root className="w-full flex justify-center bg-white border-b border-gray-200 shadow-sm">
-            <NavigationMenu.List className="flex gap-6 py-4">
-                {navItems.map((item) => (
-                    <NavigationMenu.Item key={item.href}>
-                        <Link
-                            href={item.href}
-                            className={`text-lg font-medium px-3 py-1 rounded transition-colors duration-150 hover:bg-gray-100 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                                pathname === item.href
-                                    ? "bg-blue-100 text-blue-700"
-                                    : "text-gray-700"
-                            }`}
-                        >
-                            {item.label}
-                        </Link>
-                    </NavigationMenu.Item>
-                ))}
-            </NavigationMenu.List>
-        </NavigationMenu.Root>
+        <div className="w-full bg-white/80 backdrop-blur-sm border-b border-gray-100 shadow-sm sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-6">
+                <NavigationMenu.Root className="flex justify-center">
+                    <NavigationMenu.List className="flex gap-2 py-4">
+                        {navItems.map((item) => {
+                            const Icon = item.icon;
+                            const isActive = isActiveRoute(item.href);
+                            return (
+                                <NavigationMenu.Item key={item.href}>
+                                    <Link
+                                        href={item.href}
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                                            isActive
+                                                ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                                        }`}
+                                    >
+                                        <Icon
+                                            className={`w-4 h-4 ${
+                                                isActive
+                                                    ? "text-white"
+                                                    : "text-gray-500"
+                                            }`}
+                                        />
+                                        {item.label}
+                                    </Link>
+                                </NavigationMenu.Item>
+                            );
+                        })}
+                    </NavigationMenu.List>
+                </NavigationMenu.Root>
+            </div>
+        </div>
     );
 }

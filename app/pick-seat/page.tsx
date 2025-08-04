@@ -41,50 +41,29 @@ export default function PickSeatPage() {
                     <div className="flex items-center gap-3 mb-6">
                         <MapPin className="w-6 h-6 text-green-600" />
                         <h2 className="text-2xl font-bold text-gray-900">
-                            Seat Selection Interface
+                            MCP-UI Seat Selection Resource Preview
                         </h2>
+                    </div>
+                    <p className="text-gray-600 mb-6">
+                        This section displays an interactive seat selection
+                        interface as rendered by MCP-UI. The content below is
+                        generated from an MCP-UI resource that can be embedded
+                        in any MCP client.
+                    </p>
+                    <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="font-medium">
+                                MCP-UI Resource:
+                            </span>
+                            <code className="bg-white px-2 py-1 rounded text-xs">
+                                ui://mcp-aharvard/seat-selection
+                            </code>
+                        </div>
                     </div>
                     <MCPUIResourceRenderer
                         resource={createWeatherResource().resource}
                     />
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
-                        <div className="flex items-center gap-3 mb-4">
-                            <User className="w-8 h-8 text-green-500" />
-                            <h3 className="text-lg font-semibold text-gray-900">
-                                User Experience
-                            </h3>
-                        </div>
-                        <p className="text-gray-600">
-                            Intuitive seat selection with visual feedback and
-                            confirmation
-                        </p>
-                    </div>
-                    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
-                        <div className="flex items-center gap-3 mb-4">
-                            <Clock className="w-8 h-8 text-blue-500" />
-                            <h3 className="text-lg font-semibold text-gray-900">
-                                Real-time Updates
-                            </h3>
-                        </div>
-                        <p className="text-gray-600">
-                            Live seat availability and instant status updates
-                        </p>
-                    </div>
-                    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
-                        <div className="flex items-center gap-3 mb-4">
-                            <Star className="w-8 h-8 text-yellow-500" />
-                            <h3 className="text-lg font-semibold text-gray-900">
-                                Premium Features
-                            </h3>
-                        </div>
-                        <p className="text-gray-600">
-                            Advanced selection options and premium seat
-                            categories
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

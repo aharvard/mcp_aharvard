@@ -49,8 +49,25 @@ export default function UIActionsPage() {
                     <div className="flex items-center gap-3 mb-6">
                         <Target className="w-6 h-6 text-purple-600" />
                         <h2 className="text-2xl font-bold text-gray-900">
-                            Action Interface
+                            MCP-UI Actions Resource Preview
                         </h2>
+                    </div>
+                    <p className="text-gray-600 mb-6">
+                        This section displays an interactive UI actions
+                        interface as rendered by MCP-UI. The content below is
+                        generated from an MCP-UI resource that can be embedded
+                        in any MCP client.
+                    </p>
+                    <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                            <span className="font-medium">
+                                MCP-UI Resource:
+                            </span>
+                            <code className="bg-white px-2 py-1 rounded text-xs">
+                                ui://mcp-aharvard/ui-action-card
+                            </code>
+                        </div>
                     </div>
                     <MCPUIResourceRenderer
                         resource={createUIActionResource().resource}
