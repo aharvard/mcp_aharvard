@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { WeatherData } from "./types";
+import { WeatherData, GooseConfig } from "./types";
 import WeatherCard from "./tools/WeatherCard";
 import { getWeather } from "./tools/getWeather";
 import SeatSelection from "./tools/SeatSelection";
@@ -227,6 +227,10 @@ export const setupMCPServer = (): McpServer => {
         "A demo of the Goose website. Use this tool when the user asks you to show the Goose website.",
         {},
         async (): Promise<CallToolResult> => {
+            const gooseConfig: GooseConfig = {
+                type: "inline",
+                height: "100vh",
+            };
             return {
                 content: [
                     {
@@ -240,6 +244,7 @@ export const setupMCPServer = (): McpServer => {
                         }),
                         annotations: {
                             audience: ["user"],
+                            gooseConfig,
                         },
                     },
                     {

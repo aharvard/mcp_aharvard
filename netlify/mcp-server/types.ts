@@ -37,3 +37,8 @@ export type WeatherData = {
     windUnit: string;
     description: string;
 };
+
+export type GooseConfig = {
+    type?: "inline" | "sidecar";
+    height?: "auto" | string;
+};
