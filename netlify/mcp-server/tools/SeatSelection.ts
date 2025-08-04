@@ -109,7 +109,10 @@ export default function SeatSelection() {
     padding: 0;
     background-color: transparent;
   }
-  .mcp-ui-container {} 
+  .mcp-ui-container {
+    min-height: 380px;
+    position: relative;
+  } 
   
   .sky {
     background-color: #87CEEB;
@@ -136,10 +139,49 @@ export default function SeatSelection() {
     max-width: 300px;
   }
   .card-header h3 {
-    margin: 0 0 16px 0;
+    margin: 0 0 10px 0;
     color: #1f2937;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
+  }
+  
+  .flight-info {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    border-left: 3px solid #3b82f6;
+  }
+  
+  .flight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+  }
+  
+  .flight-details > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 16px;
+  }
+  
+  .flight-details .label {
+    color: #6b7280;
+    font-weight: 500;
+    min-width: 60px;
+  }
+  
+  .flight-details .value {
+    color: #1f2937;
+    font-weight: 600;
+    text-align: right;
+  }
+  
+  .route .value {
+    color: #059669;
+    font-weight: 700;
   }
   .card-content {
     margin-bottom: 20px;
@@ -245,9 +287,9 @@ export default function SeatSelection() {
   
   .thank-you-message {
     position: absolute;
-    top: 50%;
+    top: 20px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
     color: #1f2937;
     opacity: 0;
@@ -258,6 +300,7 @@ export default function SeatSelection() {
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     min-width: 300px;
+    max-width: 400px;
     /* Hidden by default, will be revealed when plane flies away */
   }
   
@@ -273,6 +316,35 @@ export default function SeatSelection() {
     margin: 0;
     color: #6b7280;
   }
+  
+  .flight-summary {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #f0f9ff;
+    border-radius: 6px;
+    border: 1px solid #bae6fd;
+  }
+  
+  .flight-summary p {
+    font-size: 13px;
+    margin: 3px 0;
+    color: #1f2937;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flight-summary p strong {
+    color: #6b7280;
+    font-weight: 500;
+  }
+  
+  .flight-summary p:first-child {
+    margin-top: 0;
+  }
+  
+  .flight-summary p:last-child {
+    margin-bottom: 0;
+  }
 </style>
   `;
 
@@ -287,6 +359,26 @@ export default function SeatSelection() {
     <div class="selection-card">
       <div class="card-header">
         <h3>Seat Selection</h3>
+        <div class="flight-info">
+          <div class="flight-details">
+            <div class="flight-number">
+              <span class="label">Flight:</span>
+              <span class="value">AA 1234</span>
+            </div>
+            <div class="route">
+              <span class="label">Route:</span>
+              <span class="value">SFO → JFK</span>
+            </div>
+            <div class="date-time">
+              <span class="label">Date:</span>
+              <span class="value">Dec 15, 2024</span>
+            </div>
+            <div class="departure">
+              <span class="label">Departure:</span>
+              <span class="value">10:30 AM</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card-content">
         <div id="selection-status">
@@ -310,7 +402,12 @@ export default function SeatSelection() {
   <div id="thank-you-message" class="thank-you-message">
     <h2>Thanks for flying with us!</h2>
     <p>Your seat has been confirmed.</p>
-    <p><strong>Selected Seat:</strong> <span id="thank-you-seat-number"></span></p>
+    <div class="flight-summary">
+      <p><strong>Flight:</strong> AA 1234</p>
+      <p><strong>Route:</strong> SFO → JFK</p>
+      <p><strong>Date:</strong> Dec 15, 2024</p>
+      <p><strong>Selected Seat:</strong> <span id="thank-you-seat-number"></span></p>
+    </div>
   </div>
 </article>
   `;
@@ -451,11 +548,29 @@ export default function SeatSelection() {
         sky.style.transition = 'none'; // Remove transition to prevent any animation
         sky.style.display = 'none'; // Completely hide the plane
         
+        // Measure the thank you message div
+        const thankYouMessage = document.getElementById('thank-you-message');
+        let height = 400; // Default fallback height
+        
+        if (thankYouMessage) {
+          // Make sure the message is visible to get accurate height
+          thankYouMessage.style.opacity = '1';
+          thankYouMessage.style.zIndex = '100';
+          
+          // Force a reflow to ensure accurate measurement
+          thankYouMessage.offsetHeight;
+          
+          height = thankYouMessage.getBoundingClientRect().height;
+          // Add more padding to ensure the message looks good and isn't cut off
+          height += 80;
+          console.log('Thank you message measured height:', height);
+        }
+        
         window.parent.postMessage({
           type: 'size-change',
           payload: {
-            height: '400px',
-            info: 'plane animation completed'
+            height: height + 'px',
+            info: 'measured thank you message height'
           }
         }, '*');
       }, 2000);
