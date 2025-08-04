@@ -310,6 +310,7 @@ export default function SeatSelection() {
   <div id="thank-you-message" class="thank-you-message">
     <h2>Thanks for flying with us!</h2>
     <p>Your seat has been confirmed.</p>
+    <p><strong>Selected Seat:</strong> <span id="thank-you-seat-number"></span></p>
   </div>
 </article>
   `;
@@ -375,9 +376,54 @@ export default function SeatSelection() {
       // Reveal thank you message after a short delay
       setTimeout(() => {
         const thankYouMessage = document.getElementById('thank-you-message');
-        if (thankYouMessage) {
+        const thankYouSeatNumber = document.getElementById('thank-you-seat-number');
+        if (thankYouMessage && thankYouSeatNumber) {
+          // Convert seat number to airplane format for display
+          const getAirplaneSeatLabel = (seatNum) => {
+            // Map seat numbers to actual grid positions
+            const seatMap = [
+              // Row 1: 4 seats (A, B, C, D)
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+              21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+              41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56
+            ];
+            
+            // Find the position of this seat in the grid
+            const gridPosition = seatMap.indexOf(seatNum);
+            
+            // Calculate row and column based on grid position
+            let row = 1;
+            let colIndex = 0;
+            
+            // Row 1: 4 seats
+            if (gridPosition < 4) {
+              row = 1;
+              colIndex = gridPosition;
+            }
+            // Row 2: 4 seats  
+            else if (gridPosition < 8) {
+              row = 2;
+              colIndex = gridPosition - 4;
+            }
+            // Row 3: 6 seats
+            else if (gridPosition < 14) {
+              row = 3;
+              colIndex = gridPosition - 8;
+            }
+            // Row 4+: 6 seats each
+            else {
+              const remainingPos = gridPosition - 14;
+              row = 4 + Math.floor(remainingPos / 6);
+              colIndex = remainingPos % 6;
+            }
+            
+            const columns = ['a', 'b', 'c', 'd', 'e', 'f'];
+            return row + columns[colIndex];
+          };
+          
+          thankYouSeatNumber.textContent = getAirplaneSeatLabel(selectedSeat);
           thankYouMessage.style.opacity = '1';
-          console.log('Thank you message revealed');
+          console.log('Thank you message revealed with seat:', getAirplaneSeatLabel(selectedSeat));
         } else {
           console.log('Thank you message element not found');
         }
