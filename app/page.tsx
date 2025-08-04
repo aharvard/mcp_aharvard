@@ -1,354 +1,326 @@
 "use client";
 
 import Link from "next/link";
+import {
+    Github,
+    FileText,
+    ArrowRight,
+    Code,
+    CheckCircle,
+    Database,
+    FolderOpen,
+    Zap,
+    Cloud,
+    Ticket,
+    Settings,
+    Sparkles,
+    Globe,
+    Users,
+    Terminal,
+} from "lucide-react";
 
 export default function Home() {
     return (
-        <div className="min-h-screen py-8 bg-gradient-to-br from-blue-50 to-indigo-100">
-            <div className="container mx-auto px-4 max-w-6xl">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold mb-4 text-gray-900">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50">
+            <div className="container mx-auto px-6 py-16 max-w-7xl">
+                {/* Hero Section */}
+                <div className="text-center mb-20">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-medium mb-6">
+                        <Sparkles className="w-4 h-4" />
+                        MCP-UI Sandbox
+                    </div>
+                    <h1 className="text-6xl font-bold mb-8 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-tight leading-tight">
                         MCP-UI Demos
                     </h1>
-                    <p className="text-xl text-gray-600 mb-6">
-                        This site demos some MCP-UI examples outside of MCP
-                        hosts like Goose.
+                    <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                        Explore interactive MCP-UI examples in a modern sandbox
+                        environment. Test real-time weather data, interactive
+                        seat selection, and dynamic UI actions.
                     </p>
-                    <div className="flex justify-center gap-4 mb-8">
+                    <div className="flex justify-center gap-6 mb-16">
                         <a
                             href="https://github.com/aharvard/mcp_aharvard"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                            className="group inline-flex items-center px-8 py-4 bg-gray-900 text-white rounded-2xl hover:bg-gray-800 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl border border-gray-200"
                         >
-                            <svg
-                                className="w-5 h-5 mr-2"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
+                            <Github className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
                             View on GitHub
                         </a>
                         <a
                             href="https://github.com/idosal/mcp-ui"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl"
                         >
-                            <svg
-                                className="w-5 h-5 mr-2"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" />
-                            </svg>
+                            <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
                             Read MCP-UI Docs
                         </a>
                     </div>
                 </div>
 
                 {/* Demo Links */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <Link href="/get-weather" className="group">
-                        <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                            <div className="text-3xl mb-4">🌤️</div>
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                                Weather Demo
-                            </h3>
-                            <p className="text-gray-600">
-                                Test the weather tool with real API calls to
-                                Open-Meteo
-                            </p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                    <Link href="/get-weather" className="group block">
+                        <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 hover:border-blue-200 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="relative">
+                                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <Cloud className="w-8 h-8 text-white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                                    Weather Demo
+                                </h3>
+                                <p className="text-gray-600 leading-relaxed mb-4">
+                                    Get real-time weather data from Open-Meteo
+                                    API with beautiful visualizations
+                                </p>
+                                <div className="flex items-center text-blue-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                                    Explore Demo
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                </div>
+                            </div>
                         </div>
                     </Link>
-                    <Link href="/pick-seat" className="group">
-                        <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                            <div className="text-3xl mb-4">🎫</div>
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                                Seat Selection
-                            </h3>
-                            <p className="text-gray-600">
-                                Interactive seat picker with visual feedback
-                            </p>
+
+                    <Link href="/pick-seat" className="group block">
+                        <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 hover:border-green-200 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-transparent to-emerald-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="relative">
+                                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <Users className="w-8 h-8 text-white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-600 transition-colors duration-200">
+                                    Seat Selection
+                                </h3>
+                                <p className="text-gray-600 leading-relaxed mb-4">
+                                    Interactive seat picker with visual feedback
+                                    and real-time updates
+                                </p>
+                                <div className="flex items-center text-green-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                                    Explore Demo
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                </div>
+                            </div>
                         </div>
                     </Link>
-                    <Link href="/ui-actions" className="group">
-                        <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                            <div className="text-3xl mb-4">⚡</div>
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                                UI Actions
-                            </h3>
-                            <p className="text-gray-600">
-                                Test different types of MCP-UI message actions
-                            </p>
+
+                    <Link href="/ui-actions" className="group block">
+                        <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 hover:border-purple-200 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-transparent to-pink-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="relative">
+                                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <Zap className="w-8 h-8 text-white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-purple-600 transition-colors duration-200">
+                                    UI Actions
+                                </h3>
+                                <p className="text-gray-600 leading-relaxed mb-4">
+                                    Test different types of MCP-UI message
+                                    actions and interactions
+                                </p>
+                                <div className="flex items-center text-purple-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                                    Explore Demo
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                </div>
+                            </div>
                         </div>
                     </Link>
                 </div>
 
-                {/* What is this section */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                    <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                        What is this site?
-                    </h2>
-                    <div className="prose prose-lg max-w-none">
-                        <p className="text-gray-700 mb-4">
-                            This is a demo sandbox for exploring and showcasing
-                            MCP-UI examples. It provides a hands-on environment
-                            to:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
-                            <li>
-                                View UI components that can be rendered by
-                                MCP-UI clients
-                            </li>
-                            <li>Simulate tool calls and user interactions</li>
-                            <li>
-                                Debug message passing between MCP servers and UI
-                                clients
-                            </li>
-                            <li>
-                                Prototype new UI patterns for MCP applications
-                            </li>
-                        </ul>
+                {/* What is this site? */}
+                <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl p-12 mb-16 border border-gray-100">
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl">
+                            <Globe className="w-6 h-6 text-white" />
+                        </div>
+                        <h2 className="text-3xl font-bold text-gray-900">
+                            What is this site?
+                        </h2>
+                    </div>
+                    <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                        This is a modern demo sandbox for exploring and
+                        showcasing MCP-UI examples. It provides a hands-on
+                        environment to test and visualize the capabilities of
+                        Model Context Protocol UI components.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg flex-shrink-0">
+                                    <Code className="w-4 h-4 text-blue-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    View UI components that can be rendered by
+                                    MCP-UI clients
+                                </p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg flex-shrink-0">
+                                    <CheckCircle className="w-4 h-4 text-green-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    Simulate tool calls and user interactions
+                                </p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-purple-100 rounded-lg flex-shrink-0">
+                                    <Database className="w-4 h-4 text-purple-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    Debug message passing between MCP servers
+                                    and UI clients
+                                </p>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-orange-100 rounded-lg flex-shrink-0">
+                                    <FolderOpen className="w-4 h-4 text-orange-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    Prototype new UI patterns for MCP
+                                    applications
+                                </p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-red-100 rounded-lg flex-shrink-0">
+                                    <Zap className="w-4 h-4 text-red-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    Test real-time data flows and state
+                                    management
+                                </p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-lg flex-shrink-0">
+                                    <Settings className="w-4 h-4 text-indigo-600" />
+                                </div>
+                                <p className="text-gray-700">
+                                    Explore advanced MCP-UI features and
+                                    capabilities
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Usage Instructions */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-900">
-                        How to Use
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                {/* How to Use */}
+                <div className="grid lg:grid-cols-2 gap-8">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-gray-100">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl">
+                                <Terminal className="w-6 h-6 text-white" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900">
                                 For Developers
                             </h3>
-                            <div className="space-y-3 text-gray-700">
-                                <p>
-                                    1. <strong>Clone the repo:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                        </div>
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
+                                    1
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Clone the repo:
+                                    </p>
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
                                         git clone
                                         https://github.com/aharvard/mcp_aharvard
                                     </code>
-                                </p>
-                                <p>
-                                    2. <strong>Install dependencies:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
+                                    2
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Install dependencies:
+                                    </p>
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
                                         pnpm install
                                     </code>
-                                </p>
-                                <p>
-                                    3. <strong>Run locally:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
+                                    3
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Run locally:
+                                    </p>
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
                                         pnpm dev
                                     </code>
-                                </p>
-                                <p>
-                                    4. <strong>Test MCP server:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-blue-500 text-white rounded-full text-sm font-bold">
+                                    4
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Test MCP server:
+                                    </p>
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
                                         pnpm inspect
                                     </code>
-                                </p>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                    <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-gray-100">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
+                                <CheckCircle className="w-6 h-6 text-white" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900">
                                 For MCP Clients
                             </h3>
-                            <div className="space-y-3 text-gray-700">
-                                <p>
-                                    1. <strong>Add as extension</strong> in your
-                                    MCP client
+                        </div>
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
+                                    1
+                                </div>
+                                <p className="text-gray-700">
+                                    Add as extension in your MCP client
                                 </p>
-                                <p>
-                                    2. <strong>Endpoint:</strong>{" "}
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
+                                    2
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Endpoint:
+                                    </p>
+                                    <code className="block bg-gray-100 rounded-lg px-3 py-2 text-sm font-mono text-gray-800">
                                         https://mcp-aharvard.netlify.app/mcp
                                     </code>
-                                </p>
-                                <p>
-                                    3. <strong>Timeout:</strong> 300 seconds
-                                </p>
-                                <p>
-                                    4. <strong>Test:</strong> Ask for weather in
-                                    any city!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Netlify Serverless Architecture */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-900">
-                        Netlify Serverless Architecture
-                    </h2>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                                How it Works
-                            </h3>
-                            <div className="space-y-3 text-gray-700">
-                                <p>
-                                    <strong>Serverless Functions:</strong> The
-                                    MCP server runs as a Netlify Function at
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        /mcp
-                                    </code>{" "}
-                                    endpoint.
-                                </p>
-                                <p>
-                                    <strong>Express Integration:</strong> Uses
-                                    Express.js wrapped with
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        serverless-http
-                                    </code>{" "}
-                                    for HTTP request handling.
-                                </p>
-                                <p>
-                                    <strong>Stateless Design:</strong> Each
-                                    request creates a new MCP server instance to
-                                    ensure complete isolation between concurrent
-                                    clients.
-                                </p>
-                                <p>
-                                    <strong>Streaming Transport:</strong> Uses
-                                    <code className="bg-gray-100 px-2 py-1 rounded text-sm">
-                                        StreamableHTTPServerTransport
-                                    </code>
-                                    for real-time communication.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3 text-gray-800">
-                                File Structure
-                            </h3>
-                            <div className="bg-gray-50 rounded-lg p-4 text-sm font-mono">
-                                <div className="text-gray-600">netlify/</div>
-                                <div className="ml-4">
-                                    <div className="text-gray-600">
-                                        functions/
-                                    </div>
-                                    <div className="ml-4 text-gray-800">
-                                        express-mcp-server.ts
-                                    </div>
-                                    <div className="text-gray-600">
-                                        mcp-server/
-                                    </div>
-                                    <div className="ml-4">
-                                        <div className="text-gray-800">
-                                            index.ts
-                                        </div>
-                                        <div className="text-gray-800">
-                                            types.ts
-                                        </div>
-                                        <div className="text-gray-600">
-                                            tools/
-                                        </div>
-                                        <div className="ml-4">
-                                            <div className="text-gray-800">
-                                                getWeather.ts
-                                            </div>
-                                            <div className="text-gray-800">
-                                                SeatSelection.ts
-                                            </div>
-                                            <div className="text-gray-800">
-                                                UIActionCard.ts
-                                            </div>
-                                            <div className="text-gray-800">
-                                                WeatherCard.ts
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Tool Calls Documentation */}
-                <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-900">
-                        Available Tool Calls
-                    </h2>
-
-                    <div className="space-y-6">
-                        <div className="border-l-4 border-blue-500 pl-4">
-                            <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                                getWeather
-                            </h3>
-                            <p className="text-gray-700 mb-3">
-                                Fetches real-time weather data from Open-Meteo
-                                API
-                            </p>
-                            <div className="bg-gray-50 rounded-lg p-4 text-sm font-mono">
-                                <div className="text-gray-600">Parameters:</div>
-                                <div className="ml-4">
-                                    <div>
-                                        <span className="text-blue-600">
-                                            location
-                                        </span>
-                                        : string (city name)
-                                    </div>
-                                    <div>
-                                        <span className="text-blue-600">
-                                            units
-                                        </span>
-                                        : "metric" | "imperial"
-                                    </div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
+                                    3
+                                </div>
+                                <div>
+                                    <p className="font-medium text-gray-900 mb-1">
+                                        Timeout: 300 seconds
+                                    </p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="border-l-4 border-green-500 pl-4">
-                            <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                                SeatSelection
-                            </h3>
-                            <p className="text-gray-700 mb-3">
-                                Interactive seat selection interface with visual
-                                feedback
-                            </p>
-                            <div className="bg-gray-50 rounded-lg p-4 text-sm font-mono">
-                                <div className="text-gray-600">Features:</div>
-                                <div className="ml-4">
-                                    <div>• Visual seat grid</div>
-                                    <div>• Real-time availability</div>
-                                    <div>• Selection confirmation</div>
+                            <div className="flex items-start gap-3">
+                                <div className="flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full text-sm font-bold">
+                                    4
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="border-l-4 border-purple-500 pl-4">
-                            <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                                UIActionCard
-                            </h3>
-                            <p className="text-gray-700 mb-3">
-                                Demonstrates various MCP-UI message types
-                            </p>
-                            <div className="bg-gray-50 rounded-lg p-4 text-sm font-mono">
-                                <div className="text-gray-600">
-                                    Message Types:
-                                </div>
-                                <div className="ml-4">
-                                    <div>• tool - Execute specific tools</div>
-                                    <div>• prompt - Send prompts to AI</div>
-                                    <div>• link - Open external URLs</div>
-                                    <div>
-                                        • intent - Trigger specific intents
-                                    </div>
-                                    <div>• notify - Show notifications</div>
-                                </div>
+                                <p className="text-gray-700">
+                                    Test: Ask for weather in any city!
+                                </p>
                             </div>
                         </div>
                     </div>
