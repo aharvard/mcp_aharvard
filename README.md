@@ -1,14 +1,26 @@
-# MCP with Express + React
+# MCP-UI Demos
 
-A starter example for using Express with Netlify to add serverless MCP to your React project.
+A visualization sandbox for testing MCP-UI components and interactions in a convenient environment. This project demonstrates how to build MCP-UI enabled applications using Express with Netlify serverless functions.
 
 ## Features
 
 -   **React 18** with TypeScript
--   **Vite** for fast development and building
+-   **Next.js** for fast development and building
 -   **Express** serverless functions on Netlify
--   **Model Context Protocol (MCP)** integration
+-   **MCP-UI** integration for rich UI components
 -   **Tailwind CSS** for styling
+-   **Interactive demos** for weather, seat selection, and UI actions
+
+## What is this Sandbox?
+
+This is a **visualization sandbox** for testing MCP-UI components and interactions. It provides a convenient environment to:
+
+-   Test UI components that can be rendered by MCP-UI clients
+-   Simulate tool calls and user interactions
+-   Debug message passing between MCP servers and UI clients
+-   Prototype new UI patterns for MCP applications
+
+The sandbox runs on **Netlify serverless functions**, making it easy to deploy and share with others without managing infrastructure.
 
 ## Development
 
@@ -35,17 +47,35 @@ A starter example for using Express with Netlify to add serverless MCP to your R
 
 ### Building for Production
 
-Build the React app to the `public` folder:
+Build the React app:
 
 ```bash
 pnpm build
 ```
 
-The built files will be in the `public` directory, ready for deployment.
+The built files will be ready for deployment on Netlify.
+
+## Available Demos
+
+### Weather Demo (`/get-weather`)
+
+Test the weather tool with real API calls to Open-Meteo. Demonstrates how to integrate external APIs with MCP-UI components.
+
+### Seat Selection (`/pick-seat`)
+
+Interactive seat picker with visual feedback. Shows how to create complex interactive UI components that can be embedded in MCP clients.
+
+### UI Actions (`/ui-actions`)
+
+Test different types of MCP-UI message actions including tool calls, prompts, links, intents, and notifications.
+
+### Toast Notifications (`/toast-demo`)
+
+Demonstrate toast notification patterns for user feedback in MCP-UI applications.
 
 ## MCP Integration
 
-This project includes MCP (Model Context Protocol) integration through Express serverless functions.
+This project includes MCP (Model Context Protocol) integration through Express serverless functions, specifically designed for MCP-UI components.
 
 ### Using as a Goose Extension
 
@@ -57,6 +87,36 @@ This project includes MCP (Model Context Protocol) integration through Express s
 1. A timeout of `300` is fine
 1. Save changes
 1. Ask goose what's the weather in your city (not all cities are supported)
+
+### Available Tool Calls
+
+#### getWeather
+
+Fetches real-time weather data from Open-Meteo API
+
+-   **Parameters:**
+    -   `location`: string (city name)
+    -   `units`: "metric" | "imperial"
+
+#### SeatSelection
+
+Interactive seat selection interface with visual feedback
+
+-   **Features:**
+    -   Visual seat grid
+    -   Real-time availability
+    -   Selection confirmation
+
+#### UIActionCard
+
+Demonstrates various MCP-UI message types
+
+-   **Message Types:**
+    -   tool - Execute specific tools
+    -   prompt - Send prompts to AI
+    -   link - Open external URLs
+    -   intent - Trigger specific intents
+    -   notify - Show notifications
 
 ### Weather API Information
 
@@ -99,33 +159,60 @@ For more information, visit: [Open-Meteo API Documentation](https://open-meteo.c
 Test the MCP server locally or remotely:
 
 ```bash
-npx @modelcontextprotocol/inspector npx mcp-remote@next https://mcp-example-express.netlify.app/mcp
+npx @modelcontextprotocol/inspector --config mcp-config.json --server mcp-aharvard
 ```
 
 ## Project Structure
 
 ```
-├── src/                    # React source code
-│   ├── main.tsx           # React entry point
-│   ├── App.tsx            # Main App component
-│   ├── App.css            # App styles
-│   └── index.css          # Global styles
-├── public/                # Static files and build output
-├── netlify/               # Netlify functions
-│   └── functions/         # Serverless functions
-├── index.html             # HTML template
-├── vite.config.ts         # Vite configuration
-└── package.json           # Dependencies and scripts
+├── app/                   # Next.js app directory
+│   ├── page.tsx          # Main landing page
+│   ├── get-weather/      # Weather demo
+│   ├── pick-seat/        # Seat selection demo
+│   ├── ui-actions/       # UI actions demo
+│   └── toast-demo/       # Toast notifications demo
+├── components/            # React components
+├── netlify/              # Netlify functions
+│   ├── functions/        # Serverless functions
+│   └── mcp-server/       # MCP server implementation
+│       └── tools/        # MCP tool implementations
+├── mcp-config.json       # MCP configuration
+└── package.json          # Dependencies and scripts
+```
+
+## Netlify Serverless Architecture
+
+### How it Works
+
+-   **Serverless Functions**: The MCP server runs as a Netlify Function at `/mcp` endpoint
+-   **Express Integration**: Uses Express.js wrapped with `serverless-http` for HTTP request handling
+-   **Stateless Design**: Each request creates a new MCP server instance to ensure complete isolation between concurrent clients
+-   **Streaming Transport**: Uses `StreamableHTTPServerTransport` for real-time communication
+
+### File Structure
+
+```
+netlify/
+├── functions/
+│   └── express-mcp-server.ts
+└── mcp-server/
+    ├── index.ts
+    ├── types.ts
+    └── tools/
+        ├── getWeather.ts
+        ├── SeatSelection.ts
+        ├── UIActionCard.ts
+        └── WeatherCard.ts
 ```
 
 ## Deployment
 
-This project is configured for deployment on Netlify. The React app builds to the `public` folder, and the Express functions are deployed as Netlify Functions.
+This project is configured for deployment on Netlify. The Next.js app builds automatically, and the Express functions are deployed as Netlify Functions.
 
 ## Learn More
 
+-   [MCP-UI Documentation](https://github.com/idosal/mcp-ui)
 -   [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
 -   [Express](https://expressjs.com/)
--   [React](https://react.dev/)
--   [Vite](https://vitejs.dev/)
+-   [Next.js](https://nextjs.org/)
 -   [Netlify Functions](https://docs.netlify.com/functions/overview/)
