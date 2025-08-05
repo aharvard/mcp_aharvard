@@ -6,6 +6,7 @@ import WeatherCard from "./tools/WeatherCard";
 import { getWeather } from "./tools/getWeather";
 import SeatSelection from "./tools/SeatSelection";
 import UIActionCard from "./tools/UIActionCard";
+import MoodTripPlanner from "./tools/MoodTripPlanner";
 import { createUIResource } from "@mcp-ui/server";
 
 export const setupMCPServer = (): McpServer => {
@@ -256,6 +257,74 @@ export const setupMCPServer = (): McpServer => {
                     },
                 ],
             };
+        }
+    );
+
+    // Register a tool for mood-based trip planning
+    server.tool(
+        "plan-trip-by-mood",
+        "A mood-based trip planner that suggests destinations based on how you're feeling. Features big emoji buttons and animated destination reveals. Use this tool when the user wants to plan a trip based on their mood or feelings.",
+        {
+            userPreferences: z
+                .string()
+                .describe("Any specific user preferences or requirements")
+                .optional(),
+            budget: z
+                .string()
+                .describe("Budget range for the trip")
+                .optional(),
+            duration: z
+                .string()
+                .describe("Preferred trip duration")
+                .optional(),
+        },
+        async ({ userPreferences, budget, duration }): Promise<CallToolResult> => {
+            try {
+                const tripData = {
+                    userPreferences,
+                    budget,
+                    duration,
+                };
+
+                return {
+                    content: [
+                        {
+                            ...createUIResource({
+                                uri: "ui://mcp-aharvard/mood-trip-planner",
+                                content: {
+                                    type: "rawHtml",
+                                    htmlString: MoodTripPlanner(tripData),
+                                },
+                                encoding: "text",
+                            }),
+                            annotations: {
+                                audience: ["user"],
+                            },
+                        },
+                        {
+                            type: "text",
+                            text: "Mood-based trip planner loaded! Select how you're feeling using the emoji buttons above, and I'll suggest the perfect destination with a beautiful animation reveal.",
+                            annotations: {
+                                audience: ["assistant"],
+                            },
+                        },
+                    ],
+                };
+            } catch (error) {
+                console.error("Error with mood trip planner:", error);
+                return {
+                    content: [
+                        {
+                            type: "text",
+                            text: `Error loading mood trip planner: ${
+                                error instanceof Error
+                                    ? error.message
+                                    : "Unknown error"
+                            }`,
+                        },
+                    ],
+                };
+            }
         }
     );
     return server;
