@@ -307,11 +307,13 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
     border-radius: 20px;
+    pointer-events: none;
   }
   
   .destination-reveal.show {
     opacity: 1;
     transform: scale(1);
+    pointer-events: auto;
   }
   
   .destination-content {
@@ -465,37 +467,37 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
     
     <div class="mood-selection">
       <div class="mood-grid">
-        <div class="mood-button" data-mood="adventurous" onclick="selectMood('adventurous')">
+        <div class="mood-button" data-mood="adventurous">
           <span class="mood-emoji">🏔️</span>
           <p class="mood-label">Adventurous</p>
           <p class="mood-description">Seeking thrills & excitement</p>
         </div>
         
-        <div class="mood-button" data-mood="relaxed" onclick="selectMood('relaxed')">
+        <div class="mood-button" data-mood="relaxed">
           <span class="mood-emoji">🏖️</span>
           <p class="mood-label">Relaxed</p>
           <p class="mood-description">Need peace & tranquility</p>
         </div>
         
-        <div class="mood-button" data-mood="cultural" onclick="selectMood('cultural')">
+        <div class="mood-button" data-mood="cultural">
           <span class="mood-emoji">🏛️</span>
           <p class="mood-label">Cultural</p>
           <p class="mood-description">Explore history & traditions</p>
         </div>
         
-        <div class="mood-button" data-mood="romantic" onclick="selectMood('romantic')">
+        <div class="mood-button" data-mood="romantic">
           <span class="mood-emoji">💕</span>
           <p class="mood-label">Romantic</p>
           <p class="mood-description">Love is in the air</p>
         </div>
         
-        <div class="mood-button" data-mood="foodie" onclick="selectMood('foodie')">
+        <div class="mood-button" data-mood="foodie">
           <span class="mood-emoji">🍜</span>
           <p class="mood-label">Foodie</p>
           <p class="mood-description">Culinary adventures await</p>
         </div>
         
-        <div class="mood-button" data-mood="party" onclick="selectMood('party')">
+        <div class="mood-button" data-mood="party">
           <span class="mood-emoji">🎉</span>
           <p class="mood-label">Party</p>
           <p class="mood-description">Ready to celebrate life</p>
@@ -659,6 +661,22 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
       sparklesContainer.appendChild(sparkle);
     }
   }
+
+  // Add event listeners when DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add click listeners to mood buttons
+    document.querySelectorAll('.mood-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const mood = this.getAttribute('data-mood');
+        selectMood(mood);
+      });
+    });
+
+    // Add click listeners to action buttons
+    document.getElementById('clear-mood').addEventListener('click', clearMood);
+    document.getElementById('plan-trip').addEventListener('click', planTrip);
+    document.querySelector('.new-trip-btn').addEventListener('click', startOver);
+  });
 </script>`;
 
     const htmlString =
