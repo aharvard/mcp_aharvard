@@ -39,10 +39,9 @@ export default function UIActionCard() {
     const toolAction = postMessageUIAction({
         type: "tool",
         payload: {
-            toolName: "getWeather",
+            toolName: "get-weather",
             params: {
-                location: "New York",
-                foo: "bar",
+                city: "Tokyo",
             },
         },
         messageId: "optional-tool-message-id",
@@ -51,7 +50,7 @@ export default function UIActionCard() {
     const promptAction = postMessageUIAction({
         type: "prompt",
         payload: {
-            prompt: "What is the weather in New York?",
+            prompt: "What is the weather in Tokyo?",
         },
         messageId: "optional-prompt-message-id",
     });
@@ -67,9 +66,10 @@ export default function UIActionCard() {
     const intentAction = postMessageUIAction({
         type: "intent",
         payload: {
-            intent: "getWeather",
+            intent: "create-task",
             params: {
-                location: "New York",
+                title: "Buy groceries",
+                description: "Buy groceries for the week",
             },
         },
         messageId: "optional-intent-message-id",
@@ -78,7 +78,7 @@ export default function UIActionCard() {
     const notifyAction = postMessageUIAction({
         type: "notify",
         payload: {
-            message: "Hello, world!",
+            message: "cart-updated",
         },
         messageId: "optional-notify-message-id",
     });
