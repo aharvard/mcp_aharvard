@@ -8,32 +8,81 @@ interface MoodTripData {
 }
 
 export default function MoodTripPlanner(tripData?: MoodTripData) {
+    console.log("MoodTripPlanner initialized with data:", tripData);
     // Mood-based destinations
     const moodDestinations = {
         adventurous: {
-            destinations: ["New Zealand", "Costa Rica", "Iceland", "Nepal", "Patagonia"],
-            activities: ["Bungee jumping", "Volcano hiking", "Glacier walking", "Mountain climbing", "Wildlife safari"]
+            destinations: [
+                "New Zealand",
+                "Costa Rica",
+                "Iceland",
+                "Nepal",
+                "Patagonia",
+            ],
+            activities: [
+                "Bungee jumping",
+                "Volcano hiking",
+                "Glacier walking",
+                "Mountain climbing",
+                "Wildlife safari",
+            ],
         },
         relaxed: {
             destinations: ["Maldives", "Bali", "Santorini", "Tuscany", "Fiji"],
-            activities: ["Beach lounging", "Spa treatments", "Wine tasting", "Sunset watching", "Meditation retreats"]
+            activities: [
+                "Beach lounging",
+                "Spa treatments",
+                "Wine tasting",
+                "Sunset watching",
+                "Meditation retreats",
+            ],
         },
         cultural: {
             destinations: ["Japan", "Morocco", "India", "Peru", "Egypt"],
-            activities: ["Temple visits", "Local cooking classes", "Art galleries", "Historical tours", "Traditional festivals"]
+            activities: [
+                "Temple visits",
+                "Local cooking classes",
+                "Art galleries",
+                "Historical tours",
+                "Traditional festivals",
+            ],
         },
         romantic: {
             destinations: ["Paris", "Venice", "Kyoto", "Prague", "Santorini"],
-            activities: ["Candlelit dinners", "Sunset cruises", "Couples spa", "Wine tours", "Historic walks"]
+            activities: [
+                "Candlelit dinners",
+                "Sunset cruises",
+                "Couples spa",
+                "Wine tours",
+                "Historic walks",
+            ],
         },
         foodie: {
             destinations: ["Italy", "Thailand", "Mexico", "France", "Vietnam"],
-            activities: ["Street food tours", "Cooking classes", "Wine tastings", "Market visits", "Michelin dining"]
+            activities: [
+                "Street food tours",
+                "Cooking classes",
+                "Wine tastings",
+                "Market visits",
+                "Michelin dining",
+            ],
         },
         party: {
-            destinations: ["Ibiza", "Las Vegas", "Rio de Janeiro", "Bangkok", "Berlin"],
-            activities: ["Beach clubs", "Rooftop bars", "Music festivals", "Night markets", "Dance clubs"]
-        }
+            destinations: [
+                "Ibiza",
+                "Las Vegas",
+                "Rio de Janeiro",
+                "Bangkok",
+                "Berlin",
+            ],
+            activities: [
+                "Beach clubs",
+                "Rooftop bars",
+                "Music festivals",
+                "Night markets",
+                "Dance clubs",
+            ],
+        },
     };
 
     const style = `
@@ -612,6 +661,7 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
   }
 </script>`;
 
-    const htmlString = style + addFontToHead + html + postMessageHeight + handleInteractions;
+    const htmlString =
+        style + addFontToHead + html + postMessageHeight + handleInteractions;
     return htmlString;
 }
