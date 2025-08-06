@@ -29,11 +29,11 @@ export const postMessageUISizeChange = `
     }
   });
 
-  // Start observing the document element
-  resizeObserver.observe(document.documentElement);
+  // Start observing the mcp-ui-container element
+  resizeObserver.observe(document.querySelector('.mcp-ui-container'));
 
   // Post size when window loads
-  //window.addEventListener('load', postSize);
+  // window.addEventListener('load', postSize);
 
   // Post size when DOM content is loaded
   // document.addEventListener('DOMContentLoaded', postSize);
