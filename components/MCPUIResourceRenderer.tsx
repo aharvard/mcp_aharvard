@@ -16,16 +16,6 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
 }) => {
     const { showToast } = useToast();
 
-    // Add message listener to handle postMessage events from iframe
-    React.useEffect(() => {
-        const handleMessage = (event: MessageEvent) => {
-            // Only handle messages from our iframe
-        };
-
-        window.addEventListener("message", handleMessage);
-        return () => window.removeEventListener("message", handleMessage);
-    }, [showToast]);
-
     const handleUIAction = useCallback(
         async (result: UIActionResult) => {
             console.log("Handle action from MCP UI Action:", result);
