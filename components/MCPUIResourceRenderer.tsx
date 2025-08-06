@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { UIActionResult, UIResourceRenderer } from "@mcp-ui/client";
 import { useToast } from "./ToastContainer";
 
@@ -13,29 +13,13 @@ interface MCPUIResourceRendererProps {
 const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
     resource,
     onUIAction,
-    initialIframeHeight = "0px",
 }) => {
-    const [iframeHeight, setIframeHeight] = useState(initialIframeHeight);
-
     const { showToast } = useToast();
 
     // Add message listener to handle postMessage events from iframe
     React.useEffect(() => {
         const handleMessage = (event: MessageEvent) => {
             // Only handle messages from our iframe
-            if (event.data && event.data.type === "size-change") {
-                console.log(
-                    "Received size-change message from iframe:",
-                    event.data
-                );
-                setIframeHeight(event.data.payload.height);
-                showToast({
-                    type: "info",
-                    title: "Size Updated",
-                    message: `Iframe height changed to ${event.data.payload.height} from ${event.data.payload.info}`,
-                    duration: 4000,
-                });
-            }
         };
 
         window.addEventListener("message", handleMessage);
@@ -150,7 +134,6 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 resource={resource}
                 onUIAction={handleUIAction}
                 htmlProps={{
-                    // style: { minHeight: iframeHeight },
                     autoResizeIframe: {
                         height: true,
                         width: false,
