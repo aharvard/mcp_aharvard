@@ -367,7 +367,7 @@ export default function WeatherCard(data: WeatherData | null) {
     const htmlString =
         style +
         html +
-        postMessageHeight +
+        // postMessageHeight +
         postMessageUISizeChange +
         addFontToHead;
 
