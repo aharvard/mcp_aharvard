@@ -23,7 +23,7 @@ function postHeight(info) {
   
   if (height > 0) {
     window.parent.postMessage({ 
-      type: 'size-change', 
+      type: 'ui-size-change', 
       payload: {         
         height: height + 'px',
         info: info
