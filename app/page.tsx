@@ -59,7 +59,7 @@ export default function Home() {
                 </div>
 
                 {/* Demo Links */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
                     <Link href="/get-weather" className="group block">
                         <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 hover:border-blue-200 overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -122,6 +122,27 @@ export default function Home() {
                                     interactions
                                 </p>
                                 <div className="flex items-center text-purple-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
+                                    Explore Demo
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+
+                    <Link href="/mood-trip-planner" className="group block">
+                        <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 hover:border-pink-200 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 via-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="relative">
+                                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <Sparkles className="w-8 h-8 text-white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 text-gray-900 group-hover:text-pink-600 transition-colors duration-200">
+                                    Mood Trip Planner
+                                </h3>
+                                <p className="text-gray-600 leading-relaxed mb-4">
+                                    Plan your perfect trip based on your mood! Big emoji buttons, smooth animations, and personalized destination reveals.
+                                </p>
+                                <div className="flex items-center text-pink-500 font-medium group-hover:translate-x-2 transition-transform duration-300">
                                     Explore Demo
                                     <ArrowRight className="w-4 h-4 ml-2" />
                                 </div>
@@ -428,6 +449,26 @@ export default function Home() {
                                                     <code className="text-sm font-mono text-gray-800">
                                                         "Demonstrate the prompt
                                                         action"
+                                                    </code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <Sparkles className="w-5 h-5 text-pink-500" />
+                                                <h4 className="text-base font-semibold text-gray-900">
+                                                    Mood Trip Planner:
+                                                </h4>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "Help me plan a trip based on my mood"
+                                                    </code>
+                                                </div>
+                                                <div className="bg-gray-50 rounded-lg px-3 py-2">
+                                                    <code className="text-sm font-mono text-gray-800">
+                                                        "I'm feeling adventurous, suggest a destination"
                                                     </code>
                                                 </div>
                                             </div>
