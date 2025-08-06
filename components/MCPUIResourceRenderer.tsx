@@ -150,7 +150,11 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
                 resource={resource}
                 onUIAction={handleUIAction}
                 htmlProps={{
-                    style: { minHeight: iframeHeight },
+                    // style: { minHeight: iframeHeight },
+                    autoResizeIframe: {
+                        height: true,
+                        width: false,
+                    },
                 }}
             />
         </div>

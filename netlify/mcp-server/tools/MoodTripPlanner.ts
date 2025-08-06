@@ -684,7 +684,7 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
         style +
         addFontToHead +
         html +
-        postMessageHeight +
+        postMessageHeight + // remove when goose ships updates
         postMessageUISizeChange +
         handleInteractions;
     return htmlString;

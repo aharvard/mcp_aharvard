@@ -991,7 +991,7 @@ export default function SeatSelection(flightData?: FlightData) {
         style +
         addFontToHead +
         html +
-        postMessageHeight +
+        postMessageHeight + // remove when goose ships updates
         postMessageUISizeChange +
         handleInteractions;
 

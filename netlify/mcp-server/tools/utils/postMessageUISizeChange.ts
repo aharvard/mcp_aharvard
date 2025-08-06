@@ -3,11 +3,9 @@ export const postMessageUISizeChange = `
 <script>
   const mcpUiContainer = document.querySelector('.mcp-ui-container');
   
-  // Function to post size to parent
   function postSize() {
     const height = mcpUiContainer.scrollHeight;
     const width = mcpUiContainer.scrollWidth;
-    console.log('🔥🔥 postMessageUISizeChange', { height, width });
     window.parent.postMessage(
       {
         type: "ui-size-change",
@@ -20,8 +18,6 @@ export const postMessageUISizeChange = `
     );
   }
 
-  
-
   // Create ResizeObserver to watch for size changes
   const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
@@ -32,10 +28,4 @@ export const postMessageUISizeChange = `
 
   // Start observing the mcp-ui-container element
   resizeObserver.observe(mcpUiContainer);
-
-  // Post size when window loads
-  // window.addEventListener('load', postSize);
-
-  // Post size when DOM content is loaded
-  // document.addEventListener('DOMContentLoaded', postSize);
 </script>`;
