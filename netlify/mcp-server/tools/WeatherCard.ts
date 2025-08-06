@@ -1,5 +1,6 @@
 import { WeatherData } from "../types";
 import { postMessageHeight } from "./utils/postMessageHeight";
+import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 import { addFontToHead } from "./utils/addFontToHead";
 
 export default function WeatherCard(data: WeatherData | null) {
@@ -363,7 +364,12 @@ export default function WeatherCard(data: WeatherData | null) {
 </article>
   `;
 
-    const htmlString = style + html + postMessageHeight + addFontToHead;
+    const htmlString =
+        style +
+        html +
+        postMessageHeight +
+        postMessageUISizeChange +
+        addFontToHead;
 
     return htmlString;
 }
