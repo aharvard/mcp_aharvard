@@ -3,7 +3,7 @@ export const postMessageUISizeChange = `
 <script>
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
-      console.log("postMessageUISizeChange from mcp_aharvard", entry.contentRect.height, entry.contentRect.width);
+      contentRect.height, entry.contentRect.width);
       window.parent.postMessage(
         {
           type: "ui-size-change",
@@ -16,5 +16,9 @@ export const postMessageUISizeChange = `
       );
     });
   });
-  resizeObserver.observe(document.documentElement)
+  const container = document.querySelector('.mcp-ui-container');
+  console.log("postMessageUISizeChange from mcp_aharvard", container);
+  if (container) {
+    resizeObserver.observe(container);
+  }
 </script>`;
