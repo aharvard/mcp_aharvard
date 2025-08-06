@@ -1,45 +1,45 @@
 {
-  "name": "netlify-example-express-mcp",
-  "version": "1.0.0",
-  "description": "A site to show a MCP example using Netlify Functions and Express",
-  "author": "Netlify",
-  "type": "module",
-  "license": "ISC",
-  "scripts": {
-    "inspect": "npx @modelcontextprotocol/inspector --config mcp-config.json --server mcp-aharvard",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@mcp-ui/client": "^5.3.1",
-    "@mcp-ui/server": "^5.2.0",
-    "@modelcontextprotocol/sdk": "^1.10.2",
-    "@netlify/functions": "^2.5.1",
-    "@radix-ui/react-icons": "^1.3.2",
-    "@radix-ui/react-navigation-menu": "^1.2.13",
-    "@types/express": "^5.0.1",
-    "express": "^5.1.0",
-    "fetch-to-node": "^2.0.0",
-    "lucide-react": "^0.536.0",
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "serverless-http": "^3.2.0",
-    "zod": "^3.24.3"
-  },
-  "devDependencies": {
-    "@modelcontextprotocol/inspector": "^0.16.2",
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "autoprefixer": "^10.4.0",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^14.0.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^3.0.0",
-    "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+    "name": "netlify-example-express-mcp",
+    "version": "1.0.0",
+    "description": "A site to show a MCP example using Netlify Functions and Express",
+    "author": "Netlify",
+    "type": "module",
+    "license": "ISC",
+    "scripts": {
+        "inspect": "npx @modelcontextprotocol/inspector --config mcp-config.json --server mcp-aharvard",
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@mcp-ui/client": "~5.6.2",
+        "@mcp-ui/server": "~5.2.0",
+        "@modelcontextprotocol/sdk": "^1.10.2",
+        "@netlify/functions": "^2.5.1",
+        "@radix-ui/react-icons": "^1.3.2",
+        "@radix-ui/react-navigation-menu": "^1.2.13",
+        "@types/express": "^5.0.1",
+        "express": "^5.1.0",
+        "fetch-to-node": "^2.0.0",
+        "lucide-react": "^0.536.0",
+        "next": "^14.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "serverless-http": "^3.2.0",
+        "zod": "^3.24.3"
+    },
+    "devDependencies": {
+        "@modelcontextprotocol/inspector": "^0.16.2",
+        "@types/node": "^20.0.0",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "autoprefixer": "^10.4.0",
+        "eslint": "^8.0.0",
+        "eslint-config-next": "^14.0.0",
+        "postcss": "^8.4.0",
+        "tailwindcss": "^3.0.0",
+        "typescript": "^5.0.0"
+    },
+    "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }

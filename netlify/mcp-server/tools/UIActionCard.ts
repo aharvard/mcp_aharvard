@@ -1,5 +1,5 @@
 import { addFontToHead } from "./utils/addFontToHead";
-import { postMessageHeight } from "./utils/postMessageHeight";
+// import { postMessageHeight } from "./utils/postMessageHeight";
 import { postMessageUIAction } from "./utils/postMessageUIAction";
 
 export default function UIActionCard() {
@@ -580,5 +580,6 @@ function hideInspection() {
   }
 </style>
     `;
-    return addFontToHead + styles + html + postMessageHeight;
+    return addFontToHead + styles + html;
+    // + postMessageHeight;
 }
