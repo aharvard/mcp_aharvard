@@ -3,13 +3,15 @@ export const postMessageUISizeChange = `
 <script>
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
-      contentRect.height, entry.contentRect.width);
+      const entryHeight = entry.getBoundingClientRect().height;
+      const entryWidth = entry.getBoundingClientRect().width;
+      console.log('🔥', { entryHeight, entryWidth });
       window.parent.postMessage(
         {
           type: "ui-size-change",
           payload: {
-            height: entry.contentRect.height,
-            width: entry.contentRect.width, 
+            height: entryHeight,
+            width: entryWidth, 
           },
         },
         "*",
@@ -17,7 +19,7 @@ export const postMessageUISizeChange = `
     });
   });
   const container = document.querySelector('.mcp-ui-container');
-  console.log("postMessageUISizeChange from mcp_aharvard", container);
+  console.log("🔥 postMessageUISizeChange from mcp_aharvard", container);
   if (container) {
     resizeObserver.observe(container);
   }
