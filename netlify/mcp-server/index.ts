@@ -197,7 +197,7 @@ export const setupMCPServer = (): McpServer => {
                         },
                         {
                             type: "text",
-                            text: "MCP UI Actions demo loaded! This interactive panel demonstrates various types of UI actions including tool execution, intent handling, prompts, notifications, and link navigation. Click on any action to see how it works.",
+                            text: "MCP UI Actions demo loaded!",
                             annotations: {
                                 audience: ["assistant"],
                             },
@@ -269,16 +269,14 @@ export const setupMCPServer = (): McpServer => {
                 .string()
                 .describe("Any specific user preferences or requirements")
                 .optional(),
-            budget: z
-                .string()
-                .describe("Budget range for the trip")
-                .optional(),
-            duration: z
-                .string()
-                .describe("Preferred trip duration")
-                .optional(),
+            budget: z.string().describe("Budget range for the trip").optional(),
+            duration: z.string().describe("Preferred trip duration").optional(),
         },
-        async ({ userPreferences, budget, duration }): Promise<CallToolResult> => {
+        async ({
+            userPreferences,
+            budget,
+            duration,
+        }): Promise<CallToolResult> => {
             try {
                 const tripData = {
                     userPreferences,

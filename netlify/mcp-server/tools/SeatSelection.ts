@@ -1,5 +1,6 @@
 import { postMessageHeight } from "./utils/postMessageHeight";
 import { addFontToHead } from "./utils/addFontToHead";
+import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 
 interface FlightData {
     flightNumber: string;
@@ -987,7 +988,12 @@ export default function SeatSelection(flightData?: FlightData) {
 </script>`;
 
     const htmlString =
-        style + addFontToHead + html + postMessageHeight + handleInteractions;
+        style +
+        addFontToHead +
+        html +
+        postMessageHeight +
+        postMessageUISizeChange +
+        handleInteractions;
 
     return htmlString;
 }

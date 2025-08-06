@@ -1,5 +1,6 @@
 import { postMessageHeight } from "./utils/postMessageHeight";
 import { addFontToHead } from "./utils/addFontToHead";
+import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 
 interface MoodTripData {
     userPreferences?: string;
@@ -680,6 +681,11 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
 </script>`;
 
     const htmlString =
-        style + addFontToHead + html + postMessageHeight + handleInteractions;
+        style +
+        addFontToHead +
+        html +
+        postMessageHeight +
+        postMessageUISizeChange +
+        handleInteractions;
     return htmlString;
 }
