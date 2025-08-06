@@ -1,5 +1,4 @@
 import { WeatherData } from "../types";
-import { postMessageHeight } from "./utils/postMessageHeight";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 import { addFontToHead } from "./utils/addFontToHead";
 
