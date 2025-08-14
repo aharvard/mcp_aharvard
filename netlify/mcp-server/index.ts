@@ -28,6 +28,11 @@ export const setupMCPServer = (): McpServer => {
                 .string()
                 .describe("City name or location to get weather for")
                 .default("New York"),
+            city: z.string().describe("City name").optional(),
+            state: z
+                .string()
+                .describe("State or region (e.g., CA, Texas)")
+                .optional(),
             units: z
                 .enum(["metric", "imperial"])
                 .describe(
@@ -35,11 +40,16 @@ export const setupMCPServer = (): McpServer => {
                 )
                 .default("imperial"),
         },
-        async ({ location, units }): Promise<CallToolResult> => {
+        async ({ location, units, city, state }): Promise<CallToolResult> => {
             try {
+                const resolvedLocation = city
+                    ? state
+                        ? `${city}, ${state}`
+                        : city
+                    : location;
                 // Get real weather data from OpenMeteo API
                 const weatherData: WeatherData = await getWeather(
-                    location,
+                    resolvedLocation,
                     units
                 );
                 return {
@@ -73,7 +83,13 @@ export const setupMCPServer = (): McpServer => {
                     content: [
                         {
                             type: "text",
-                            text: `Error getting weather for ${location}: ${
+                            text: `Error getting weather for ${
+                                city
+                                    ? state
+                                        ? `${city}, ${state}`
+                                        : city
+                                    : location
+                            }: ${
                                 error instanceof Error
                                     ? error.message
                                     : "Unknown error"

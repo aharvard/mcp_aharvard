@@ -41,7 +41,8 @@ export default function UIActionCard() {
         payload: {
             toolName: "get-weather",
             params: {
-                city: "Tokyo",
+                city: "San Francisco",
+                state: "CA",
             },
         },
         messageId: "optional-tool-message-id",

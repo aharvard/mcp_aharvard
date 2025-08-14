@@ -7,5 +7,5 @@ export const postMessageUIAction = (action: UIActionResult) => {
 
     console.log("formattedAction", formattedAction);
 
-    return `window.parent.postMessage(${formattedAction}, '*');`;
+    return `(${formattedAction}, '*');`;
 };
