@@ -382,6 +382,7 @@ export const setupMCPServer = (): McpServer => {
     font-weight:700;
     text-align:center;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25);
+    height: 100vh;
   ">
     ${label}
   </div>
