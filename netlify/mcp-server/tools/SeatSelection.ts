@@ -874,13 +874,9 @@ export default function SeatSelection(flightData?: FlightData) {
       // Send message after animation starts
       setTimeout(() => {
         window.parent.postMessage({
-          type: 'tool',
+          type: 'notify',
           payload: {
-            toolName: 'seat-selection',
-            params: {
-              seatNumber: selectedSeat,
-              confirmed: true
-            }
+            message: 'Seat confirmed!',
           }
         }, '*');
       }, 500);
