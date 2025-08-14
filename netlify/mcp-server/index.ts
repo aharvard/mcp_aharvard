@@ -341,5 +341,71 @@ export const setupMCPServer = (): McpServer => {
             }
         }
     );
+
+    // Register a tool to render multiple MCP UI color boxes
+    server.tool(
+        "render-multuple-mcp-uis",
+        "Render a specified number of simple colored MCP-UI boxes with white text showing their index.",
+        {
+            count: z
+                .number()
+                .int()
+                .min(1)
+                .max(20)
+                .describe("Number of UI boxes to render (1-20)")
+                .default(3),
+        },
+        async ({ count }): Promise<CallToolResult> => {
+            const palette = [
+                "#3b82f6", // blue-500
+                "#10b981", // emerald-500
+                "#f59e0b", // amber-500
+                "#ef4444", // red-500
+                "#8b5cf6", // violet-500
+                "#14b8a6", // teal-500
+                "#eab308", // yellow-500
+                "#f97316", // orange-500
+                "#06b6d4", // cyan-500
+                "#22c55e", // green-500
+            ];
+
+            const makeBox = (index: number, color: string) => {
+                const label = `UI #${index + 1}`;
+                return `
+<article class="mcp-ui-container">
+  <div style="
+    background:${color};
+    color:#fff;
+    padding:24px;
+    border-radius:12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight:700;
+    text-align:center;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25);
+  ">
+    ${label}
+  </div>
+</article>`;
+            };
+
+            const resources = Array.from({ length: count }).map((_, i) => ({
+                ...createUIResource({
+                    uri: `ui://mcp-aharvard/multi-ui-box-${i + 1}`,
+                    content: {
+                        type: "rawHtml",
+                        htmlString: makeBox(i, palette[i % palette.length]),
+                    },
+                    encoding: "text",
+                }),
+                annotations: {
+                    audience: ["user"],
+                },
+            }));
+
+            return {
+                content: resources,
+            };
+        }
+    );
     return server;
 };
