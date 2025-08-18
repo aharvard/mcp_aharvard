@@ -28,7 +28,10 @@ export default function UIActionCard() {
     </button>
     <button 
       class="action-button"
-      onclick="( function() { console.log('clicked'); ${action} } )()">
+      onclick="( function() { console.log('clicked'); window.parent.postMessage(${action.replace(
+          "'",
+          '"'
+      )}, '*'); } )()">
       Post Message
     </button>
   </div>
@@ -581,5 +584,11 @@ function hideInspection() {
   }
 </style>
     `;
-    return addFontToHead + styles + html + postMessageUISizeChange;
+    return (
+        addFontToHead +
+        styles +
+        html +
+        postMessageHeight + // remove when goose ships updates
+        postMessageUISizeChange
+    );
 }
