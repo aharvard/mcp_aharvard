@@ -29,10 +29,7 @@ export default function UIActionCard() {
     </button>
     <button 
       class="action-button"
-      onclick="( function() { console.log('clicked'); window.parent.postMessage(${action.replace(
-          "'",
-          '"'
-      )}, '*'); } )()">
+            onclick="( function() { console.log('clicked'); ${action} } )()">
       Post Message
     </button>
   </div>
