@@ -29,7 +29,7 @@ export default function UIActionCard() {
     </button>
     <button 
       class="action-button"
-            onclick="( function() { console.log('clicked'); ${action} } )()">
+            onclick="( function() { console.log('clicked'); window.parent.postMessage${action} } )()">
       Post Message
     </button>
   </div>
