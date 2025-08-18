@@ -1,4 +1,5 @@
 import { addFontToHead } from "./utils/addFontToHead";
+import { postMessageHeight } from "./utils/postMessageHeight";
 import { postMessageUIAction } from "./utils/postMessageUIAction";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 
