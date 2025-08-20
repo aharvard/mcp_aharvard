@@ -2,6 +2,7 @@ import { addFontToHead } from "./utils/addFontToHead";
 import { postMessageHeight } from "./utils/postMessageHeight";
 import { postMessageUIAction } from "./utils/postMessageUIAction";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
+import { listenForMessageFromParent } from "./utils/listenForMessageFromParent";
 
 export default function UIActionCard() {
     const Action = (
@@ -587,6 +588,7 @@ function hideInspection() {
         styles +
         html +
         postMessageHeight + // remove when goose ships updates
-        postMessageUISizeChange
+        postMessageUISizeChange +
+        listenForMessageFromParent
     );
 }
