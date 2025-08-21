@@ -1,7 +1,6 @@
 import { WeatherData } from "../types";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 import { addFontToHead } from "./utils/addFontToHead";
-import { postMessageHeight } from "./utils/postMessageHeight";
 
 export default function WeatherCard(data: WeatherData | null) {
     // Handle null or undefined data
@@ -364,12 +363,7 @@ export default function WeatherCard(data: WeatherData | null) {
 </article>
   `;
 
-    const htmlString =
-        style +
-        html +
-        postMessageHeight + // remove when goose ships updates
-        postMessageUISizeChange +
-        addFontToHead;
+    const htmlString = style + html + postMessageUISizeChange + addFontToHead;
 
     return htmlString;
 }

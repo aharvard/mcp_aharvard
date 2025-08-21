@@ -1,4 +1,3 @@
-import { postMessageHeight } from "./utils/postMessageHeight";
 import { addFontToHead } from "./utils/addFontToHead";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 
@@ -987,7 +986,6 @@ export default function SeatSelection(flightData?: FlightData) {
         style +
         addFontToHead +
         html +
-        postMessageHeight + // remove when goose ships updates
         postMessageUISizeChange +
         handleInteractions;
 
