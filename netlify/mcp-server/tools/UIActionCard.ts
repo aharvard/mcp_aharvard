@@ -587,7 +587,6 @@ function hideInspection() {
         addFontToHead +
         styles +
         html +
-        postMessageHeight + // remove when goose ships updates
         postMessageUISizeChange +
         listenForMessageFromParent
     );
