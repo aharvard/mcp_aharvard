@@ -65,6 +65,11 @@ export const setupMCPServer = (): McpServer => {
                     units
                 );
                 return {
+                    _meta: {
+                        goose: {
+                            displayType: displayType,
+                        },
+                    },
                     content: [
                         {
                             type: "resource",
@@ -85,11 +90,6 @@ export const setupMCPServer = (): McpServer => {
                             }),
                             annotations: {
                                 audience: ["user"],
-                            },
-                            _meta: {
-                                goose: {
-                                    displayType: displayType,
-                                },
                             },
                         },
                     ],
