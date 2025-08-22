@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@mcp-ui/client':
-        specifier: ~5.6.2
-        version: 5.6.2(@preact/signals-core@1.11.0)
+        specifier: ^5.9.0
+        version: 5.9.0(@preact/signals-core@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mcp-ui/server':
-        specifier: ~5.2.0
+        specifier: ^5.2.0
         version: 5.2.0
       '@modelcontextprotocol/sdk':
         specifier: ^1.10.2
@@ -170,8 +170,11 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@mcp-ui/client@5.6.2':
-    resolution: {integrity: sha512-CLHin0eDM+0m0AmSc/PS0XgZAU2D+b/ppt4CxLykTck4CrQ0Gi589ieqh9VidijiB9R5Aw3F8Wi/IUr6Tp6urg==}
+  '@mcp-ui/client@5.9.0':
+    resolution: {integrity: sha512-I7ZAZKSo08GtDRrPZNlD8Ij6EFOJvnIfsal6MIwYxY8AtMkbLkI+DDkM9QhSmMDDJvK0jtqWEVu+5KZK+pQYlQ==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
 
   '@mcp-ui/server@5.2.0':
     resolution: {integrity: sha512-at6iPEWbs37mWiiB2YByf9sQEVq8FTqlIxe4cuyb4iw5GLYHRjnFoPsn4hSDF3wMEcsSKjTtinB3o1NI5s6viA==}
@@ -221,38 +224,56 @@ packages:
   '@next/swc-darwin-arm64@14.2.31':
     resolution: {integrity: sha512-dTHKfaFO/xMJ3kzhXYgf64VtV6MMwDs2viedDOdP+ezd0zWMOQZkxcwOfdcQeQCpouTr9b+xOqMCUXxgLizl8Q==}
     engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
 
   '@next/swc-darwin-x64@14.2.31':
     resolution: {integrity: sha512-iSavebQgeMukUAfjfW8Fi2Iz01t95yxRl2w2wCzjD91h5In9la99QIDKcKSYPfqLjCgwz3JpIWxLG6LM/sxL4g==}
     engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
 
   '@next/swc-linux-arm64-gnu@14.2.31':
     resolution: {integrity: sha512-XJb3/LURg1u1SdQoopG6jDL2otxGKChH2UYnUTcby4izjM0il7ylBY5TIA7myhvHj9lG5pn9F2nR2s3i8X9awQ==}
     engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
 
   '@next/swc-linux-arm64-musl@14.2.31':
     resolution: {integrity: sha512-IInDAcchNCu3BzocdqdCv1bKCmUVO/bKJHnBFTeq3svfaWpOPewaLJ2Lu3GL4yV76c/86ZvpBbG/JJ1lVIs5MA==}
     engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
 
   '@next/swc-linux-x64-gnu@14.2.31':
     resolution: {integrity: sha512-YTChJL5/9e4NXPKW+OJzsQa42RiWUNbE+k+ReHvA+lwXk+bvzTsVQboNcezWOuCD+p/J+ntxKOB/81o0MenBhw==}
     engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
 
   '@next/swc-linux-x64-musl@14.2.31':
     resolution: {integrity: sha512-A0JmD1y4q/9ufOGEAhoa60Sof++X10PEoiWOH0gZ2isufWZeV03NnyRlRmJpRQWGIbRkJUmBo9I3Qz5C10vx4w==}
     engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
 
   '@next/swc-win32-arm64-msvc@14.2.31':
     resolution: {integrity: sha512-nowJ5GbMeDOMzbTm29YqrdrD6lTM8qn2wnZfGpYMY7SZODYYpaJHH1FJXE1l1zWICHR+WfIMytlTDBHu10jb8A==}
     engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
 
   '@next/swc-win32-ia32-msvc@14.2.31':
     resolution: {integrity: sha512-pk9Bu4K0015anTS1OS9d/SpS0UtRObC+xe93fwnm7Gvqbv/W1ZbzhK4nvc96RURIQOux3P/bBH316xz8wjGSsA==}
     engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
 
   '@next/swc-win32-x64-msvc@14.2.31':
     resolution: {integrity: sha512-LwFZd4JFnMHGceItR9+jtlMm8lGLU/IPkgjBBgYmdYSfalbHCiDpjMYtgDQ2wtwiAOSJOCyFI4m8PikrsDyA6Q==}
     engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -849,9 +870,13 @@ packages:
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     resolution: {integrity: sha512-ppLRUgHVaGRWUx0R0Ut06Mjo9gBaBkg3v/8AxusGLhsIotbBLuRk51rAzqLC8gq6NyyAojEXglNjzf6R948DNw==}
+    cpu: [arm]
+    os: [android]
 
   '@unrs/resolver-binding-android-arm64@1.11.1':
     resolution: {integrity: sha512-lCxkVtb4wp1v+EoN+HjIG9cIIzPkX5OtM03pQYkG+U5O/wL53LC4QbIeazgiKqluGeVEeBlZahHalCaBvU1a2g==}
+    cpu: [arm64]
+    os: [android]
 
   '@unrs/resolver-binding-darwin-arm64@1.11.1':
     resolution: {integrity: sha512-gPVA1UjRu1Y/IsB/dQEsp2V1pm44Of6+LWvbLc9SDk1c2KhhDRDBUkQCYVWe6f26uJb3fOK8saWMgtX8IrMk3g==}
@@ -860,39 +885,63 @@ packages:
 
   '@unrs/resolver-binding-darwin-x64@1.11.1':
     resolution: {integrity: sha512-cFzP7rWKd3lZaCsDze07QX1SC24lO8mPty9vdP+YVa3MGdVgPmFc59317b2ioXtgCMKGiCLxJ4HQs62oz6GfRQ==}
+    cpu: [x64]
+    os: [darwin]
 
   '@unrs/resolver-binding-freebsd-x64@1.11.1':
     resolution: {integrity: sha512-fqtGgak3zX4DCB6PFpsH5+Kmt/8CIi4Bry4rb1ho6Av2QHTREM+47y282Uqiu3ZRF5IQioJQ5qWRV6jduA+iGw==}
+    cpu: [x64]
+    os: [freebsd]
 
   '@unrs/resolver-binding-linux-arm-gnueabihf@1.11.1':
     resolution: {integrity: sha512-u92mvlcYtp9MRKmP+ZvMmtPN34+/3lMHlyMj7wXJDeXxuM0Vgzz0+PPJNsro1m3IZPYChIkn944wW8TYgGKFHw==}
+    cpu: [arm]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-arm-musleabihf@1.11.1':
     resolution: {integrity: sha512-cINaoY2z7LVCrfHkIcmvj7osTOtm6VVT16b5oQdS4beibX2SYBwgYLmqhBjA1t51CarSaBuX5YNsWLjsqfW5Cw==}
+    cpu: [arm]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-arm64-gnu@1.11.1':
     resolution: {integrity: sha512-34gw7PjDGB9JgePJEmhEqBhWvCiiWCuXsL9hYphDF7crW7UgI05gyBAi6MF58uGcMOiOqSJ2ybEeCvHcq0BCmQ==}
+    cpu: [arm64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-arm64-musl@1.11.1':
     resolution: {integrity: sha512-RyMIx6Uf53hhOtJDIamSbTskA99sPHS96wxVE/bJtePJJtpdKGXO1wY90oRdXuYOGOTuqjT8ACccMc4K6QmT3w==}
+    cpu: [arm64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-ppc64-gnu@1.11.1':
     resolution: {integrity: sha512-D8Vae74A4/a+mZH0FbOkFJL9DSK2R6TFPC9M+jCWYia/q2einCubX10pecpDiTmkJVUH+y8K3BZClycD8nCShA==}
+    cpu: [ppc64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-riscv64-gnu@1.11.1':
     resolution: {integrity: sha512-frxL4OrzOWVVsOc96+V3aqTIQl1O2TjgExV4EKgRY09AJ9leZpEg8Ak9phadbuX0BA4k8U5qtvMSQQGGmaJqcQ==}
+    cpu: [riscv64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-riscv64-musl@1.11.1':
     resolution: {integrity: sha512-mJ5vuDaIZ+l/acv01sHoXfpnyrNKOk/3aDoEdLO/Xtn9HuZlDD6jKxHlkN8ZhWyLJsRBxfv9GYM2utQ1SChKew==}
+    cpu: [riscv64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-s390x-gnu@1.11.1':
     resolution: {integrity: sha512-kELo8ebBVtb9sA7rMe1Cph4QHreByhaZ2QEADd9NzIQsYNQpt9UkM9iqr2lhGr5afh885d/cB5QeTXSbZHTYPg==}
+    cpu: [s390x]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-x64-gnu@1.11.1':
     resolution: {integrity: sha512-C3ZAHugKgovV5YvAMsxhq0gtXuwESUKc5MhEtjBpLoHPLYM+iuwSj3lflFwK3DPm68660rZ7G8BMcwSro7hD5w==}
+    cpu: [x64]
+    os: [linux]
 
   '@unrs/resolver-binding-linux-x64-musl@1.11.1':
     resolution: {integrity: sha512-rV0YSoyhK2nZ4vEswT/QwqzqQXw5I6CjoaYMOX0TqBlWhojUf8P94mvI7nuJTeaCkkds3QE4+zS8Ko+GdXuZtA==}
+    cpu: [x64]
+    os: [linux]
 
   '@unrs/resolver-binding-wasm32-wasi@1.11.1':
     resolution: {integrity: sha512-5u4RkfxJm+Ng7IWgkzi3qrFOvLvQYnPBmjmZQ8+szTK/b31fQCnleNl1GgEt7nIsZRIf5PLhPwT0WM+q45x/UQ==}
@@ -901,12 +950,18 @@ packages:
 
   '@unrs/resolver-binding-win32-arm64-msvc@1.11.1':
     resolution: {integrity: sha512-nRcz5Il4ln0kMhfL8S3hLkxI85BXs3o8EYoattsJNdsX4YUU89iOkVn7g0VHSRxFuVMdM4Q1jEpIId1Ihim/Uw==}
+    cpu: [arm64]
+    os: [win32]
 
   '@unrs/resolver-binding-win32-ia32-msvc@1.11.1':
     resolution: {integrity: sha512-DCEI6t5i1NmAZp6pFonpD5m7i6aFrpofcp4LA2i8IIq60Jyo28hamKBxNrZcyOwVOZkgsRp9O2sXWBWP8MnvIQ==}
+    cpu: [ia32]
+    os: [win32]
 
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     resolution: {integrity: sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g==}
+    cpu: [x64]
+    os: [win32]
 
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
@@ -1537,6 +1592,7 @@ packages:
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -2873,7 +2929,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
-  '@mcp-ui/client@5.6.2(@preact/signals-core@1.11.0)':
+  '@mcp-ui/client@5.9.0(@preact/signals-core@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.17.1
       '@quilted/threads': 3.3.1(@preact/signals-core@1.11.0)

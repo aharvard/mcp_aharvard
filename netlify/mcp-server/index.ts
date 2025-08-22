@@ -39,8 +39,20 @@ export const setupMCPServer = (): McpServer => {
                     "Temperature units (metric for Celsius, imperial for Fahrenheit)"
                 )
                 .default("imperial"),
+            displayType: z
+                .enum(["inline", "sidecar"])
+                .describe(
+                    "Display type for the weather card (inline or sidecar)"
+                )
+                .default("inline"),
         },
-        async ({ location, units, city, state }): Promise<CallToolResult> => {
+        async ({
+            location,
+            units,
+            city,
+            state,
+            displayType,
+        }): Promise<CallToolResult> => {
             try {
                 const resolvedLocation = city
                     ? state
@@ -73,6 +85,11 @@ export const setupMCPServer = (): McpServer => {
                             }),
                             annotations: {
                                 audience: ["user"],
+                            },
+                            _meta: {
+                                goose: {
+                                    displayType: displayType,
+                                },
                             },
                         },
                     ],
