@@ -3,7 +3,7 @@ export const listenForMessageFromParent = `
 <script>
 
 const iframeRenderData = {
-  theme: light,
+  theme: 'light',
   host: undefined,
 };
 
@@ -18,6 +18,6 @@ window.addEventListener('message', (event) => {
 window.parent.postMessage({ type: 'ui-lifecycle-iframe-ready' }, '*');
 
 const mcpUiContainer = document.querySelector('.mcp-ui-container');
-mcpUiContainer.classList.add(theme-${iframeRenderData.theme});
+mcpUiContainer.classList.add('theme-' + iframeRenderData.theme);
 
 </script>`;
