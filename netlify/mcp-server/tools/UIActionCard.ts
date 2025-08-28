@@ -197,6 +197,7 @@ function hideInspection() {
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
+    overflow: hidden;
   }
   
   .mcp-ui-container {
