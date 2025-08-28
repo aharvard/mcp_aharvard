@@ -3,7 +3,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Cloud, User, Zap, Heart, Code } from "lucide-react";
+import { Home, Cloud, User, Zap, Heart } from "lucide-react";
 
 const navItems = [
     { href: "/", label: "Home", icon: Home },
