@@ -89,8 +89,15 @@ export default function UIActionCard() {
     <article class="mcp-ui-container">
 <div class="dark-container">
   <div class="header">
-    <h1>MCP-UI Actions</h1>
-    <p class="subtitle">Interactive control panel for MCP-UI actions</p>
+    <div class="header-content">
+      <div class="header-text">
+        <h1>MCP-UI Actions</h1>
+        <p class="subtitle">Interactive control panel for MCP-UI actions</p>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <span class="theme-icon" id="theme-icon">🌙</span>
+      </button>
+    </div>
   </div>
   
   <div class="main-content">
@@ -162,6 +169,32 @@ function hideInspection() {
     panel.classList.remove('active');
   }
 }
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const themeIcon = document.getElementById('theme-icon');
+  const currentTheme = root.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  root.setAttribute('data-theme', newTheme);
+  themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+  
+  // Store theme preference in localStorage
+  localStorage.setItem('mcp-ui-theme', newTheme);
+}
+
+// Initialize theme on page load
+function initializeTheme() {
+  const savedTheme = localStorage.getItem('mcp-ui-theme') || 'dark';
+  const root = document.documentElement;
+  const themeIcon = document.getElementById('theme-icon');
+  
+  root.setAttribute('data-theme', savedTheme);
+  themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+}
+
+// Initialize theme when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeTheme);
 </script>
     `;
 
@@ -176,6 +209,11 @@ function hideInspection() {
   :root {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
+  }
+  
+  /* Dark theme (default) */
+  :root,
+  [data-theme="dark"] {
     --bg-primary: #0f0f0f;
     --bg-secondary: #1a1a1a;
     --bg-tertiary: #2a2a2a;
@@ -187,6 +225,21 @@ function hideInspection() {
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Light theme */
+  [data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
   
   @supports (font-variation-settings: normal) {
@@ -215,10 +268,53 @@ function hideInspection() {
   }
   
   .header {
-    text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .header-text {
+    text-align: center;
+    flex: 1;
+  }
+  
+  .theme-toggle {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+  }
+  
+  .theme-toggle:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .theme-icon {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .theme-toggle:hover .theme-icon {
+    transform: scale(1.1);
   }
   
   .header h1 {
@@ -263,7 +359,14 @@ function hideInspection() {
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
     border-color: var(--accent-color);
+  }
+  
+  [data-theme="dark"] .action-row:hover {
     background: #323232;
+  }
+  
+  [data-theme="light"] .action-row:hover {
+    background: #e2e8f0;
   }
   
   .action-content {
@@ -447,6 +550,27 @@ function hideInspection() {
     .dark-container {
       margin: 0.25rem;
       padding: 0.5rem;
+    }
+    
+    .header-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .header-text {
+      order: 2;
+    }
+    
+    .theme-toggle {
+      order: 1;
+      align-self: flex-end;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0.5rem;
+    }
+    
+    .theme-icon {
+      font-size: 1rem;
     }
     
     .header h1 {

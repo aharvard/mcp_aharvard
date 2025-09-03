@@ -12,12 +12,21 @@ window.addEventListener('message', (event) => {
     console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data', event.data.payload);
     iframeRenderData.theme = event.data.payload.theme;
     iframeRenderData.host = event.data.payload.host;
+    
+    // Set the theme and host attributes on the document root
+    document.documentElement.setAttribute('data-theme', iframeRenderData.theme);
+    if (iframeRenderData.host) {
+      document.documentElement.setAttribute('data-host', iframeRenderData.host);
+    }
   }
 });
 
 window.parent.postMessage({ type: 'ui-lifecycle-iframe-ready' }, '*');
 
-
-mcpUiContainer.classList.add('theme-' + iframeRenderData.theme);
+// Set initial theme and host
+document.documentElement.setAttribute('data-theme', iframeRenderData.theme);
+if (iframeRenderData.host) {
+  document.documentElement.setAttribute('data-host', iframeRenderData.host);
+}
 
 </script>`;
