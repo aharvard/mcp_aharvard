@@ -444,7 +444,7 @@ function hideInspection() {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 0.75rem;
     line-height: 1.4;
-    color: #e5e7eb;
+    color: var(--text-secondary);
     overflow-x: auto;
     white-space: pre-wrap;
     word-break: break-word;
