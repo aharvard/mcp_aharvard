@@ -2,31 +2,29 @@
 export const listenForMessageFromParent = `
 <script>
 
-const iframeRenderData = {
-  theme: 'light',
-  host: undefined,
-};
+// Default values
+const defaultTheme = 'dark';
+const defaultHost = 'unknown';
+
+// Set initial theme and host
+document.documentElement.setAttribute('data-theme', defaultTheme);
+document.documentElement.setAttribute('data-host', defaultHost);
 
 window.addEventListener('message', (event) => {
-  if (event.data.type === 'ui-lifecycle-iframe-render-data') {
+  if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
     console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data', event.data.payload);
-    iframeRenderData.theme = event.data.payload.theme;
-    iframeRenderData.host = event.data.payload.host;
     
-    // Set the theme and host attributes on the document root
-    document.documentElement.setAttribute('data-theme', iframeRenderData.theme);
-    if (iframeRenderData.host) {
-      document.documentElement.setAttribute('data-host', iframeRenderData.host);
+    const payload = event.data.payload;
+    if (payload) {
+      const theme = payload.theme || defaultTheme;
+      const host = payload.host || defaultHost;
+      
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-host', host);
     }
   }
 });
 
 window.parent.postMessage({ type: 'ui-lifecycle-iframe-ready' }, '*');
-
-// Set initial theme and host
-document.documentElement.setAttribute('data-theme', iframeRenderData.theme);
-if (iframeRenderData.host) {
-  document.documentElement.setAttribute('data-host', iframeRenderData.host);
-}
 
 </script>`;
