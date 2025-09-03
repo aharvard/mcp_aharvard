@@ -12,15 +12,18 @@ document.documentElement.setAttribute('data-host', defaultHost);
 
 window.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
-    console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data', event.data.payload);
+    console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data');
     
     const payload = event.data.payload;
     if (payload) {
+      console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data payload', payload);
       const theme = payload.theme || defaultTheme;
       const host = payload.host || defaultHost;
       
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.setAttribute('data-host', host);
+      
+      console.log(document.documentElement);
     }
   }
 });
