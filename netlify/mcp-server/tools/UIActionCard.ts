@@ -89,15 +89,8 @@ export default function UIActionCard() {
     <article class="mcp-ui-container">
 <div class="dark-container">
   <div class="header">
-    <div class="header-content">
-      <div class="header-text">
-        <h1>MCP-UI Actions</h1>
-        <p class="subtitle">Interactive control panel for MCP-UI actions</p>
-      </div>
-      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-        <span class="theme-icon" id="theme-icon">🌙</span>
-      </button>
-    </div>
+    <h1>MCP-UI Actions</h1>
+    <p class="subtitle">Interactive control panel for MCP-UI actions</p>
   </div>
   
   <div class="main-content">
@@ -170,31 +163,7 @@ function hideInspection() {
   }
 }
 
-function toggleTheme() {
-  const root = document.documentElement;
-  const themeIcon = document.getElementById('theme-icon');
-  const currentTheme = root.getAttribute('data-theme') || 'dark';
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  root.setAttribute('data-theme', newTheme);
-  themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-  
-  // Store theme preference in localStorage
-  localStorage.setItem('mcp-ui-theme', newTheme);
-}
 
-// Initialize theme on page load
-function initializeTheme() {
-  const savedTheme = localStorage.getItem('mcp-ui-theme') || 'dark';
-  const root = document.documentElement;
-  const themeIcon = document.getElementById('theme-icon');
-  
-  root.setAttribute('data-theme', savedTheme);
-  themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-}
-
-// Initialize theme when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeTheme);
 </script>
     `;
 
@@ -268,53 +237,10 @@ document.addEventListener('DOMContentLoaded', initializeTheme);
   }
   
   .header {
+    text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
-  }
-  
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .header-text {
-    text-align: center;
-    flex: 1;
-  }
-  
-  .theme-toggle {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    flex-shrink: 0;
-  }
-  
-  .theme-toggle:hover {
-    background: var(--accent-color);
-    border-color: var(--accent-color);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .theme-icon {
-    font-size: 1.25rem;
-    transition: transform 0.2s ease;
-  }
-  
-  .theme-toggle:hover .theme-icon {
-    transform: scale(1.1);
   }
   
   .header h1 {
@@ -550,27 +476,6 @@ document.addEventListener('DOMContentLoaded', initializeTheme);
     .dark-container {
       margin: 0.25rem;
       padding: 0.5rem;
-    }
-    
-    .header-content {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .header-text {
-      order: 2;
-    }
-    
-    .theme-toggle {
-      order: 1;
-      align-self: flex-end;
-      width: 2.5rem;
-      height: 2.5rem;
-      padding: 0.5rem;
-    }
-    
-    .theme-icon {
-      font-size: 1rem;
     }
     
     .header h1 {
