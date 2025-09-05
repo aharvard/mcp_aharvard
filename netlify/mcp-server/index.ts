@@ -120,6 +120,43 @@ export const setupMCPServer = (): McpServer => {
         }
     );
 
+    // Resiter a tool to demo UI metadata features
+    server.tool(
+        "ui-metadata-demo",
+        "A demo of metadata features for MCP-UI resources.",
+        {},
+        async (): Promise<CallToolResult> => {
+            return {
+                content: [
+                    createUIResource({
+                        uri: "ui://mcp-aharvard/weather-card",
+                        encoding: "text",
+                        content: {
+                            type: "rawHtml",
+                            htmlString: "<div>UI metadata demo</div>",
+                        },
+                        resourceProps: {
+                            annotations: {
+                                audience: ["user"],
+                            },
+                        },
+                        metadata: {
+                            goose: {
+                                displayType: "sidecar",
+                            },
+                        },
+                        uiMetadata: {
+                            "initial-render-data": {
+                                message: "UI metadata demo",
+                            },
+                            "preferred-frame-size": ["800px", "600px"],
+                        },
+                    }),
+                ],
+            };
+        }
+    );
+
     // Register a tool for resource link demo
     server.tool(
         "resource-link-demo",
