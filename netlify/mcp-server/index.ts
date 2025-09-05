@@ -150,7 +150,7 @@ export const setupMCPServer = (): McpServer => {
                             "initial-render-data": {
                                 message: "UI metadata demo",
                             },
-                            "preferred-frame-size": ["800px", "200px"],
+                            "preferred-frame-size": ["200px", "800px"],
                         },
                     }),
                 ],
