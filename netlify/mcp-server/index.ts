@@ -133,7 +133,8 @@ export const setupMCPServer = (): McpServer => {
                         encoding: "text",
                         content: {
                             type: "rawHtml",
-                            htmlString: "<div>UI metadata demo</div>",
+                            htmlString:
+                                "<style>body { background: black; color: white; }</style><div>UI metadata demo</div>",
                         },
                         resourceProps: {
                             annotations: {
@@ -149,7 +150,7 @@ export const setupMCPServer = (): McpServer => {
                             "initial-render-data": {
                                 message: "UI metadata demo",
                             },
-                            "preferred-frame-size": ["800px", "600px"],
+                            "preferred-frame-size": ["800px", "200px"],
                         },
                     }),
                 ],
