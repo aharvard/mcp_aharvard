@@ -93,18 +93,6 @@ export const setupMCPServer = (): McpServer => {
                                 },
                             },
                         },
-                        {
-                            type: "resource_link",
-                            uri: "file:///project/src/fake-demo.txt",
-                            name: "fake-demo.txt",
-                            description:
-                                "Fake demo text file to test for resource link data.",
-                            mimeType: "text/plain",
-                            annotations: {
-                                audience: ["assistant"],
-                                priority: 0.9,
-                            },
-                        },
                     ],
                 };
             } catch (error) {
@@ -128,6 +116,31 @@ export const setupMCPServer = (): McpServer => {
                     ],
                 };
             }
+        }
+    );
+
+    // Register a tool for resource link demo
+    server.tool(
+        "resource-link-demo",
+        "A demo of a resource link that displays a fake demo text file.",
+        {},
+        async (): Promise<CallToolResult> => {
+            return {
+                content: [
+                    {
+                        type: "resource_link",
+                        uri: "file:///project/src/fake-demo.txt",
+                        name: "fake-demo.txt",
+                        description:
+                            "Fake demo text file to test for resource link data.",
+                        mimeType: "text/plain",
+                        annotations: {
+                            audience: ["assistant"],
+                            priority: 0.9,
+                        },
+                    },
+                ],
+            };
         }
     );
 
