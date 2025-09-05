@@ -9,7 +9,6 @@ import UIActionCard from "./tools/UIActionCard";
 import MoodTripPlanner from "./tools/MoodTripPlanner";
 import { createUIResource } from "@mcp-ui/server";
 import { RemoteDomDemo } from "./tools/RemoteDomDemo";
-import { metadata } from "../../app/layout";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
