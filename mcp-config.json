@@ -1,7 +1,7 @@
 {
     "mcpServers": {
         "mcp-aharvard": {
-            "type": "http",
+            "type": "streamable-http",
             "url": "https://mcp-aharvard.netlify.app/mcp"
         }
     }
