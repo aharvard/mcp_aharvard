@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@mcp-ui/client": "^5.9.0",
-        "@mcp-ui/server": "^5.2.0",
+        "@mcp-ui/server": "^5.10.0",
         "@modelcontextprotocol/sdk": "^1.10.2",
         "@netlify/functions": "^2.5.1",
         "@radix-ui/react-icons": "^1.3.2",

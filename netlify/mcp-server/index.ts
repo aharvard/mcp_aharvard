@@ -9,6 +9,7 @@ import UIActionCard from "./tools/UIActionCard";
 import MoodTripPlanner from "./tools/MoodTripPlanner";
 import { createUIResource } from "@mcp-ui/server";
 import { RemoteDomDemo } from "./tools/RemoteDomDemo";
+import { metadata } from "../../app/layout";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -75,24 +76,25 @@ export const setupMCPServer = (): McpServer => {
                                 mimeType: "application/json",
                             },
                         },
-                        {
-                            ...createUIResource({
-                                uri: "ui://mcp-aharvard/weather-card",
-                                content: {
-                                    type: "rawHtml",
-                                    htmlString: WeatherCard(weatherData),
-                                },
-                                encoding: "text",
-                            }),
-                            annotations: {
-                                audience: ["user"],
+
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/weather-card",
+                            encoding: "text",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: WeatherCard(weatherData),
                             },
-                            _meta: {
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                            metadata: {
                                 goose: {
                                     displayType: displayType,
                                 },
                             },
-                        },
+                        }),
                     ],
                 };
             } catch (error) {
@@ -192,19 +194,19 @@ export const setupMCPServer = (): McpServer => {
 
                 return {
                     content: [
-                        {
-                            ...createUIResource({
-                                uri: "ui://mcp-aharvard/airplane-seat-selection",
-                                content: {
-                                    type: "rawHtml",
-                                    htmlString: SeatSelection(flightData),
-                                },
-                                encoding: "text",
-                            }),
-                            annotations: {
-                                audience: ["user"],
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/airplane-seat-selection",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: SeatSelection(flightData),
                             },
-                        },
+                            encoding: "text",
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                        }),
                         {
                             type: "text",
                             text: `Airplane seat selection interface loaded for flight ${flightNumber} to ${destination}. Please select your seat from the interactive map above.`,
@@ -241,19 +243,20 @@ export const setupMCPServer = (): McpServer => {
             try {
                 return {
                     content: [
-                        {
-                            ...createUIResource({
-                                uri: "ui://mcp-aharvard/ui-actions-demo",
-                                content: {
-                                    type: "rawHtml",
-                                    htmlString: UIActionCard(),
-                                },
-                                encoding: "text",
-                            }),
-                            annotations: {
-                                audience: ["user"],
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/ui-actions-demo",
+                            encoding: "text",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: UIActionCard(),
                             },
-                        },
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                        }),
+
                         {
                             type: "text",
                             text: "MCP UI Actions demo loaded!",
@@ -293,20 +296,21 @@ export const setupMCPServer = (): McpServer => {
             };
             return {
                 content: [
-                    {
-                        ...createUIResource({
-                            uri: "ui://mcp-aharvard/goose-website",
-                            content: {
-                                type: "externalUrl",
-                                iframeUrl: "https://block.github.io/goose/",
-                            },
-                            encoding: "text",
-                        }),
-                        annotations: {
-                            gooseConfig,
-                            audience: ["user", "something else"],
+                    createUIResource({
+                        uri: "ui://mcp-aharvard/goose-website",
+                        content: {
+                            type: "externalUrl",
+                            iframeUrl: "https://block.github.io/goose/",
                         },
-                    },
+                        encoding: "text",
+                        resourceProps: {
+                            annotations: {
+                                gooseConfig,
+                                audience: ["user", "something else"],
+                            },
+                        },
+                    }),
+
                     {
                         type: "text",
                         text: "TBD",
@@ -345,19 +349,19 @@ export const setupMCPServer = (): McpServer => {
 
                 return {
                     content: [
-                        {
-                            ...createUIResource({
-                                uri: "ui://mcp-aharvard/mood-trip-planner",
-                                content: {
-                                    type: "rawHtml",
-                                    htmlString: MoodTripPlanner(tripData),
-                                },
-                                encoding: "text",
-                            }),
-                            annotations: {
-                                audience: ["user"],
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/mood-trip-planner",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: MoodTripPlanner(tripData),
                             },
-                        },
+                            encoding: "text",
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                        }),
                         {
                             type: "text",
                             text: "Mood-based trip planner loaded! Select how you're feeling using the emoji buttons above, and I'll suggest the perfect destination with a beautiful animation reveal.",
@@ -415,36 +419,38 @@ export const setupMCPServer = (): McpServer => {
             const makeBox = (index: number, color: string) => {
                 const label = `UI #${index + 1}`;
                 return `
-<article class="mcp-ui-container">
-  <div style="
-    background:${color};
-    color:#fff;
-    padding:24px;
-    border-radius:12px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight:700;
-    text-align:center;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25);
-    height: 100vh;
-  ">
-    ${label}
-  </div>
-</article>`;
+    <article class="mcp-ui-container">
+      <div style="
+        background:${color};
+        color:#fff;
+        padding:24px;
+        border-radius:12px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight:700;
+        text-align:center;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25);
+        height: 100vh;
+      ">
+        ${label}
+      </div>
+    </article>`;
             };
 
-            const resources = Array.from({ length: count }).map((_, i) => ({
-                ...createUIResource({
+            const resources = Array.from({ length: count }).map((_, i) =>
+                createUIResource({
                     uri: `ui://mcp-aharvard/multi-ui-box-${i + 1}`,
                     content: {
                         type: "rawHtml",
                         htmlString: makeBox(i, palette[i % palette.length]),
                     },
                     encoding: "text",
-                }),
-                annotations: {
-                    audience: ["user"],
-                },
-            }));
+                    resourceProps: {
+                        annotations: {
+                            audience: ["user"],
+                        },
+                    },
+                })
+            );
 
             return {
                 content: resources,
@@ -472,20 +478,20 @@ export const setupMCPServer = (): McpServer => {
 
                 return {
                     content: [
-                        {
-                            ...createUIResource({
-                                uri: "ui://mcp-aharvard/remote-dom-demo",
-                                content: {
-                                    type: "remoteDom",
-                                    script: remoteDomScript,
-                                    framework: "react",
-                                },
-                                encoding: "text",
-                            }),
-                            annotations: {
-                                audience: ["user"],
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/remote-dom-demo",
+                            content: {
+                                type: "remoteDom",
+                                script: remoteDomScript,
+                                framework: "react",
                             },
-                            _meta: {
+                            encoding: "text",
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                            metadata: {
                                 title: "Remote DOM Demo",
                                 description:
                                     "Interactive demo showcasing MCP-UI Remote DOM capabilities",
@@ -494,7 +500,8 @@ export const setupMCPServer = (): McpServer => {
                                     "600px",
                                 ],
                             },
-                        },
+                        }),
+
                         {
                             type: "text",
                             text: `Remote DOM Demo loaded with ${theme} theme${

@@ -12,8 +12,8 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0(@preact/signals-core@1.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mcp-ui/server':
-        specifier: ^5.2.0
-        version: 5.2.0
+        specifier: ^5.10.0
+        version: 5.10.0
       '@modelcontextprotocol/sdk':
         specifier: ^1.10.2
         version: 1.17.1
@@ -848,8 +848,8 @@ packages:
       react: ^18 || ^19
       react-dom: ^18 || ^19
 
-  '@mcp-ui/server@5.2.0':
-    resolution: {integrity: sha512-at6iPEWbs37mWiiB2YByf9sQEVq8FTqlIxe4cuyb4iw5GLYHRjnFoPsn4hSDF3wMEcsSKjTtinB3o1NI5s6viA==}
+  '@mcp-ui/server@5.10.0':
+    resolution: {integrity: sha512-nFqI/dbyao1Lnm5LcCPimfwFHiKvJz6sUS0iVKv9FS3FzlicbCNW6mYmqV3lnv15x9/bRQMhE0Z7ZmxxuJbBZA==}
 
   '@modelcontextprotocol/sdk@1.17.1':
     resolution: {integrity: sha512-CPle1OQehbWqd25La9Ack5B07StKIxh4+Bf19qnpZKJC1oI22Y0czZHbifjw1UoczIfKBwBDAp/dFxvHG13B5A==}
@@ -6816,7 +6816,7 @@ snapshots:
       - preact
       - supports-color
 
-  '@mcp-ui/server@5.2.0':
+  '@mcp-ui/server@5.10.0':
     dependencies:
       '@modelcontextprotocol/sdk': 1.17.1
     transitivePeerDependencies:
