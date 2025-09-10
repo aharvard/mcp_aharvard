@@ -120,7 +120,7 @@ export const setupMCPServer = (): McpServer => {
         }
     );
 
-    // Resiter a tool to demo UI metadata features
+    // Register a tool to demo UI metadata features
     server.tool(
         "ui-metadata-demo",
         "A demo of metadata features for MCP-UI resources.",
