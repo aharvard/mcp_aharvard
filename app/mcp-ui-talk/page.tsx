@@ -1,15 +1,15 @@
 import { createUIResource } from "@mcp-ui/server";
 import MCPUIResourceRenderer from "../../components/MCPUIResourceRenderer";
-import UIActionCard from "../../netlify/mcp-server/tools/UIActionCard";
+import { MCPUITalk } from "../../netlify/mcp-server/tools/MCPUITalk";
 
 export default function UIActionsPage() {
     // Create UI resource based on weather data state
     const createUIActionResource = () => {
         return createUIResource({
-            uri: `ui://mcp-aharvard/ui-action-card`,
+            uri: `ui://mcp-aharvard/mcp-ui-talk`,
             content: {
                 type: "rawHtml",
-                htmlString: UIActionCard(),
+                htmlString: MCPUITalk(),
             },
             encoding: "text",
         });

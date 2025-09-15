@@ -9,6 +9,7 @@ import UIActionCard from "./tools/UIActionCard";
 import MoodTripPlanner from "./tools/MoodTripPlanner";
 import { createUIResource } from "@mcp-ui/server";
 import { RemoteDomDemo } from "./tools/RemoteDomDemo";
+import { MCPUITalk } from "./tools/MCPUITalk";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -559,6 +560,55 @@ export const setupMCPServer = (): McpServer => {
                         {
                             type: "text",
                             text: `Error loading remote DOM demo: ${
+                                error instanceof Error
+                                    ? error.message
+                                    : "Unknown error"
+                            }`,
+                        },
+                    ],
+                };
+            }
+        }
+    );
+
+    // Register a tool for showing MCP UI Talk slides
+    server.tool(
+        "show-mcp-ui-talk",
+        "Shows slides for a presentation about MCP-UI. Use this tool when the user asks to show slides for their talk about MCP-UI or wants to see the MCP UI Talk presentation.",
+        {
+            slideNumber: z
+                .number()
+                .optional()
+                .describe(
+                    "Specific slide number to show (1-based). If not provided, shows all slides."
+                ),
+        },
+        async ({ slideNumber }): Promise<CallToolResult> => {
+            try {
+                const htmlContent = MCPUITalk();
+
+                return {
+                    content: [
+                        {
+                            type: "resource",
+                            resource: {
+                                uri: "ui://mcp-aharvard/mcp-ui-talk",
+                                mimeType: "text/html",
+                                text: htmlContent,
+                            },
+                            annotations: {
+                                audience: ["assistant"],
+                            },
+                        },
+                    ],
+                };
+            } catch (error) {
+                console.error("Error loading MCP UI Talk:", error);
+                return {
+                    content: [
+                        {
+                            type: "text",
+                            text: `Error loading MCP UI Talk: ${
                                 error instanceof Error
                                     ? error.message
                                     : "Unknown error"
