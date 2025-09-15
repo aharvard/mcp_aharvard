@@ -585,6 +585,7 @@ export const setupMCPServer = (): McpServer => {
         },
         async ({ slideNumber }): Promise<CallToolResult> => {
             try {
+                console.log("slideNumber", slideNumber);
                 const htmlContent = MCPUITalk();
 
                 return {
