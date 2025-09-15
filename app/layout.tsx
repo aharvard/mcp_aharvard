@@ -52,7 +52,6 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <ToastContainer>
-                    <Navigation />
                     <main className="min-h-screen">{children}</main>
                     <Footer />
                 </ToastContainer>
