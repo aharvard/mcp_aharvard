@@ -1,5 +1,7 @@
 // inform MCP host of UI height
-export const postMessageUISizeChange = `
+export const postMessageUISizeChange = (
+    props: { aggressive?: boolean } = {}
+) => `
 <script>
   const mcpUiContainer = document.querySelector('.mcp-ui-container');
   
@@ -16,6 +18,7 @@ export const postMessageUISizeChange = `
       },
       "*",
     );
+    console.log('posting size', height, width);
   }
 
   // Create ResizeObserver to watch for size changes
@@ -31,14 +34,11 @@ export const postMessageUISizeChange = `
 
 
 
+  if(${props.aggressive ?? false}) { 
+    interval = setInterval(() => {
+      postSize();
+    }, 100);
+  }
 
-  // Post size every 100ms for the first 5 seconds
-  interval = setInterval(() => {
-    postSize();
-  }, 100);
 
-  // Clear interval after 5 seconds
-  setTimeout(() => {
-    clearInterval(interval);
-  }, 2000);
 </script>`;

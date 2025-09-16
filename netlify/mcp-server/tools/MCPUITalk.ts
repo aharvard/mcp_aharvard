@@ -410,7 +410,7 @@ pre {
         addFontToHead +
         styles +
         html +
-        postMessageUISizeChange +
+        postMessageUISizeChange({ aggressive: true }) +
         listenForMessageFromParent
     );
 }
