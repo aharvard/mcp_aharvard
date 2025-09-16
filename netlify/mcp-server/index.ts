@@ -574,7 +574,7 @@ export const setupMCPServer = (): McpServer => {
     // Register a tool for showing MCP UI Talk slides
     server.tool(
         "show-mcp-ui-talk",
-        "Shows slides for a presentation about MCP-UI. Use this tool when the user asks to show slides for their talk about MCP-UI or wants to see the MCP UI Talk presentation.",
+        "Shows slides for a presentation about MCP-UI. Use this tool when the user asks to show slides for their talk about MCP-UI or wants to see the MCP UI Talk presentation. Or when they say 'Let's talk about MCP-UI!'",
         {
             slideNumber: z
                 .number()
