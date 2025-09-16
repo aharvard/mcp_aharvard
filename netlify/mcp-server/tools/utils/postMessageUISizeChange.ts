@@ -38,7 +38,7 @@ resizeObserver.observe(mcpUiContainer);
 <script>
 ${setup}
 ${resizeObserver}
-${props.aggressive ? `setInterval(() => postSize(), 100);` : ""}
+${props.aggressive ? `setInterval(() => postSize(), 1000);` : ""}
 </script>
 `;
 };
