@@ -124,7 +124,7 @@ export function MCPUITalk(START_SLIDE = 1) {
     );
 
     const html = `
-<article class="mcp-ui-container" data-theme="dark">
+<article class="mcp-ui-container">
   <div class="deck">
     ${[
         titleSlide,
