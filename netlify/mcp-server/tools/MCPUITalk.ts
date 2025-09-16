@@ -129,13 +129,12 @@ export function MCPUITalk(START_SLIDE = 1) {
     ${[
         titleSlide,
         intro,
-        // mcpToolResponses,
+        demoTime,
         embeddedResource,
         McpUiSdk,
         UiResourceTypes,
         earlyDays,
         future,
-        demoTime,
     ]
         .map((slide) => slide)
         .join("")}
