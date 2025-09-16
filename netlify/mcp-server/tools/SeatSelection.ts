@@ -986,8 +986,8 @@ export default function SeatSelection(flightData?: FlightData) {
         style +
         addFontToHead +
         html +
-        postMessageUISizeChange({ aggressive: false });
-    handleInteractions;
+        postMessageUISizeChange({ aggressive: false }) +
+        handleInteractions;
 
     return htmlString;
 }
