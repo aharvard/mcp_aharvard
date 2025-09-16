@@ -586,21 +586,23 @@ export const setupMCPServer = (): McpServer => {
         async ({ slideNumber }): Promise<CallToolResult> => {
             try {
                 console.log("slideNumber", slideNumber);
-                const htmlContent = MCPUITalk();
+                const htmlContent = MCPUITalk(slideNumber);
 
                 return {
                     content: [
-                        {
-                            type: "resource",
-                            resource: {
-                                uri: "ui://mcp-aharvard/mcp-ui-talk",
-                                mimeType: "text/html",
-                                text: htmlContent,
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/mcp-ui-talk",
+                            encoding: "text",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: htmlContent,
                             },
-                            annotations: {
-                                audience: ["assistant"],
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
                             },
-                        },
+                        }),
                     ],
                 };
             } catch (error) {
