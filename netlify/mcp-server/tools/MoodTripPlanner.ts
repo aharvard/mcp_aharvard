@@ -683,7 +683,7 @@ export default function MoodTripPlanner(tripData?: MoodTripData) {
         style +
         addFontToHead +
         html +
-        postMessageUISizeChange +
-        handleInteractions;
+        postMessageUISizeChange({ aggressive: false });
+    handleInteractions;
     return htmlString;
 }

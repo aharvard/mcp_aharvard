@@ -617,7 +617,7 @@ function hideInspection() {
         addFontToHead +
         styles +
         html +
-        postMessageUISizeChange +
+        postMessageUISizeChange({ aggressive: false }) +
         listenForMessageFromParent
     );
 }

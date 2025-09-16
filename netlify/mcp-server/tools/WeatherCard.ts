@@ -363,7 +363,11 @@ export default function WeatherCard(data: WeatherData | null) {
 </article>
   `;
 
-    const htmlString = style + html + postMessageUISizeChange + addFontToHead;
+    const htmlString =
+        style +
+        html +
+        postMessageUISizeChange({ aggressive: false }) +
+        addFontToHead;
 
     return htmlString;
 }
