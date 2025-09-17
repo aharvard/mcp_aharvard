@@ -18,30 +18,53 @@ export function MCPUITalk(START_SLIDE = 1) {
         `
     );
 
-    const intro = slide(
-        `
-<h2>MCP-UI</h2>
+    const aboutMe = slide(`
+<h2>About Me</h2>
 <ul>
-  <li>conforms to the MCP spec</li>
-  <li>UI returned from tool calls as embedded resource</li>
-  <li>types: rawHtml, externalUrl, remoteDom</li>
+  <li>Joined Square 2 years ago</li>
+  <li>Design engineer</li>
+  <li>Interested in design automation
+    <ul>
+      <li>Design systems</li>
+      <li>Figma plugins</li>
+    </ul>
+  </li>
+  <li>Hack Week in March 2025
+    <ul>
+    <li>Started using Goose</li>
+    <li>MCP servers</li>
+    </ul>
+  </li>
 </ul>
-      `
-    );
+`);
 
-    //     const mcpToolResponses = slide(
-    //         `
-    // <h2>MCP tools can send</h2>
-    // <h3>as of 2025-06-18</h3>
-    // <ul>
-    //   <li>text</li>
-    //   <li>image</li>
-    //   <li>audio</li>
-    //   <li>resource</li>
-    //   <li>resource link</li>
-    // </ul>
-    //       `
-    //     );
+    const problem = slide(`
+<h2>How I got involved</h2>
+<h3>Problem</h3>
+<ul>  
+  <li>Started building with Goose</li>
+  <li>Goose lacked deterministic visual/interactive stuff</li>
+</ul>
+<h3>Solution</h3>
+<ul>
+  <li>Read the MCP spec</li>
+  <li>Discovered MCP-UI in a GH discussion</li>
+  <li>Brought it to Goose</li>
+  <li>Got involved on Twitter & Discord</li>
+</ul>
+   `);
+
+    const UiResourceTypes = slide(`
+<h2>What actually is it?</h2>
+<p>MCP-UI is an embedded resource returned inside of a tool response:</p>
+<ul>
+  <li>Raw HTML Content</li>
+  <li>External URL</li>
+  <li>Remote DOM</li>
+  <li><em>JSON — being discussed</em></li>
+  <li><em>Render Prompt? — speculative</em></li>
+</ul>
+   `);
 
     const embeddedResource = slide(
         `
@@ -62,49 +85,19 @@ export function MCPUITalk(START_SLIDE = 1) {
     const McpUiSdk = slide(
         `
 <h2>MCP-UI SDKs</h2>
-<h3>@mcp-ui/server</h3>
+<h3>Server</h3>
 <ul>
   <li>helps generate resource object</li>
   <li>typescript & ruby (python coming soon)</li>
 </ul>
 <br />
-<h3>@mcp-ui/client</h3>
+<h3>Client</h3>
 <ul>
-  <li>Used in Goose</li>
   <li>react & web-components</li>
   <li>manages iframe</li>
+  <li>Used in Goose</li>
 </ul>
 `
-    );
-
-    const UiResourceTypes = slide(`
-<h2>MCP-UI Resource Types</h2>
-<ul>
-  <li>Raw HTML content</li>
-  <li>External URL</li>
-  <li>Remote DOM</li>
-</ul>
-      `);
-
-    const earlyDays = slide(
-        `
-<h2>Early days</h2>
-<ul>
-  <li>Goose was the one of first MCP-UI enabled host (Postman shipped support same week)</li>
-  <li>Shopify announced</li>
-</ul>
-    `
-    );
-
-    const future = slide(
-        `
-<h2>Future</h2>
-<ul>
-  <li>ChatGPT now supports MCP, will they support MCP-UI?</li>
-  <li>g2! but kgoose lacks support for embedded resources</li>
-  <li>Agentic experiences for our brands</li>
-</ul>
-    `
     );
 
     const pickAirplaneSeats = postMessageUIAction({
@@ -117,9 +110,33 @@ export function MCPUITalk(START_SLIDE = 1) {
     const demoTime = slide(
         `
 <h2>Demo time!</h2>
-<button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">
-  Pick airplane seats
-</button>
+<h3>In Goose</h3>
+<ul>
+<li>
+  <button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">
+    Pick airplane seats
+  </button>
+</li>
+<li>Weather</li>
+<li>Auto Visualiser</li>
+</ul>
+<h3>Connecting blocks</h3>
+<ul>
+<li>Square Growth</li>
+<li>Agentic Commerce</li>
+</ul>
+  `
+    );
+
+    const conclusion = slide(
+        `
+  <h2>Thoughts</h2>
+  <ul>
+  <li>Goose was the one of first MCP-UI enabled host (start of Aug)</li>
+  <li>ChatGPT now supports MCP, will they support MCP-UI?</li>
+  <li>g2! but kgoose lacks support for embedded resources</li>
+  <li>Agentic experiences for our brands</li>
+</ul>
     `
     );
 
@@ -128,13 +145,13 @@ export function MCPUITalk(START_SLIDE = 1) {
   <div class="deck">
     ${[
         titleSlide,
-        intro,
-        demoTime,
-        embeddedResource,
-        McpUiSdk,
+        aboutMe,
+        problem,
         UiResourceTypes,
-        earlyDays,
-        future,
+        embeddedResource,
+        demoTime,
+        McpUiSdk,
+        conclusion,
     ]
         .map((slide) => slide)
         .join("")}
@@ -254,7 +271,7 @@ font-family: 'dank mono';
 }
 
 :root {
-font-size: 2vw;
+font-size: 1.8vw;
 }
 ::selection {
 background: var(--highlight);
@@ -294,6 +311,7 @@ html, body {
 .deck{
   display: grid;
   gap: 1rem;
+  background: var(--bg-secondary);
 }
 
 .slide {
@@ -302,6 +320,7 @@ html, body {
   color: var(--text-primary);
   padding: 2rem 4rem;
   display: none;
+  width: 100vw;
 }
 
 h2 {
@@ -318,6 +337,10 @@ h3 {
 ul {
   padding-left: 1.1rem;
 }
+
+p + ul {
+margin-top: 1rem;
+}
   
 p, li {
   font-size: 1.4rem
@@ -327,10 +350,18 @@ li {
   padding-left: 1rem;
 }
 
+em {
+  color: var(--text-secondary);
+}
+
 pre {
   background: var(--bg-secondary);
   padding: 1rem;
+  width: 100%;
+  display: block;
+  overflow-x: scroll;
 }
+  
 .active {
   display: block;
 }
