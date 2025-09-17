@@ -66,19 +66,24 @@ export const setupMCPServer = (): McpServer => {
                     resolvedLocation,
                     units
                 );
+
+                const resolvedLocationFormatted = resolvedLocation.replace(
+                    /, /g,
+                    "-"
+                );
                 return {
                     content: [
                         {
                             type: "resource",
                             resource: {
-                                uri: "http://mcp-aharvard/weather-data",
+                                uri: `http://mcp-aharvard/weather-data/${resolvedLocationFormatted}`,
                                 text: JSON.stringify(weatherData),
                                 mimeType: "application/json",
                             },
                         },
 
                         createUIResource({
-                            uri: "ui://mcp-aharvard/weather-card",
+                            uri: `ui://mcp-aharvard/weather-card/${resolvedLocationFormatted}`,
                             encoding: "text",
                             content: {
                                 type: "rawHtml",
