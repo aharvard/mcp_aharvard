@@ -21,17 +21,17 @@ export function MCPUITalk(START_SLIDE = 1) {
     const questions = slide(`
 <h2>Raise your hand if...</h2>
 <ul class="clickToReveal">
-  <li>used Goose Desktop</li>
+  <li>used Goose desktop</li>
   <li>installed a Goose extension (MCP server)</li>
-  <li>built a Goose extension (MCP server)</li>
+  <li>built a Goose extension</li>
   <li>used a Goose extension that responds with MCP-UI</li>
   <li>built a Goose extension that uses MCP-UI</li>
 </ul>
 `);
 
     const aboutMe = slide(`
-<h2>About Me</h2>
-<ul>
+<h2>About me</h2>
+<ul class="clickToReveal">
   <li>Hi, I'm Andrew, a design engineer</li>
   <li>I've been at Block for 2 years</li>
   <li>Passionate about design automation</li>
@@ -50,14 +50,14 @@ export function MCPUITalk(START_SLIDE = 1) {
 `);
 
     const problem = slide(`
-<h2>I've been learning a lot</h2>
+<h2>Learning</h2>
 <div class="clickToReveal">
   <div>
     <h3>Observations</h3>
     <ul>  
       <li>Goose was limited to text-only output (sometimes images)</li>
       <li>Various models would render images in goose in various ways</li>
-      <li>Text and voice as user interaction input mechanism</li>
+      <li>Only user interaction input mechanisms: text and voice</li>
     </ul>
   </div>
   <div>
@@ -65,17 +65,17 @@ export function MCPUITalk(START_SLIDE = 1) {
     <ul>
       <li>Read the MCP spec (highly recommend)</li>
       <li>Discovered MCP-UI in a GH discussion & brought it to Goose</li>
-      <li>Got involved on Twitter, Discord, & GH (Open Source)</li>
+      <li>Got involved on Twitter, Discord, & GH (open source)</li>
     </ul>
   </div>
 </div>
    `);
 
     const UiResourceTypes = slide(`
-<h2>What is MCP-UI? (this!)</h2>
+<h2>What is MCP-UI?</h2>
 <p>MCP-UI is an embedded resource in a tool response. Currently we have a few types of UIs we can produce.</p>
 <ul>
-  <li>Raw HTML Content</li>
+  <li>Raw HTML Content (these slides!)</li>
   <li>External URL</li>
   <li>Remote DOM</li>
   <li><em>JSON — being discussed</em></li>
@@ -85,8 +85,8 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     const embeddedResource = slide(
         `
-<h2>MCP-UI Resource</h2>
-<p>An embedded resource in a tool response. When Goose sees this, Goose will show UI.</p>
+<h2>An embedded resource</h2>
+<p>A type of content inside of a tool response. When Goose sees this, Goose will show UI.</p>
 <pre>
 {
   "type": "resource",
@@ -222,7 +222,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
-      slide.classList.add("active"); // REMOVE THIS
+      // slide.classList.add("active"); // REMOVE THIS
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
@@ -252,9 +252,9 @@ export function MCPUITalk(START_SLIDE = 1) {
               firstHiddenChild.classList.add('revealed');
             } else {
               // If all children are revealed, hide all and start over
-              children.forEach(child => {
-                child.classList.remove('revealed');
-              });
+              // children.forEach(child => {
+                // child.classList.remove('revealed');
+              // });
             }
           });
         });
