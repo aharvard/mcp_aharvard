@@ -247,7 +247,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
-      slide.classList.add("active"); // SHOWS ALL SLIDES
+      // slide.classList.add("active"); // SHOWS ALL SLIDES
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
