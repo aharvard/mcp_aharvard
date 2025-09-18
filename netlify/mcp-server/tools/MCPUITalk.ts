@@ -124,16 +124,41 @@ export function MCPUITalk(START_SLIDE = 1) {
             prompt: "Select seats for my flight from SF to Charlotte",
         },
     });
+    const demoMCPUIAtions = postMessageUIAction({
+        type: "prompt",
+        payload: {
+            prompt: "Show me the MCP-UI actions",
+        },
+    });
 
     const demoTime = slide(
         `
 <h2>Demo</h2>
 <ul>
-  <li>Goose theme switch</li>
-  <li><button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">
-        Pick airplane seats
-      </button> > Weather > Auto Visualiser</li>
-  <li>Connecting the blocks: Square Growth & Agentic Commerce</li>
+  <li>Agentic flow</li>
+  <ul>
+    <li>
+      <button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">Pick airplane seats</button>
+    </li>
+  </li>    
+  <li>Weather</li>
+  <li>Auto Visualiser</li>
+  </ul>
+  <li>MCP-UI in/out of Goose for Square</li>
+  <ul>
+    <li>Square Growth</li>
+    <li>Agentic Commerce</li>
+  </ul>
+  <li>Bi-directional communication protocol</li>
+  <ul>
+    <li>
+  <button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${demoMCPUIAtions} } )()">
+        MCP-UI actions
+      </button>
+      </li>
+      <li>Goose theme switch</li>
+    </ul>
+  </ul>
 </ul>
   
   
@@ -222,7 +247,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
-      // slide.classList.add("active"); // REMOVE THIS
+      slide.classList.add("active"); // REMOVE THIS
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
@@ -263,6 +288,17 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // Initialize click to reveal functionality
     setupClickToReveal();
+
+    // Add escape key functionality to reset all revealed elements
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        // Find all revealed elements and remove the revealed class
+        const allRevealedElements = document.querySelectorAll('.clickToReveal .revealed');
+        allRevealedElements.forEach(element => {
+          element.classList.remove('revealed');
+        });
+      }
+    });
     
   </script>
 </article>
@@ -393,7 +429,7 @@ p + ul {
 }
 
 p, li {
-  font-size: 1.4rem
+  font-size: 1.4rem;
 }
 
 li {
@@ -430,6 +466,10 @@ pre {
   
 .active {
   display: block;
+}
+
+button {
+font-size: 1em !important;
 }
 
 .buttons {
