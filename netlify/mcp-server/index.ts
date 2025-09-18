@@ -66,11 +66,11 @@ export const setupMCPServer = (): McpServer => {
                     resolvedLocation,
                     units
                 );
-
-                const resolvedLocationFormatted = resolvedLocation.replace(
-                    /, /g,
-                    "-"
-                );
+                // todo remove spaces also
+                const resolvedLocationFormatted = resolvedLocation
+                    .toLowerCase()
+                    .replace(/, /g, "-")
+                    .replace(/ /g, "-");
                 return {
                     content: [
                         {
