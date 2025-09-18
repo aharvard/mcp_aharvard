@@ -73,7 +73,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     const UiResourceTypes = slide(`
 <h2>What is MCP-UI?</h2>
-<p>MCP-UI is an embedded resource in a tool response. Currently we have a few types of UIs we can produce.</p>
+<p>An embedded resource in a tool response that conforms to the MCP spec and allows MCP servers to respond with interactive UI. Severs can send the following MIME types:</p>
 <ul>
   <li>Raw HTML Content (these slides!)</li>
   <li>External URL</li>
@@ -247,7 +247,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
-      // slide.classList.add("active"); // SHOWS ALL SLIDES
+      slide.classList.add("active"); // SHOWS ALL SLIDES
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
