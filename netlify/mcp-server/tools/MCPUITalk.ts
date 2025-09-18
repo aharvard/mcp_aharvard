@@ -49,8 +49,8 @@ export function MCPUITalk(START_SLIDE = 1) {
 </ul>
 `);
 
-    const problem = slide(`
-<h2>Learning</h2>
+    const gettingInvolved = slide(`
+<h2>Getting involved</h2>
 <div class="clickToReveal">
   <div>
     <h3>Observations</h3>
@@ -71,15 +71,13 @@ export function MCPUITalk(START_SLIDE = 1) {
 </div>
    `);
 
-    const UiResourceTypes = slide(`
+    const whatIsMCPUI = slide(`
 <h2>What is MCP-UI?</h2>
-<p>An embedded resource in a tool response that conforms to the MCP spec and allows MCP servers to respond with interactive UI. Severs can send the following MIME types:</p>
 <ul>
-  <li>Raw HTML Content (these slides!)</li>
-  <li>External URL</li>
-  <li>Remote DOM</li>
-  <li><em>JSON — being discussed</em></li>
-  <li><em>Render Prompt? — speculative</em></li>
+  <li>an embedded resource in a tool response</li>
+  <li>conforms to the MCP spec</li>
+  <li>enables MCP servers to respond with rich, interactive UI</li>
+  <li>with a variety of MIME types...</li>
 </ul>
    `);
 
@@ -100,21 +98,36 @@ export function MCPUITalk(START_SLIDE = 1) {
     `
     );
 
+    const mimeTypes = slide(`
+  <h2>MIME types</h2>
+  <p>Severs can send the following:</p>
+  <ul>
+    <li>Raw HTML content (these slides!)</li>
+    <li>External URL</li>
+    <li>Remote DOM</li>
+    <li><em>JSON — declarative UI being discussed</em></li>
+    <li><em>Render prompt — generative UI, speculative</em></li>
+  </ul>
+      `);
+
     const McpUiSdk = slide(
         `
 <h2>MCP-UI SDKs</h2>
-<h3>Server</h3>
-<ul>
-  <li>helps generate resource object</li>
-  <li>typescript & ruby (python coming soon)</li>
-</ul>
-<br />
-<h3>Client</h3>
-<ul>
-  <li>react & web-components</li>
-  <li>manages iframe</li>
-  <li>Used in Goose</li>
-</ul>
+  <div class="clickToReveal">
+    <h3>Server</h3>
+    <ul>
+      <li>typescript & ruby (python coming soon)</li>
+      <li>helps generate resource object</li>
+    </ul>
+    <h3>Client</h3>
+    <ul>
+      <li>react & web-components</li>
+      <li>manages iframe</li>
+      <li>we use this in Goose</li>
+    </ul>
+  </div>
+</div>
+
 `
     );
 
@@ -124,6 +137,7 @@ export function MCPUITalk(START_SLIDE = 1) {
             prompt: "Select seats for my flight from SF to Charlotte",
         },
     });
+
     const demoMCPUIAtions = postMessageUIAction({
         type: "prompt",
         payload: {
@@ -168,12 +182,14 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     const conclusion = slide(
         `
-  <h2>Thoughts</h2>
-  <ul>
-  <li>Goose was the one of first MCP-UI enabled host (start of Aug)</li>
+  <h2>Closing thoughts</h2>
+  <ul class="clickToReveal">
+  <li>Proud that Goose was one of first MCP-UI enabled host</li>
+  <li>We need more MCP-UI builders!</li>
+  <li>Let's get MCP-UI in g2 <em>— kgoose currently lacks support for embedded resources</em></li>
+
   <li>ChatGPT now supports MCP, will they support MCP-UI?</li>
-  <li>g2! but kgoose lacks support for embedded resources</li>
-  <li>Agentic experiences for our brands</li>
+  <li>We need to start imagining how our brands show up inside of agents like Goose and ChatGPT</li>
 </ul>
     `
     );
@@ -185,9 +201,10 @@ export function MCPUITalk(START_SLIDE = 1) {
         titleSlide,
         questions,
         aboutMe,
-        problem,
-        UiResourceTypes,
+        gettingInvolved,
+        whatIsMCPUI,
         embeddedResource,
+        mimeTypes,
         demoTime,
         McpUiSdk,
         conclusion,
@@ -247,7 +264,7 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
-      // slide.classList.add("active"); // SHOWS ALL SLIDES
+      slide.classList.add("active"); // SHOWS ALL SLIDES
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
