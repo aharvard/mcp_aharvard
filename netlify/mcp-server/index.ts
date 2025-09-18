@@ -595,19 +595,19 @@ export const setupMCPServer = (): McpServer => {
 
                 return {
                     content: [
-                        createUIResource({
-                            uri: "ui://mcp-aharvard/mcp-ui-talk",
-                            encoding: "text",
-                            content: {
-                                type: "rawHtml",
-                                htmlString: htmlContent,
-                            },
-                            resourceProps: {
-                                annotations: {
-                                    audience: ["user"],
+                        {
+                            ...createUIResource({
+                                uri: "ui://mcp-aharvard/mcp-ui-talk",
+                                encoding: "text",
+                                content: {
+                                    type: "rawHtml",
+                                    htmlString: htmlContent,
                                 },
+                            }),
+                            annotations: {
+                                audience: ["user"],
                             },
-                        }),
+                        },
                     ],
                 };
             } catch (error) {
