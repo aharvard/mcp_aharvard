@@ -18,45 +18,62 @@ export function MCPUITalk(START_SLIDE = 1) {
         `
     );
 
+    const questions = slide(`
+<h2>Raise your hand if...</h2>
+<ul class="clickToReveal">
+  <li>used Goose Desktop</li>
+  <li>installed a Goose extension (MCP server)</li>
+  <li>built a Goose extension (MCP server)</li>
+  <li>used a Goose extension that responds with MCP-UI</li>
+  <li>built a Goose extension that uses MCP-UI</li>
+</ul>
+`);
+
     const aboutMe = slide(`
 <h2>About Me</h2>
 <ul>
-  <li>Joined Square 2 years ago</li>
-  <li>Design engineer</li>
-  <li>Interested in design automation
-    <ul>
-      <li>Design systems</li>
-      <li>Figma plugins</li>
-    </ul>
-  </li>
-  <li>Hack Week in March 2025
-    <ul>
+  <li>Hi, I'm Andrew, a design engineer</li>
+  <li>I've been at Block for 2 years</li>
+  <li>Passionate about design automation</li>
+  <ul>
+    <li>Design systems (14 years)</li>
+    <li>Figma/Figjam/Storybook plugins</li>
+  </ul>
+  <li>Pivotal moment for me — Hack Week 2025 (back in March)</li>
+  <ul>
     <li>Started using Goose</li>
-    <li>MCP servers</li>
-    </ul>
+    <li>Created a MCP server: #design-to-web</li>
+    <li>Figma -> CMS page builds</li>
+  </ul>
   </li>
 </ul>
 `);
 
     const problem = slide(`
-<h2>How I got involved</h2>
-<h3>Problem</h3>
-<ul>  
-  <li>Started building with Goose</li>
-  <li>Goose lacked deterministic visual/interactive stuff</li>
-</ul>
-<h3>Solution</h3>
-<ul>
-  <li>Read the MCP spec</li>
-  <li>Discovered MCP-UI in a GH discussion</li>
-  <li>Brought it to Goose</li>
-  <li>Got involved on Twitter & Discord</li>
-</ul>
+<h2>I've been learning a lot</h2>
+<div class="clickToReveal">
+  <div>
+    <h3>Observations</h3>
+    <ul>  
+      <li>Goose was limited to text-only output (sometimes images)</li>
+      <li>Various models would render images in goose in various ways</li>
+      <li>Text and voice as user interaction input mechanism</li>
+    </ul>
+  </div>
+  <div>
+    <h3>What I did</h3>
+    <ul>
+      <li>Read the MCP spec (highly recommend)</li>
+      <li>Discovered MCP-UI in a GH discussion & brought it to Goose</li>
+      <li>Got involved on Twitter, Discord, & GH (Open Source)</li>
+    </ul>
+  </div>
+</div>
    `);
 
     const UiResourceTypes = slide(`
-<h2>What actually is it?</h2>
-<p>MCP-UI is an embedded resource returned inside of a tool response:</p>
+<h2>What is MCP-UI? (this!)</h2>
+<p>MCP-UI is an embedded resource in a tool response. Currently we have a few types of UIs we can produce.</p>
 <ul>
   <li>Raw HTML Content</li>
   <li>External URL</li>
@@ -69,6 +86,7 @@ export function MCPUITalk(START_SLIDE = 1) {
     const embeddedResource = slide(
         `
 <h2>MCP-UI Resource</h2>
+<p>An embedded resource in a tool response. When Goose sees this, Goose will show UI.</p>
 <pre>
 {
   "type": "resource",
@@ -109,22 +127,17 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     const demoTime = slide(
         `
-<h2>Demo time!</h2>
-<h3>In Goose</h3>
+<h2>Demo</h2>
 <ul>
-<li>
-  <button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">
-    Pick airplane seats
-  </button>
-</li>
-<li>Weather</li>
-<li>Auto Visualiser</li>
+  <li>Goose theme switch</li>
+  <li><button class="prompt-button" onclick="( function() { console.log('clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">
+        Pick airplane seats
+      </button> > Weather > Auto Visualiser</li>
+  <li>Connecting the blocks: Square Growth & Agentic Commerce</li>
 </ul>
-<h3>Connecting blocks</h3>
-<ul>
-<li>Square Growth</li>
-<li>Agentic Commerce</li>
-</ul>
+  
+  
+  
   `
     );
 
@@ -145,6 +158,7 @@ export function MCPUITalk(START_SLIDE = 1) {
   <div class="deck">
     ${[
         titleSlide,
+        questions,
         aboutMe,
         problem,
         UiResourceTypes,
@@ -208,12 +222,47 @@ export function MCPUITalk(START_SLIDE = 1) {
 
     // hide slides
     slides.forEach((slide, index) => {
+      slide.classList.add("active"); // REMOVE THIS
       if (index+1 === currentSlideIndex) {
         slide.classList.add("active");
         return
       }
 
     });
+
+    // Click to reveal functionality
+    function setupClickToReveal() {
+      // Add click listener to each slide
+      slides.forEach(slide => {
+        slide.addEventListener('click', function(event) {
+          // Find all elements with clickToReveal class in this slide
+          const clickToRevealElements = slide.querySelectorAll('.clickToReveal');
+          
+          clickToRevealElements.forEach(element => {
+            // Get all child elements
+            const children = Array.from(element.children);
+            
+            // Find the first hidden child
+            const firstHiddenChild = children.find(child => 
+              !child.classList.contains('revealed')
+            );
+            
+            if (firstHiddenChild) {
+              // Reveal the next hidden child
+              firstHiddenChild.classList.add('revealed');
+            } else {
+              // If all children are revealed, hide all and start over
+              children.forEach(child => {
+                child.classList.remove('revealed');
+              });
+            }
+          });
+        });
+      });
+    }
+
+    // Initialize click to reveal functionality
+    setupClickToReveal();
     
   </script>
 </article>
@@ -338,16 +387,31 @@ ul {
   padding-left: 1.1rem;
 }
 
+
 p + ul {
-margin-top: 1rem;
+ margin-top: 1rem;
 }
-  
+
 p, li {
   font-size: 1.4rem
 }
 
 li {
   padding-left: 1rem;
+}
+
+
+ul ul {
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+  }
+  
+li {
+  margin-bottom: 0.25em;
+}
+
+ul ul li {
+  font-size: 1rem;
 }
 
 em {
@@ -360,6 +424,8 @@ pre {
   width: 100%;
   display: block;
   overflow-x: scroll;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
 }
   
 .active {
@@ -432,6 +498,16 @@ pre {
   color: var(--text-secondary);
   opacity: 0.7;
   font-family: 'dank mono';
+}
+
+/* Click to reveal functionality */
+.clickToReveal > * {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.clickToReveal > *.revealed {
+  opacity: 1;
 }
 
 </style>
