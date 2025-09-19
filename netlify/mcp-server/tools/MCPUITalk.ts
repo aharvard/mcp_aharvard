@@ -19,7 +19,7 @@ export function MCPUITalk(START_SLIDE = 1) {
     );
 
     const questions = slide(`
-<h2>Raise your hand if...</h2>
+<h2>Raise your hand if you have...</h2>
 <ul class="clickToReveal">
   <li>used Goose desktop</li>
   <li>installed a Goose extension (MCP server)</li>
@@ -34,10 +34,11 @@ export function MCPUITalk(START_SLIDE = 1) {
 <ul class="clickToReveal">
   <li>Hi, I'm Andrew, a design engineer</li>
   <li>I've been at Block for 2 years</li>
-  <li>Passionate about design automation</li>
+  <li>Career focused on design tooling and automation</li>
   <ul>
     <li>Design systems (14 years)</li>
     <li>Figma/Figjam/Storybook plugins</li>
+    <li>Exploring how MCP-UI can help automate Block</li>
   </ul>
   <li>Pivotal moment for me — Hack Week 2025 (back in March)</li>
   <ul>
@@ -56,7 +57,7 @@ export function MCPUITalk(START_SLIDE = 1) {
     <h3>Observations</h3>
     <ul>  
       <li>Goose was limited to text-only output (sometimes images)</li>
-      <li>Various models would render images in goose in various ways</li>
+      <li>Various models would render images in Goose in various ways</li>
       <li>Only user interaction input mechanisms: text and voice</li>
     </ul>
   </div>
@@ -77,7 +78,7 @@ export function MCPUITalk(START_SLIDE = 1) {
   <li>an embedded resource in a tool response</li>
   <li>conforms to the MCP spec</li>
   <li>enables MCP servers to respond with rich, interactive UI</li>
-  <li>with a variety of MIME types...</li>
+  <li>with a variety of MIME types</li>
 </ul>
    `);
 
@@ -89,8 +90,8 @@ export function MCPUITalk(START_SLIDE = 1) {
 {
   "type": "resource",
   "resource": {
-    "uri": "ui://my-resource",
-    "mimeType": "text",
+    "uri": "ui://my-interactive-greeting-01",
+    "mimeType": "text/html",
     "text": "&lt;h1&gt;Hello World&lt;/h1&gt;"
   }
 }
@@ -186,7 +187,7 @@ export function MCPUITalk(START_SLIDE = 1) {
   <ul class="clickToReveal">
   <li>Proud that Goose was one of first MCP-UI enabled host</li>
   <li>We need more MCP-UI builders!</li>
-  <li>Let's get MCP-UI in g2 <em>— kgoose currently lacks support for embedded resources</em></li>
+  <li>Let's get MCP-UI in g2 <em>— kGoose currently lacks support for embedded resources</em></li>
 
   <li>ChatGPT now supports MCP, will they support MCP-UI?</li>
   <li>We need to start imagining how our brands show up inside of agents like Goose and ChatGPT</li>
@@ -205,8 +206,8 @@ export function MCPUITalk(START_SLIDE = 1) {
         whatIsMCPUI,
         embeddedResource,
         mimeTypes,
-        demoTime,
         McpUiSdk,
+        demoTime,
         conclusion,
     ]
         .map((slide) => slide)
@@ -426,7 +427,7 @@ html, body {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 h3 {
@@ -508,7 +509,7 @@ font-size: 1em !important;
 
 .nav-button {
   aspect-ratio: 1;
-  font-size: 3rem;
+  font-size: 3rem !important;
   width: 1em;
   position: relative;
   background: transparent;
