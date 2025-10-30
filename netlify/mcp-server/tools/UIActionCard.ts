@@ -1,16 +1,19 @@
 import { addFontToHead } from "./utils/addFontToHead";
-import { postMessageUIAction } from "./utils/postMessageUIAction";
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
 import { listenForMessageFromParent } from "./utils/listenForMessageFromParent";
 
 export default function UIActionCard() {
     const Action = (
-        action: string,
+        actionObject: any,
         text: string,
         description: string,
         icon: string,
         customInputs?: string
     ) => {
+        const actionDataJson = JSON.stringify(actionObject).replace(
+            /"/g,
+            "&quot;"
+        );
         return `
 <div class="action-row">
   <div class="action-content">
@@ -25,7 +28,7 @@ export default function UIActionCard() {
     <button 
       class="action-button"
       data-action-name="${text}"
-      data-action-value="${action.replace(/"/g, "&quot;")}"
+      data-action-data="${actionDataJson}"
       onclick="postMessageAndInspect(this)">
       Post Message
     </button>
@@ -34,7 +37,7 @@ export default function UIActionCard() {
 `;
     };
 
-    const toolAction = postMessageUIAction({
+    const toolAction = {
         type: "tool",
         payload: {
             toolName: "get-weather",
@@ -45,25 +48,25 @@ export default function UIActionCard() {
             },
         },
         messageId: "optional-tool-message-id",
-    });
+    };
 
-    const promptAction = postMessageUIAction({
+    const promptAction = {
         type: "prompt",
         payload: {
             prompt: "What is the weather in Tokyo?",
         },
         messageId: "optional-prompt-message-id",
-    });
+    };
 
-    const linkAction = postMessageUIAction({
+    const linkAction = {
         type: "link",
         payload: {
             url: "https://www.google.com",
         },
         messageId: "optional-link-message-id",
-    });
+    };
 
-    const intentAction = postMessageUIAction({
+    const intentAction = {
         type: "intent",
         payload: {
             intent: "create-task",
@@ -73,35 +76,35 @@ export default function UIActionCard() {
             },
         },
         messageId: "optional-intent-message-id",
-    });
+    };
 
-    const notifyAction = postMessageUIAction({
+    const notifyAction = {
         type: "notify",
         payload: {
             message: "cart-updated",
         },
         messageId: "optional-notify-message-id",
-    });
+    };
 
     // Type assertion for custom action type not yet in @mcp-ui/server
-    const requestRenderDataAction = postMessageUIAction({
+    const requestRenderDataAction = {
         type: "ui-request-render-data",
         messageId: crypto.randomUUID(),
-    } as any);
+    };
 
-    const iframeReadyAction = postMessageUIAction({
+    const iframeReadyAction = {
         type: "ui-lifecycle-iframe-ready",
         messageId: crypto.randomUUID(),
-    } as any);
+    };
 
-    const sizeChangeAction = postMessageUIAction({
+    const sizeChangeAction = {
         type: "ui-size-change",
         payload: {
             height: 600,
             width: 800,
         },
         messageId: crypto.randomUUID(),
-    } as any);
+    };
 
     const sizeChangeInputs = `
 <div class="input-group">
@@ -116,10 +119,10 @@ export default function UIActionCard() {
 </div>
 `;
 
-    const requestDataAction = postMessageUIAction({
+    const requestDataAction = {
         type: "ui-request-data",
         messageId: crypto.randomUUID(),
-    } as any);
+    };
 
     const html = `
     <article class="mcp-ui-container">
@@ -137,6 +140,12 @@ export default function UIActionCard() {
           "Send ui-size-change message with dimensions",
           "📐",
           sizeChangeInputs
+      )}
+      ${Action(
+          iframeReadyAction,
+          "UI Iframe Ready",
+          "Send ui-lifecycle-iframe-ready message to host",
+          "✅"
       )}
          ${Action(
              requestDataAction,
@@ -175,12 +184,7 @@ export default function UIActionCard() {
           "🔔"
       )}
       ${Action(linkAction, "Link Action", "Navigate to an external URL", "🔗")}
-      ${Action(
-          iframeReadyAction,
-          "Iframe Ready",
-          "Send ui-lifecycle-iframe-ready message to host",
-          "✅"
-      )}
+      
    
     
     </div>
@@ -207,18 +211,14 @@ export default function UIActionCard() {
 </article>
 
 <script>
-function decodeHTML(html) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = html;
-  return txt.value;
-}
-
 function postMessageAndInspect(button) {
   const actionName = button.getAttribute('data-action-name');
-  let actionValue = button.getAttribute('data-action-value');
+  const actionData = button.getAttribute('data-action-data');
   
-  // Special handling for Size Change action - read from inputs
-  if (actionName === 'Size Change') {
+  let messageObject = null;
+  
+  // Special handling for UI Size Change action - read from inputs
+  if (actionName === 'UI Size Change') {
     const heightInput = document.getElementById('size-height');
     const widthInput = document.getElementById('size-width');
     
@@ -227,7 +227,7 @@ function postMessageAndInspect(button) {
       const width = parseInt(widthInput.value) || 800;
       
       // Create updated action with input values
-      const sizeChangeMessage = {
+      messageObject = {
         type: 'ui-size-change',
         payload: {
           height: height,
@@ -235,35 +235,44 @@ function postMessageAndInspect(button) {
         },
         messageId: crypto.randomUUID()
       };
-      
-      const formattedAction = JSON.stringify(sizeChangeMessage, null, 2).replace(/"/g, "'");
-      actionValue = '(' + formattedAction + ", '*');";
     }
+  } else if (actionData) {
+    // Parse the stored JSON data
+    try {
+      messageObject = JSON.parse(actionData);
+    } catch (error) {
+      console.error('[MCP-UI] Error parsing action data:', error);
+      return;
+    }
+  }
+  
+  if (!messageObject) {
+    console.error('[MCP-UI] No message object to send');
+    return;
   }
   
   // Show inspection
   const content = document.getElementById('inspection-content');
   const panel = document.getElementById('inspection-panel');
   
-  if (content && panel && actionName && actionValue) {
-    content.innerHTML = '<div class="message-info"><h4>' + actionName + '</h4><pre class="message-payload">' + actionValue + '</pre></div>';
+  if (content && panel && actionName) {
+    const formattedMessage = JSON.stringify(messageObject, null, 2);
+    content.innerHTML = '<div class="message-info"><h4>' + actionName + '</h4><pre class="message-payload">' + formattedMessage + '</pre></div>';
     panel.classList.add('active');
   }
   
-  // Post message to parent
-  if (actionValue) {
-    const decodedAction = decodeHTML(actionValue);
-    console.log('⚾️[MCP-UI] Sending message to parent:', {
-      actionName: actionName,
-      decodedAction: decodedAction,
-      timestamp: new Date().toISOString()
-    });
-    try {
-      eval('window.parent.postMessage' + decodedAction);
-      console.log('⚾️[MCP-UI] Message sent successfully');
-    } catch (error) {
-      console.error('[MCP-UI] Error posting message:', error);
-    }
+  // Post message to parent (no eval needed!)
+  console.log('⚾️[MCP-UI] Sending message to parent:', {
+    actionName: actionName,
+    message: messageObject,
+    timestamp: new Date().toISOString()
+  });
+  
+  try {
+    window.parent.postMessage(messageObject, '*');
+    console.log('⚾️[MCP-UI] Message sent successfully');
+  } catch (error) {
+    console.error('[MCP-UI] Error posting message:', error);
   }
 }
 </script>
