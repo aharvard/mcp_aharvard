@@ -8,7 +8,8 @@ export default function UIActionCard() {
         action: string,
         text: string,
         description: string,
-        icon: string
+        icon: string,
+        customInputs?: string
     ) => {
         return `
 <div class="action-row">
@@ -17,6 +18,7 @@ export default function UIActionCard() {
     <div class="action-details">
       <h3 class="action-title">${text}</h3>
       <p class="action-description">${description}</p>
+      ${customInputs || ""}
     </div>
   </div>
   <div class="action-buttons">
@@ -87,6 +89,38 @@ export default function UIActionCard() {
         messageId: crypto.randomUUID(),
     } as any);
 
+    const iframeReadyAction = postMessageUIAction({
+        type: "ui-lifecycle-iframe-ready",
+        messageId: crypto.randomUUID(),
+    } as any);
+
+    const sizeChangeAction = postMessageUIAction({
+        type: "ui-size-change",
+        payload: {
+            height: 600,
+            width: 800,
+        },
+        messageId: crypto.randomUUID(),
+    } as any);
+
+    const sizeChangeInputs = `
+<div class="input-group">
+  <div class="input-row">
+    <label for="size-height">Height:</label>
+    <input type="number" id="size-height" class="size-input" value="600" min="0" />
+  </div>
+  <div class="input-row">
+    <label for="size-width">Width:</label>
+    <input type="number" id="size-width" class="size-input" value="800" min="0" />
+  </div>
+</div>
+`;
+
+    const requestDataAction = postMessageUIAction({
+        type: "ui-request-data",
+        messageId: crypto.randomUUID(),
+    } as any);
+
     const html = `
     <article class="mcp-ui-container">
 <div class="dark-container">
@@ -97,6 +131,25 @@ export default function UIActionCard() {
   
   <div class="main-content">
     <div class="actions-panel">
+      ${Action(
+          sizeChangeAction,
+          "UI Size Change",
+          "Send ui-size-change message with dimensions",
+          "📐",
+          sizeChangeInputs
+      )}
+         ${Action(
+             requestDataAction,
+             "UI Request Data",
+             "Send ui-request-data message to host",
+             "📥"
+         )}
+      ${Action(
+          requestRenderDataAction,
+          "UI Request Render Data",
+          "Send ui-request-render-data message to host",
+          "📊"
+      )}
       ${Action(
           toolAction,
           "Tool Action",
@@ -123,31 +176,24 @@ export default function UIActionCard() {
       )}
       ${Action(linkAction, "Link Action", "Navigate to an external URL", "🔗")}
       ${Action(
-          requestRenderDataAction,
-          "Request Render Data",
-          "Request data to be rendered in the UI",
-          "📊"
+          iframeReadyAction,
+          "Iframe Ready",
+          "Send ui-lifecycle-iframe-ready message to host",
+          "✅"
       )}
+   
     
     </div>
     
     <div class="inspection-panel" id="inspection-panel">
       <div class="inspection-header">
         <h3>Message Inspector</h3>
-        <p class="inspection-subtitle">Click "Post Message" on any action to see the message payload</p>
       </div>
       <div class="inspection-content" id="inspection-content">
         <div class="placeholder">
           <span class="placeholder-icon">🔍</span>
-          <p>Click "Post Message" on any action to see its message</p>
+          <p>Click "Post Message" on any action to see the message payload and response from host</p>
         </div>
-      </div>
-      
-      <div class="inspection-divider"></div>
-      
-      <div class="inspection-header">
-        <h3>Incoming Message from Host</h3>
-        <p class="inspection-subtitle">Messages received from the parent window</p>
       </div>
       <div class="inspection-content" id="incoming-message-content">
         <div class="placeholder">
@@ -169,7 +215,31 @@ function decodeHTML(html) {
 
 function postMessageAndInspect(button) {
   const actionName = button.getAttribute('data-action-name');
-  const actionValue = button.getAttribute('data-action-value');
+  let actionValue = button.getAttribute('data-action-value');
+  
+  // Special handling for Size Change action - read from inputs
+  if (actionName === 'Size Change') {
+    const heightInput = document.getElementById('size-height');
+    const widthInput = document.getElementById('size-width');
+    
+    if (heightInput && widthInput) {
+      const height = parseInt(heightInput.value) || 600;
+      const width = parseInt(widthInput.value) || 800;
+      
+      // Create updated action with input values
+      const sizeChangeMessage = {
+        type: 'ui-size-change',
+        payload: {
+          height: height,
+          width: width
+        },
+        messageId: crypto.randomUUID()
+      };
+      
+      const formattedAction = JSON.stringify(sizeChangeMessage, null, 2).replace(/"/g, "'");
+      actionValue = '(' + formattedAction + ", '*');";
+    }
+  }
   
   // Show inspection
   const content = document.getElementById('inspection-content');
@@ -303,7 +373,7 @@ function postMessageAndInspect(button) {
   
   .action-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 1.25rem;
     background: var(--bg-tertiary);
@@ -330,9 +400,10 @@ function postMessageAndInspect(button) {
   
   .action-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     flex: 1;
+    min-width: 0;
   }
   
   .action-icon {
@@ -344,10 +415,12 @@ function postMessageAndInspect(button) {
     justify-content: center;
     border-radius: 6px;
     flex-shrink: 0;
+    margin-top: 0.125rem;
   }
   
   .action-details {
     flex: 1;
+    min-width: 0;
   }
   
   .action-title {
@@ -363,10 +436,48 @@ function postMessageAndInspect(button) {
     line-height: 1.5;
   }
   
+  .input-group {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .input-row label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .size-input {
+    width: 80px;
+    padding: 0.375rem 0.5rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: inherit;
+  }
+  
+  .size-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  }
+  
   .action-buttons {
     display: flex;
     gap: 0.5rem;
     flex-shrink: 0;
+    align-self: flex-start;
   }
   
   .action-button {
@@ -380,6 +491,7 @@ function postMessageAndInspect(button) {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-sm);
+    white-space: nowrap;
   }
   
   .action-button:hover {
@@ -582,6 +694,27 @@ function postMessageAndInspect(button) {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+    
+    .input-group {
+      margin-top: 0.5rem;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+    
+    .input-row {
+      gap: 0.375rem;
+    }
+    
+    .input-row label {
+      font-size: 0.625rem;
+      min-width: 40px;
+    }
+    
+    .size-input {
+      width: 60px;
+      padding: 0.25rem 0.375rem;
+      font-size: 0.625rem;
     }
     
     .action-buttons {
