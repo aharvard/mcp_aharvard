@@ -8,7 +8,7 @@ document.documentElement.setAttribute('data-host', defaultHost);
 
 window.addEventListener('message', (event) => {
   // Log all incoming messages with full data
-  console.log('⚾️[MCP-UI] Incoming message:', event);
+  console.log('⚾️[MCP-UI] Incoming message:', event.data);
   
   // Update the incoming message inspector panel
   const incomingMessageContent = document.getElementById('incoming-message-content');
