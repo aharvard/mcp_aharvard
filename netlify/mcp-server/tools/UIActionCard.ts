@@ -47,7 +47,7 @@ export default function UIActionCard() {
                 displayType: "inline",
             },
         },
-        messageId: "optional-tool-message-id",
+        messageId: crypto.randomUUID(),
     };
 
     const promptAction = {
@@ -55,7 +55,7 @@ export default function UIActionCard() {
         payload: {
             prompt: "What is the weather in Tokyo?",
         },
-        messageId: "optional-prompt-message-id",
+        messageId: crypto.randomUUID(),
     };
 
     const linkAction = {
@@ -63,7 +63,7 @@ export default function UIActionCard() {
         payload: {
             url: "https://www.google.com",
         },
-        messageId: "optional-link-message-id",
+        messageId: crypto.randomUUID(),
     };
 
     const intentAction = {
@@ -75,7 +75,7 @@ export default function UIActionCard() {
                 description: "Buy groceries for the week",
             },
         },
-        messageId: "optional-intent-message-id",
+        messageId: crypto.randomUUID(),
     };
 
     const notifyAction = {
@@ -83,7 +83,7 @@ export default function UIActionCard() {
         payload: {
             message: "cart-updated",
         },
-        messageId: "optional-notify-message-id",
+        messageId: crypto.randomUUID(),
     };
 
     // Type assertion for custom action type not yet in @mcp-ui/server
@@ -143,16 +143,16 @@ export default function UIActionCard() {
       )}
       ${Action(
           iframeReadyAction,
-          "UI Iframe Ready",
+          "UI Lifecycle Iframe Ready",
           "Send ui-lifecycle-iframe-ready message to host",
           "✅"
       )}
-         ${Action(
-             requestDataAction,
-             "UI Request Data",
-             "Send ui-request-data message to host",
-             "📥"
-         )}
+      ${Action(
+          requestDataAction,
+          "UI Request Data",
+          "Send ui-request-data message to host",
+          "📥"
+      )}
       ${Action(
           requestRenderDataAction,
           "UI Request Render Data",
