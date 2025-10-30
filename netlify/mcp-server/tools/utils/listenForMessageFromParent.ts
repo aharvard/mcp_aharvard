@@ -7,8 +7,11 @@ document.documentElement.setAttribute('data-theme', defaultTheme);
 document.documentElement.setAttribute('data-host', defaultHost);
 
 window.addEventListener('message', (event) => {
+  // Log all incoming messages with full data
+  console.log('[MCP-UI] Incoming message:', event);
+
   if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
-    console.log('[MCP-UI-HOST] ui-lifecycle-iframe-render-data');
+    
     const {renderData} = event.data.payload;
     if (renderData) {
       const theme = renderData.theme || defaultTheme;
