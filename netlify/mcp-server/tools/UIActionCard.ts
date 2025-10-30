@@ -21,15 +21,10 @@ export default function UIActionCard() {
   </div>
   <div class="action-buttons">
     <button 
-      class="inspect-button"
+      class="action-button"
       data-action-name="${text}"
       data-action-value="${action.replace(/"/g, "&quot;")}"
-      onclick="inspectMessage(this)">
-      Inspect
-    </button>
-    <button 
-      class="action-button"
-            onclick="( function() { console.log('clicked'); window.parent.postMessage${action} } )()">
+      onclick="postMessageAndInspect(this)">
       Post Message
     </button>
   </div>
@@ -127,12 +122,12 @@ export default function UIActionCard() {
     <div class="inspection-panel" id="inspection-panel">
       <div class="inspection-header">
         <h3>Message Inspector</h3>
-        <p class="inspection-subtitle">Click "Inspect" on any action to see the message payload</p>
+        <p class="inspection-subtitle">Click "Post Message" on any action to see the message payload</p>
       </div>
       <div class="inspection-content" id="inspection-content">
         <div class="placeholder">
           <span class="placeholder-icon">🔍</span>
-          <p>Click "Inspect" on any action to see its message</p>
+          <p>Click "Post Message" on any action to see its message</p>
         </div>
       </div>
     </div>
@@ -141,10 +136,17 @@ export default function UIActionCard() {
 </article>
 
 <script>
-function inspectMessage(button) {
+function decodeHTML(html) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+}
+
+function postMessageAndInspect(button) {
   const actionName = button.getAttribute('data-action-name');
   const actionValue = button.getAttribute('data-action-value');
   
+  // Show inspection
   const content = document.getElementById('inspection-content');
   const panel = document.getElementById('inspection-panel');
   
@@ -152,19 +154,17 @@ function inspectMessage(button) {
     content.innerHTML = '<div class="message-info"><h4>' + actionName + '</h4><pre class="message-payload">' + actionValue + '</pre></div>';
     panel.classList.add('active');
   }
-}
-
-function hideInspection() {
-  const content = document.getElementById('inspection-content');
-  const panel = document.getElementById('inspection-panel');
   
-  if (content && panel) {
-    content.innerHTML = '<div class="placeholder"><span class="placeholder-icon">🔍</span><p>Click "Inspect" on any action to see its message</p></div>';
-    panel.classList.remove('active');
+  // Post message to parent
+  if (actionValue) {
+    const decodedAction = decodeHTML(actionValue);
+    try {
+      eval('window.parent.postMessage' + decodedAction);
+    } catch (error) {
+      console.error('Error posting message:', error);
+    }
   }
 }
-
-
 </script>
     `;
 
@@ -280,6 +280,7 @@ function hideInspection() {
     border: 1px solid var(--border-color);
     transition: all 0.2s ease;
     box-shadow: var(--shadow-sm);
+    gap: 1rem;
   }
   
   .action-row:hover {
@@ -335,24 +336,6 @@ function hideInspection() {
     display: flex;
     gap: 0.5rem;
     flex-shrink: 0;
-  }
-  
-  .inspect-button {
-    background: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .inspect-button:hover {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border-color: var(--accent-color);
   }
   
   .action-button {
@@ -549,19 +532,11 @@ function hideInspection() {
       gap: 0.25rem;
     }
     
-    .inspect-button,
     .action-button {
       padding: 0.375rem 0.5rem;
       font-size: 0.625rem;
       border-radius: 4px;
       white-space: nowrap;
-    }
-    
-    .inspect-button {
-      min-width: 3rem;
-    }
-    
-    .action-button {
       min-width: 3.5rem;
     }
     
