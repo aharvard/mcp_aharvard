@@ -10,6 +10,25 @@ window.addEventListener('message', (event) => {
   // Log all incoming messages with full data
   console.log('⚾️[MCP-UI] Incoming message:', event);
   
+  // Update the incoming message inspector panel
+  const incomingMessageContent = document.getElementById('incoming-message-content');
+  if (incomingMessageContent && event.data) {
+    const timestamp = new Date().toISOString();
+    const eventDataJson = JSON.stringify(event.data, null, 2);
+    const eventType = event.data.type || 'N/A';
+    const eventOrigin = event.origin || 'unknown';
+    
+    incomingMessageContent.innerHTML = 
+      '<div class="message-info">' +
+        '<h4>Latest Message (' + timestamp + ')</h4>' +
+        '<div class="message-details">' +
+          '<p><strong>Origin:</strong> ' + eventOrigin + '</p>' +
+          '<p><strong>Type:</strong> ' + eventType + '</p>' +
+        '</div>' +
+        '<h5 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 600;">Event Data:</h5>' +
+        '<pre class="message-payload">' + eventDataJson + '</pre>' +
+      '</div>';
+  }
 
   if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
     

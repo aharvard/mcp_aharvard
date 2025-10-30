@@ -15,8 +15,8 @@
         "dev:server:build": "netlify build && netlify dev"
     },
     "dependencies": {
-        "@mcp-ui/client": "^5.9.0",
-        "@mcp-ui/server": "^5.11.0",
+        "@mcp-ui/client": "^5.14.1",
+        "@mcp-ui/server": "^5.13.1",
         "@modelcontextprotocol/sdk": "^1.10.2",
         "@netlify/functions": "^2.5.1",
         "@radix-ui/react-icons": "^1.3.2",

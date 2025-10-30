@@ -142,6 +142,19 @@ export default function UIActionCard() {
           <p>Click "Post Message" on any action to see its message</p>
         </div>
       </div>
+      
+      <div class="inspection-divider"></div>
+      
+      <div class="inspection-header">
+        <h3>Incoming Message from Host</h3>
+        <p class="inspection-subtitle">Messages received from the parent window</p>
+      </div>
+      <div class="inspection-content" id="incoming-message-content">
+        <div class="placeholder">
+          <span class="placeholder-icon">📨</span>
+          <p>Waiting for messages from host...</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -407,6 +420,12 @@ function postMessageAndInspect(button) {
     color: var(--text-secondary);
   }
   
+  .inspection-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 1.5rem 0;
+  }
+  
   .inspection-content {
     min-height: 200px;
   }
@@ -436,6 +455,26 @@ function postMessageAndInspect(button) {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1rem;
+  }
+  
+  .message-info h5 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .message-details {
+    margin-bottom: 0.5rem;
+  }
+  
+  .message-details p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .message-details strong {
+    color: var(--text-primary);
   }
   
   .message-payload {
@@ -576,6 +615,10 @@ function postMessageAndInspect(button) {
       font-size: 0.625rem;
     }
     
+    .inspection-divider {
+      margin: 1rem 0;
+    }
+    
     .inspection-content {
       min-height: 120px;
     }
@@ -596,6 +639,14 @@ function postMessageAndInspect(button) {
     .message-info h4 {
       font-size: 0.75rem;
       margin-bottom: 0.5rem;
+    }
+    
+    .message-info h5 {
+      font-size: 0.625rem;
+    }
+    
+    .message-details p {
+      font-size: 0.625rem;
     }
     
     .message-payload {
