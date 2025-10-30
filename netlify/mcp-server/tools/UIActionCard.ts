@@ -81,6 +81,12 @@ export default function UIActionCard() {
         messageId: "optional-notify-message-id",
     });
 
+    // Type assertion for custom action type not yet in @mcp-ui/server
+    const requestRenderDataAction = postMessageUIAction({
+        type: "ui-request-render-data",
+        messageId: crypto.randomUUID(),
+    } as any);
+
     const html = `
     <article class="mcp-ui-container">
 <div class="dark-container">
@@ -116,6 +122,12 @@ export default function UIActionCard() {
           "🔔"
       )}
       ${Action(linkAction, "Link Action", "Navigate to an external URL", "🔗")}
+      ${Action(
+          requestRenderDataAction,
+          "Request Render Data",
+          "Request data to be rendered in the UI",
+          "📊"
+      )}
     
     </div>
     
