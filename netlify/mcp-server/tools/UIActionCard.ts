@@ -270,9 +270,9 @@ function postMessageAndInspect(button) {
   
   try {
     window.parent.postMessage(messageObject, '*');
-    console.log('⚾️[MCP-UI] Message sent successfully');
+    
   } catch (error) {
-    console.error('[MCP-UI] Error posting message:', error);
+    console.error('⚾️[MCP-UI] Error posting message:', error);
   }
 }
 </script>
