@@ -170,14 +170,14 @@ function postMessageAndInspect(button) {
   // Post message to parent
   if (actionValue) {
     const decodedAction = decodeHTML(actionValue);
-    console.log('[MCP-UI] Sending message to parent:', {
+    console.log('⚾️[MCP-UI] Sending message to parent:', {
       actionName: actionName,
       decodedAction: decodedAction,
       timestamp: new Date().toISOString()
     });
     try {
       eval('window.parent.postMessage' + decodedAction);
-      console.log('[MCP-UI] Message sent successfully');
+      console.log('⚾️[MCP-UI] Message sent successfully');
     } catch (error) {
       console.error('[MCP-UI] Error posting message:', error);
     }

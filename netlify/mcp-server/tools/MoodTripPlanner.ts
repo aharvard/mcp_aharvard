@@ -8,7 +8,7 @@ interface MoodTripData {
 }
 
 export default function MoodTripPlanner(tripData?: MoodTripData) {
-    console.log("MoodTripPlanner initialized with data:", tripData);
+    console.log("⚾️MoodTripPlanner initialized with data:", tripData);
     // Mood-based destinations
     const moodDestinations = {
         adventurous: {

@@ -1,14 +1,14 @@
 export const RemoteDomDemo = (config: {
-  theme?: "light" | "dark";
-  showAdvanced?: boolean;
+    theme?: "light" | "dark";
+    showAdvanced?: boolean;
 }) => {
-  const { theme = "light", showAdvanced = false } = config;
+    const { theme = "light", showAdvanced = false } = config;
 
-  // Use variables to avoid linter warnings
-  console.log("Remote DOM Demo config:", { theme, showAdvanced });
+    // Use variables to avoid linter warnings
+    console.log("⚾️Remote DOM Demo config:", { theme, showAdvanced });
 
-  // Create a comprehensive remote DOM script that demonstrates various UI components
-  const remoteDomScript = `
+    // Create a comprehensive remote DOM script that demonstrates various UI components
+    const remoteDomScript = `
         // Clear the root element
         root.innerHTML = '';
         
@@ -194,5 +194,5 @@ export const RemoteDomDemo = (config: {
         });
     `;
 
-  return remoteDomScript;
+    return remoteDomScript;
 };

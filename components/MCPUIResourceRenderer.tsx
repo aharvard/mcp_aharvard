@@ -18,7 +18,7 @@ const MCPUIResourceRenderer: React.FC<MCPUIResourceRendererProps> = ({
 
     const handleUIAction = useCallback(
         async (result: UIActionResult) => {
-            console.log("Handle action from MCP UI Action:", result);
+            console.log("⚾️Handle action from MCP UI Action:", result);
 
             // If a custom onUIAction handler is provided, use it
             if (onUIAction) {

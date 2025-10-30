@@ -8,7 +8,7 @@ document.documentElement.setAttribute('data-host', defaultHost);
 
 window.addEventListener('message', (event) => {
   // Log all incoming messages with full data
-  console.log('[MCP-UI] Incoming message:', event);
+  console.log('⚾️[MCP-UI] Incoming message:', event);
 
   if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
     
