@@ -20,12 +20,7 @@ window.addEventListener('message', (event) => {
     
     incomingMessageContent.innerHTML = 
       '<div class="message-info">' +
-        '<h4>Latest Message (' + timestamp + ')</h4>' +
-        '<div class="message-details">' +
-          '<p><strong>Origin:</strong> ' + eventOrigin + '</p>' +
-          '<p><strong>Type:</strong> ' + eventType + '</p>' +
-        '</div>' +
-        '<h5 style="margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 600;">Event Data:</h5>' +
+        '<h4>Response from Host:</h4>' +
         '<pre class="message-payload">' + eventDataJson + '</pre>' +
       '</div>';
   }
