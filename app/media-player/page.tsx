@@ -42,8 +42,7 @@ export default function MediaPlayerPage() {
                         </div>
                         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                             Interactive video and audio player with open source,
-                            safe-for-work content from Creative Commons and
-                            Pixabay
+                            safe-for-work content.
                         </p>
                     </div>
 
@@ -121,8 +120,8 @@ export default function MediaPlayerPage() {
                             </h2>
                         </div>
                         <p className="text-gray-600 mb-6">
-                            This section displays the media player as rendered by
-                            MCP-UI. The player supports both video and audio
+                            This section displays the media player as rendered
+                            by MCP-UI. The player supports both video and audio
                             content with full controls.
                         </p>
                         <div className="bg-gray-50 rounded-xl p-4 mb-6">
@@ -132,7 +131,8 @@ export default function MediaPlayerPage() {
                                     MCP-UI Resource:
                                 </span>
                                 <code className="bg-white px-2 py-1 rounded text-xs">
-                                    ui://mcp-aharvard/media-player-{selectedType}
+                                    ui://mcp-aharvard/media-player-
+                                    {selectedType}
                                 </code>
                             </div>
                         </div>
@@ -151,8 +151,8 @@ export default function MediaPlayerPage() {
                             </div>
                             <p className="text-gray-600">
                                 Big Buck Bunny and Elephant's Dream are open
-                                movies from the Blender Foundation, released under
-                                Creative Commons
+                                movies from the Blender Foundation, released
+                                under Creative Commons
                             </p>
                         </div>
                         <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
@@ -163,8 +163,8 @@ export default function MediaPlayerPage() {
                                 </h3>
                             </div>
                             <p className="text-gray-600">
-                                Ambient music tracks from Pixabay, free to use for
-                                any project without attribution
+                                Ambient music tracks from Pixabay, free to use
+                                for any project without attribution
                             </p>
                         </div>
                         <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
@@ -185,4 +185,3 @@ export default function MediaPlayerPage() {
         </>
     );
 }
-

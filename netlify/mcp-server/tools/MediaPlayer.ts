@@ -82,7 +82,7 @@ export default function MediaPlayer(options: MediaPlayerOptions) {
   .media-card {
     background: white;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     animation: slideIn 0.5s ease-out;
   }
