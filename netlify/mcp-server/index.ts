@@ -10,6 +10,7 @@ import MoodTripPlanner from "./tools/MoodTripPlanner";
 import { createUIResource } from "@mcp-ui/server";
 import { RemoteDomDemo } from "./tools/RemoteDomDemo";
 import { MCPUITalk } from "./tools/MCPUITalk";
+import TypographySpecimens from "./tools/TypographySpecimens";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -617,6 +618,71 @@ export const setupMCPServer = (): McpServer => {
                         {
                             type: "text",
                             text: `Error loading MCP UI Talk: ${
+                                error instanceof Error
+                                    ? error.message
+                                    : "Unknown error"
+                            }`,
+                        },
+                    ],
+                };
+            }
+        }
+    );
+
+    // Register a tool for typography specimens
+    server.tool(
+        "show-typography-specimens",
+        "Displays beautiful typography specimens featuring popular open-source typefaces including Inter, Playfair Display, JetBrains Mono, and Outfit. Shows font samples, weight scales, and character sets. Use this tool when the user wants to see typography examples, font specimens, or explore different typefaces.",
+        {
+            fontSize: z
+                .enum(["small", "medium", "large"])
+                .describe("Size of the type specimens")
+                .default("medium"),
+            showPangrams: z
+                .boolean()
+                .describe(
+                    "Whether to show pangram samples (quick brown fox, etc.)"
+                )
+                .default(true),
+        },
+        async ({ fontSize, showPangrams }): Promise<CallToolResult> => {
+            try {
+                const htmlContent = TypographySpecimens({
+                    fontSize,
+                    showPangrams,
+                });
+
+                return {
+                    content: [
+                        createUIResource({
+                            uri: "ui://mcp-aharvard/typography-specimens",
+                            encoding: "text",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: htmlContent,
+                            },
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                        }),
+                        {
+                            type: "text",
+                            text: "Typography specimens loaded! Showcasing Inter (modern sans-serif), Playfair Display (elegant serif), JetBrains Mono (developer monospace), and Outfit (geometric display). All fonts are loaded from Google Fonts.",
+                            annotations: {
+                                audience: ["assistant"],
+                            },
+                        },
+                    ],
+                };
+            } catch (error) {
+                console.error("Error loading typography specimens:", error);
+                return {
+                    content: [
+                        {
+                            type: "text",
+                            text: `Error loading typography specimens: ${
                                 error instanceof Error
                                     ? error.message
                                     : "Unknown error"
