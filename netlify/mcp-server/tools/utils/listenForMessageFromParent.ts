@@ -36,7 +36,7 @@ window.addEventListener('message', (event) => {
   }
 
   // Handle render data response
-  if (event.data && event.data.type === '"ui-lifecycle-iframe-render-data"' && event.data.messageId === renderDataRequestId) {
+  if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data' && event.data.messageId === renderDataRequestId) {
     console.log('⚾️ [MCP-UI] Received render data response');
     
     if (event.data.payload) {
