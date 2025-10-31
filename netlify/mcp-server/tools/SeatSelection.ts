@@ -806,11 +806,11 @@ export default function SeatSelection(flightData?: FlightData) {
   }
 
   function confirmSeat() {
-    console.log('⚾️confirmSeat called with selectedSeat:', selectedSeat);
+    console.log('⚾️ confirmSeat called with selectedSeat:', selectedSeat);
     if (selectedSeat) {
       // Add flying animation
       const sky = document.querySelector('.sky');
-      console.log('⚾️Sky element found:', sky);
+      console.log('⚾️ Sky element found:', sky);
       sky.style.transition = 'transform 2s ease-in-out';
       sky.style.transform = 'translateY(-100vh)';
       
@@ -864,9 +864,9 @@ export default function SeatSelection(flightData?: FlightData) {
           
           thankYouSeatNumber.textContent = getAirplaneSeatLabel(selectedSeat);
           thankYouMessage.style.opacity = '1';
-          console.log('⚾️Thank you message revealed with seat:', getAirplaneSeatLabel(selectedSeat));
+          console.log('⚾️ Thank you message revealed with seat:', getAirplaneSeatLabel(selectedSeat));
         } else {
-          console.log('⚾️Thank you message element not found');
+          console.log('⚾️ Thank you message element not found');
         }
       }, 800);
       
@@ -903,7 +903,7 @@ export default function SeatSelection(flightData?: FlightData) {
           height = thankYouMessage.getBoundingClientRect().height;
           // Add more padding to ensure the message looks good and isn't cut off
           height += 80;
-          console.log('⚾️Thank you message measured height:', height);
+          console.log('⚾️ Thank you message measured height:', height);
         }
         
         window.parent.postMessage({

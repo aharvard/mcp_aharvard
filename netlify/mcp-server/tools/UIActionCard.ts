@@ -262,7 +262,7 @@ function postMessageAndInspect(button) {
   }
   
   // Post message to parent (no eval needed!)
-  console.log('⚾️[MCP-UI] Sending message to parent:', {
+  console.log('⚾️ [MCP-UI] Sending message to parent:', {
     actionName: actionName,
     message: messageObject,
     timestamp: new Date().toISOString()
@@ -272,7 +272,7 @@ function postMessageAndInspect(button) {
     window.parent.postMessage(messageObject, '*');
     
   } catch (error) {
-    console.error('⚾️[MCP-UI] Error posting message:', error);
+    console.error('⚾️ [MCP-UI] Error posting message:', error);
   }
 }
 </script>

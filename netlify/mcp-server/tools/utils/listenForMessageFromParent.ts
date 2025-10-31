@@ -6,9 +6,19 @@ const defaultHost = 'unknown';
 document.documentElement.setAttribute('data-theme', defaultTheme);
 document.documentElement.setAttribute('data-host', defaultHost);
 
+// Generate messageId for render data request
+const renderDataRequestId = crypto.randomUUID();
+
+// Request render data from host on load
+window.parent.postMessage({
+  type: 'ui-request-render-data',
+  messageId: renderDataRequestId,
+}, '*');
+console.log('⚾️ [MCP-UI] Requesting render data with messageId:', renderDataRequestId);
+
 window.addEventListener('message', (event) => {
   // Log all incoming messages with full data
-  console.log('⚾️[MCP-UI] Incoming message:', event.data);
+  console.log('⚾️ [MCP-UI] Incoming message:', event.data);
   
   // Update the incoming message inspector panel
   const incomingMessageContent = document.getElementById('incoming-message-content');
@@ -25,18 +35,26 @@ window.addEventListener('message', (event) => {
       '</div>';
   }
 
-  if (event.data && event.data.type === 'ui-lifecycle-iframe-render-data') {
+  // Handle render data response
+  if (event.data && event.data.type === 'ui-message-response' && event.data.messageId === renderDataRequestId) {
+    console.log('⚾️ [MCP-UI] Received render data response');
     
-    const {renderData} = event.data.payload;
-    if (renderData) {
-      console.log('⚾️[MCP-UI] RenderData:', renderData);
+    if (event.data.payload && event.data.payload.response) {
+      const renderData = event.data.payload.response;
+      console.log('⚾️ [MCP-UI] RenderData:', renderData);
+      
       const theme = renderData.theme || defaultTheme;
       const host = renderData.host || defaultHost;
+      
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.setAttribute('data-host', host);
+    } else if (event.data.payload && event.data.payload.error) {
+      console.error('⚾️ [MCP-UI] Error receiving render data:', event.data.payload.error);
     } else {
-      console.error('renderData is falsy');
+      console.warn('⚾️ [MCP-UI] Render data response missing payload');
     }
   }
 });
+
+
 </script>`;

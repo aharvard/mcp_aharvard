@@ -153,7 +153,7 @@ export function MCPUITalk(START_SLIDE = 1) {
   <li>Agentic flow</li>
   <ul>
     <li>
-      <button class="prompt-button" onclick="( function() { console.log('⚾️clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">Pick airplane seats</button>
+      <button class="prompt-button" onclick="( function() { console.log('⚾️ clicked'); window.parent.postMessage${pickAirplaneSeats} } )()">Pick airplane seats</button>
     </li>
   </li>    
   <li>Weather</li>
@@ -167,7 +167,7 @@ export function MCPUITalk(START_SLIDE = 1) {
   <li>Bi-directional communication protocol</li>
   <ul>
     <li>
-  <button class="prompt-button" onclick="( function() { console.log('⚾️clicked'); window.parent.postMessage${demoMCPUIAtions} } )()">
+  <button class="prompt-button" onclick="( function() { console.log('⚾️ clicked'); window.parent.postMessage${demoMCPUIAtions} } )()">
         MCP-UI actions
       </button>
       </li>
