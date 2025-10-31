@@ -195,7 +195,7 @@ export default function TypographySpecimens(params?: TypographyParams) {
   .specimen-card {
     background: var(--bg-secondary);
     padding: 1rem;
-    flex: 1 0 400px;
+    flex: 1 0 500px;
     border-radius: 4px;
   }
   
@@ -260,11 +260,11 @@ export default function TypographySpecimens(params?: TypographyParams) {
   }
   
   .display-text.medium {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
   }
   
   .display-text.large {
-    font-size: 4.5rem;
+    font-size: 5.5rem;
   }
   
   .sample-text {
