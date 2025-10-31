@@ -169,12 +169,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
     margin: 0 auto;
   }
   
-  .page-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 3px solid var(--border-heavy);
-  }
-  
   .page-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -388,11 +382,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
 
     const html = `
 <article class="mcp-ui-container">
-  <div class="page-header">
-    <h1 class="page-title">Typography Specimens</h1>
-    <p class="page-subtitle">Explore beautiful open-source typefaces</p>
-  </div>
-  
   <div class="specimens-grid">
     ${fontSpecimens}
   </div>
