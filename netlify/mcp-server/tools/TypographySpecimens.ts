@@ -1,4 +1,5 @@
 import { postMessageUISizeChange } from "./utils/postMessageUISizeChange";
+import { listenForMessageFromParent } from "./utils/listenForMessageFromParent";
 
 interface TypographyParams {
     fontSize?: string;
@@ -417,6 +418,7 @@ export default function TypographySpecimens(params?: TypographyParams) {
         fontLinks +
         styles +
         html +
-        postMessageUISizeChange({ aggressive: false })
+        postMessageUISizeChange({ aggressive: false }) +
+        listenForMessageFromParent
     );
 }
