@@ -139,7 +139,7 @@ export default function TypographySpecimens(params?: TypographyParams) {
   :root,
   [data-theme="dark"] {
     --bg-primary: #0f0f0f;
-    --bg-secondary: #1a1a1a;
+    --bg-secondary: #000000;
     --text-primary: #ddd;
     --text-secondary: #a0a0a0;
     --border-color: #333333;
@@ -149,7 +149,7 @@ export default function TypographySpecimens(params?: TypographyParams) {
   /* Light theme */
   [data-theme="light"] {
     --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
+    --bg-secondary: #ffffff;
     --text-primary: #000000;
     --text-secondary: #666666;
     --border-color: #000000;
@@ -157,7 +157,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
   }
   
   html, body {
-    background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.4;
   }
@@ -169,7 +168,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
   .mcp-ui-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem;
   }
   
   .page-header {
@@ -198,13 +196,13 @@ export default function TypographySpecimens(params?: TypographyParams) {
   .specimens-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
   }
   
   .specimen-card {
     background: var(--bg-secondary);
-    border: 2px solid var(--border-heavy);
     padding: 1.5rem;
+    border-radius: 12px;
   }
   
   .specimen-header {
@@ -361,10 +359,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
   }
   
   @media (max-width: 768px) {
-    .mcp-ui-container {
-      padding: 0.75rem;
-    }
-    
     .page-title {
       font-size: 1.75rem;
     }
