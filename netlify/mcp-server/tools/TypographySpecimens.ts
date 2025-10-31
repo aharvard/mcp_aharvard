@@ -194,15 +194,16 @@ export default function TypographySpecimens(params?: TypographyParams) {
   }
   
   .specimens-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
   
   .specimen-card {
     background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: 12px;
+    padding: 1rem;
+    flex: 1 0 400px;
+    border-radius: 4px;
   }
   
   .specimen-header {
@@ -352,11 +353,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
     font-size: 1.75rem;
   }
   
-  @media (max-width: 900px) {
-    .specimens-grid {
-      grid-template-columns: 1fr;
-    }
-  }
   
   @media (max-width: 768px) {
     .page-title {
@@ -365,10 +361,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
     
     .page-subtitle {
       font-size: 0.75rem;
-    }
-    
-    .specimen-card {
-      padding: 1rem;
     }
     
     .font-name {
