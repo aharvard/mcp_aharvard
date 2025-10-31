@@ -166,7 +166,6 @@ export default function TypographySpecimens(params?: TypographyParams) {
   }
   
   .mcp-ui-container {
-    max-width: 1200px;
     margin: 0 auto;
   }
   
