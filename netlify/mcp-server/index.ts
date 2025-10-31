@@ -11,6 +11,7 @@ import { createUIResource } from "@mcp-ui/server";
 import { RemoteDomDemo } from "./tools/RemoteDomDemo";
 import { MCPUITalk } from "./tools/MCPUITalk";
 import TypographySpecimens from "./tools/TypographySpecimens";
+import MediaPlayer from "./tools/MediaPlayer";
 
 export const setupMCPServer = (): McpServer => {
     const server = new McpServer(
@@ -683,6 +684,70 @@ export const setupMCPServer = (): McpServer => {
                         {
                             type: "text",
                             text: `Error loading typography specimens: ${
+                                error instanceof Error
+                                    ? error.message
+                                    : "Unknown error"
+                            }`,
+                        },
+                    ],
+                };
+            }
+        }
+    );
+
+    // Register a tool for media player demo
+    server.tool(
+        "show-media-player",
+        "Displays an interactive media player for either video or audio content. Video shows 'Big Buck Bunny' from Blender Foundation. Audio shows a test audio file from Internet Archive. Use this tool when the user wants to see a media player demo, play video or audio.",
+        {
+            type: z
+                .enum(["video", "audio"])
+                .describe(
+                    "Type of media to display: 'video' shows Big Buck Bunny, 'audio' shows test audio"
+                )
+                .default("video"),
+        },
+        async ({ type }): Promise<CallToolResult> => {
+            try {
+                const htmlContent = MediaPlayer({ type });
+
+                const mediaType = type === "video" ? "Video" : "Audio";
+                const content =
+                    type === "video"
+                        ? "Big Buck Bunny by Blender Foundation"
+                        : "Test Audio from Internet Archive";
+
+                return {
+                    content: [
+                        createUIResource({
+                            uri: `ui://mcp-aharvard/media-player-${type}`,
+                            encoding: "text",
+                            content: {
+                                type: "rawHtml",
+                                htmlString: htmlContent,
+                            },
+                            resourceProps: {
+                                annotations: {
+                                    audience: ["user"],
+                                },
+                            },
+                        }),
+                        {
+                            type: "text",
+                            text: `${mediaType} player loaded! Now playing: ${content}. The player features native HTML5 controls. All content is open source and safe for work.`,
+                            annotations: {
+                                audience: ["assistant"],
+                            },
+                        },
+                    ],
+                };
+            } catch (error) {
+                console.error("Error loading media player:", error);
+                return {
+                    content: [
+                        {
+                            type: "text",
+                            text: `Error loading media player: ${
                                 error instanceof Error
                                     ? error.message
                                     : "Unknown error"

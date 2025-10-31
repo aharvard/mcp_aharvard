@@ -3,7 +3,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Cloud, User, Zap, Heart, Type } from "lucide-react";
+import { Home, Cloud, User, Zap, Heart, Type, PlayCircle } from "lucide-react";
 
 const navItems = [
     { href: "/", label: "Home", icon: Home },
@@ -12,6 +12,7 @@ const navItems = [
     { href: "/ui-actions", label: "UI Actions", icon: Zap },
     { href: "/mood-trip-planner", label: "Mood Trip Planner", icon: Heart },
     { href: "/typography-specimens", label: "Typography", icon: Type },
+    { href: "/media-player", label: "Media Player", icon: PlayCircle },
     // { href: "/remote-dom-demo", label: "Remote DOM", icon: Code },
 ];
 
