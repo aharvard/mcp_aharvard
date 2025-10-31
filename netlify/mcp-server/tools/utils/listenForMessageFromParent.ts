@@ -36,11 +36,11 @@ window.addEventListener('message', (event) => {
   }
 
   // Handle render data response
-  if (event.data && event.data.type === 'ui-message-response' && event.data.messageId === renderDataRequestId) {
+  if (event.data && event.data.type === '"ui-lifecycle-iframe-render-data"' && event.data.messageId === renderDataRequestId) {
     console.log('⚾️ [MCP-UI] Received render data response');
     
-    if (event.data.payload && event.data.payload.response) {
-      const renderData = event.data.payload.response;
+    if (event.data.payload) {
+      const renderData = event.data.payload.renderData;
       console.log('⚾️ [MCP-UI] RenderData:', renderData);
       
       const theme = renderData.theme || defaultTheme;
@@ -48,8 +48,6 @@ window.addEventListener('message', (event) => {
       
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.setAttribute('data-host', host);
-    } else if (event.data.payload && event.data.payload.error) {
-      console.error('⚾️ [MCP-UI] Error receiving render data:', event.data.payload.error);
     } else {
       console.warn('⚾️ [MCP-UI] Render data response missing payload');
     }
